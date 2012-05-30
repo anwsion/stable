@@ -1,0 +1,34 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Anwsion首页</title>
+<style>
+*{margin:0;padding:0;font-size:12px;}
+.default_Error{background:url(../static/css/default/img/error.gif) 0 0 no-repeat;width:600px;height:200px;position:absolute;z-index:99;left:50%;top:50%;margin-left:-300px;margin-top:-100px;}
+.default_Error h1{ padding-top:90px;margin-left:200px;color:#666;font-size:14px;font-weight:bold;border-bottom:1px solid #ccc;padding-bottom:20px;}
+.default_Error .p{height:40px; line-height:40px;margin-left:200px;color:#999;}
+.default_Error a{color:#105cb6;text-decoration:none;}
+.default_Error a:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<div class="default_Error">
+	<h1>当您看到这个页面的时候，说明您已经走错地方了...</h1>
+	<p class="p"><a href="#">返回首页</a>  &nbsp;&nbsp;<font  style="font-weight:bold; color:#cb0000;" id="skip_page">5&nbsp;</font> 秒之后页面自动跳转...</p>
+</div>
+<script>
+	(function(str){
+		
+		var skip = document.getElementById(str); //getID
+		var index = "http://www.idunion.com/",i=5;
+		
+		var setVAL = setInterval(function(){	
+			   i >=0 ? skip.innerHTML = i-- +'&nbsp;': (function(){return window.location.href = index;clearInterval(setVAL);})();
+		},1000);
+		
+	})('skip_page');
+</script>
+</body>
+</html>

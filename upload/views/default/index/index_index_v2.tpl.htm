@@ -1,0 +1,61 @@
+﻿<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+
+<div class="bd">
+  <!--right_nav_s-->
+  <div class="tommy_rightDiv index enTryAside ">
+
+<!-- 边栏菜单 -->
+<?php TPL::output('block/sidebar_menu.tpl.htm'); ?>
+
+<!-- 边栏分类 -->
+<?php TPL::output('block/sidebar_category.tpl.htm'); ?>		
+
+<!-- 边栏邀请 -->
+<?php TPL::output('block/sidebar_invite.tpl.htm'); ?>	
+  <?php if (!$this->user_info['avatar_file'] OR !$this->user_info['signature']) { ?>
+  	<div class="ta_markDiv">
+		<h2 class="ta_mTitle">完善你的个人资料</h2>
+		<div  class="ta_userDiv">
+			<textarea class="ta_area_user" onfocus="if(this.value=='一句话介绍自己'){this.value=''};" onblur="if(this.value==''){this.value='一句话介绍自己'};" id="custom_signature"><?php if (!$this->user_info['signature']) { ?>一句话介绍自己<?php } else { echo $this->user_info['signature']; } ?></textarea>
+			<a href="javascript:;" class="upLoad_userPic"><img src="<?php echo get_avatar_url($this->user_info['uid'],'min',$this->user_info['avatar_file']); ?>"/><?php if (!$this->user_info['avatar_file']) { ?><span class="upLoad_userhead" onclick="window.location='<?php echo get_setting('base_url');?>/account/?c=setting&act=user';">上传</span><?php } ?></a>
+			
+		</div>
+		<p class="ta_srue"><a href="javascript:;" onclick="$('#custom_signature').focus(); update_signature($('#custom_signature').val()); return false;">确定</a></p>
+	</div>
+  <?php } ?>
+  
+<!-- 边栏可能感兴趣的人或话题 -->  
+<?php TPL::output('block/sidebar_recommend_users_topics.tpl.htm'); ?>		
+ 
+	
+  </div>
+  <!--right_nav_e-->
+  <!--left_nav_s-->
+  <div class="contant_left index" id="notitile_all"<?php if(!$this->user_info['notification_unread']) { ?> style="display:none"<?php } ?>>
+    <h2 class="c_title"><span class="give_set"><a href="<?php echo get_setting('base_url'); ?>/account/?c=setting&act=inbox">通知设置</a></span>新通知<span id="announce_num" class="span"><?php echo $this->user_info['notification_unread'];?></span></h2>
+    <ul class="tz_ul" id="notification_list">
+		<p style="padding: 15px 0" align="center">正在读取...</p>
+	</ul>
+    <p class="knonw_el"><a href="javascript:;" onclick="mark_notifications(); return false;" class="default_gray_but fl">我知道了</a><a href="<?php echo get_setting('base_url');?>/notifications" class="default_blue_but" >查看所有</a></p>
+  </div>
+  <a name="c_contents"></a>
+
+
+ 	<!-- 最新动态 -->  
+	<?php TPL::output('block/content_dynamic.tpl.htm'); ?>	 
+  <!--left_nav_e-->
+</div>
+
+<?php if ($_GET['first_login']) { ?>
+<script type="text/javascript">
+$(document).ready(function () {
+	$.get(G_BASE_URL+'/account/?c=ajax&act=welcome_message_template', function (template) {
+		$('#ajax_data').html(template);
+		
+		welcome_step_1_load();
+	});
+});
+</script>
+<?php } ?>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

@@ -1,0 +1,109 @@
+<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+
+<div class="bd">
+  <!--right_nav_s-->
+  <!--问题注释_s-->
+   <div class="tommy_rightDiv hide" id="con_0">
+    <ul class="yquestionTag" style="border-top:none;">
+      <li><strong>问题发布指南</strong></li>
+    </ul>
+	
+	 <div class="company_pro txt" id="con_0">
+ <p><b><em>●</em>问题：</b>
+请用准确的语言描述您发布的问题思想，并控制在 40 个字数以内。</p>
+ <p><b><em>●</em>详细内容：</b>
+详细补充您的问题内容，并提供一些相关的素材以供参与者更多的了解您所要问题的主题思想</p>
+ <p><b><em>●</em>选择话题：</b>
+选择一个或者多个合适的话题，让您发布的问题得到更多有相同兴趣的人参与。如果系统没有相关话题，您可以选择创建新的话题。所有人可以在您发布问题之后添加和编辑该问题所属的话题。</p>
+<p><b><em>●</em>修改时效：</b>
+在问题发布后的 <?php echo get_setting('question_edit_time');?> 分钟以内可以修改问题内容，超过 <?php echo get_setting('question_edit_time');?> 分钟后将无法再次修改。</p>
+
+    </div>
+	
+  </div>
+  <!--问题注释_e-->
+  <!--right_nav_e-->
+  <!--left_nav_s-->
+  <div class="contant_left">
+    <h2 class="c_title" id="datelist"><span class="s"><img src="<?php echo G_STATIC_URL; ?>/css/img/a_l_04.png"/>发布</span> <a href="#question" id="publish_question">问题</a></h2>
+    <form action="<?php echo get_setting('base_url');?>/publish/<?php if ($this->question_info['question_id']) { ?>?c=ajax&act=question_modify<?php } else { ?>?act=question<?php } ?>" method="post" id="question_form" onsubmit="return false;">
+    <input type="hidden" name="attach_access_key" value="<?php echo $this->attach_access_key; ?>" />
+    <input type="hidden" name="question_id" id="question_id" value="<?php echo $this->question_info['question_id']; ?>" />
+    <ul class="discussion_element hide" id="layer0">
+      <li>
+        <label>问题：</label>
+        <input name="question_content" class="lx" type="text" value="<?php echo $this->question_info['question_content']; ?>" />
+      </li>
+      <li>
+        <label>详细内容：</label>
+        <textarea class="lx" name="question_detail" id="specificx" style="height: 320px;"  /><?php echo $this->question_info['question_detail']; ?></textarea>
+      </li>
+      <li class="disabled">
+        <label>问题分类：</label>
+        <select name="category_id">
+        <option value="0">- 请选择分类 -</option>
+        <?php echo $this->question_category_list; ?>
+        </select>
+      <li>
+      <li class="line" style="width:715px">
+        <label>上传附件：</label>
+        <div id="file_uploader_question"></div>
+        <div style="clear:left"></div>
+      </li>
+      
+	  <li class="line"<?php if ($this->question_info['question_id']) { ?> style="display:none"<?php } ?>><label>问题话题：</label>
+	 
+	 <div class="shd" id="Manytopics">
+		<div class="add_C" id="addTags"></div>
+		<div class=""><input name="addName" class="i_add"  type="text" id="inValue"/></div>
+	 </div>
+	<div style="clear:both;"></div>
+	<div class="xrh" >
+		<div class="tips hide" id="xrh">
+			<dl class="u">
+			<?php foreach($this->topic_tree as $key => $val){ ?>
+				<dt><a href="javascript:void(0);" onclick="addTags(this);" rel="<?php echo $val['topic_title']; ?>" title="<?php echo $val['topic_title']; ?>"><?php echo $val['topic_title']; ?></a></dt>
+				<dd>
+				<?php if($val['childs']){ ?>
+					<?php foreach($val['childs'] as $topic){ ?>
+						<a href="javascript:void(0);" onclick="addTags(this);" rel="<?php echo $topic['topic_title']; ?>" title="<?php echo $topic['topic_title']; ?>"><?php echo $topic['topic_title']; ?></a>
+					<?php } ?>
+				<?php } ?>
+				</dd>
+			<?php } ?>
+			</dl>
+
+
+        </div>
+	</div>
+	
+	 </li>  
+	 
+      <li style="padding-left:0;position:static;width:715px;"><a href="#" onclick="ajax_post($('#question_form')); return false;" class="sureSubMit">确定发布</a></li>
+    </ul>
+    </form>
+  </div>
+  <!--left_nav_e-->
+</div>
+
+<script type="text/javascript">
+	var ATTACH_ACCESS_KEY = '<?php echo $this->attach_access_key; ?>';
+	var question_id = document.getElementById('question_id').value;
+	
+	if (!window.location.hash)
+	{
+		window.location.hash = 'question';
+	}
+</script>
+
+<script type="text/javascript" src="<?php echo G_STATIC_URL; ?>/js/publish.js"></script>
+
+<?php if ($this->question_info['question_id']) { ?>
+<script type="text/javascript" src="<?php echo G_STATIC_URL; ?>/js/publish_question_edit.js"></script>
+<?php } ?>
+
+<script type="text/javascript">
+	var t = new m.mx(); t.info();
+</script>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

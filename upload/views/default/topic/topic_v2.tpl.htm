@@ -1,0 +1,148 @@
+<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+
+
+<div class="bd pbd">
+  <!--right_nav_s-->
+  <div class="tommy_rightDiv xBlog_tag enTryAside">
+    
+    <div class=" RightListDiv">
+      <h3 class="h3">相关话题<em></em></h3>
+      <div class="newTopic">
+      <?php foreach($this->topic_othter_child_list as $key => $val){ ?>
+      <a href="<?php echo get_setting('base_url');?>/topic/?topic_title=<?php echo $val['topic_title']; ?>" title="<?php echo $val['topic_title']; ?>" ><?php echo $val['topic_title']; ?></a>
+      <?php } ?>
+      </div>
+    </div>
+	<div class=" RightListDiv">
+      <h3 class="h3">你的话题经验<em></em></h3>
+      <p><a  href="javascript:;" id="increased_experience_btn">
+<?php if(! $this->topic_info['topic_experience']){ ?>	  
+	  你在 <?php echo $this->topic_info['topic_title']; ?> 话题中的经验
+<?php } else { ?>
+	<?php echo $this->topic_info['topic_experience']; ?>
+<?php } ?>	  
+	  </a>
+	  </p>
+	  <div class="default_area" style="display: none;" id="experience_content_div">
+		<textarea class="default_textArea" id="experience_content"><?php echo $this->topic_info['topic_experience']; ?></textarea>
+		<p class="default_save"><a  href="javascript:;" id="cancle_experience_btn">取消</a>
+		<a id="done_experience_btn" href="javascript:;" class="save_txt default_blue_but">保存</a>
+	  </div>
+    </div>
+
+    <div class=" RightListDiv" style="border:none;">
+      <h3 class="h3"><span class="default_vor"><?php echo $this->topic_info['focus_count']; ?></span>&nbsp;人关注了该话题</h3>
+      <p class="default_GZ" id="loc0">
+	
+		</p>
+    </div>
+  </div>
+  <!--right_nav_e-->
+  <!--left_nav_s-->
+  <div class="contant_left pfo  DIS_top discussion_element">
+
+	<div id="Manytopics" class="shd">
+		<div class="add_C" id="addtxt">
+		<?php if($this->topic_parent_list){ ?>
+		<?php foreach($this->topic_parent_list as $key => $val){ ?>
+		<span val="<?php echo $val['topic_title']; ?>" id="<?php echo $val['topic_id']; ?>"><a href="<?php echo get_setting('base_url');?>/topic/?topic_title=<?php echo $val['topic_title']; ?>" rel="<?php echo $val['topic_id']; ?>" title="<?php echo $val['topic_title']; ?>" onmouseover="eventstalk(this);"><?php echo $val['topic_title']; ?></a><em onclick="removeChilds(this)" class="hide">x</em></span>
+		<?php } ?>
+		<?php } ?>
+		<?php if ($this->topic_info['topic_modify']){?>
+		<a href="javascript:void(0);" class="editor" id="editor" onclick="hide('editorInput','editor','editorInput','editor hide',this)">话题编辑</a>
+		<?php } ?>
+		</div>
+		
+		<div class="editorInput hide" id="editorInput">
+			<div id="ajaxDate" class="hide">
+				<div class="add" onclick="add('take');">添加
+				<span id="take" ></span>话题</div>
+				<div id="txt"></div>
+			</div>
+		<input type="text" class="i_add" name="addName">
+		<a href="javascript:void(0);" class="finish" onclick="hide('editor','editorInput','editor ','editorInput hide',this);addElementVALUE();">完成</a>
+		<p id="err" class="cr hide">请勿重复添加话题！</p>
+		</div>
+	</div>
+
+    <ul class="ur" style="height:auto;">
+      <li class="lr" onmouseover="elementClickEvent.letter.default_Evs(event);" ><img src="<?php if($this->topic_info['topic_pic']){?><?php
+	  echo   get_setting('upload_url').'/topic/'.str_replace('32_32','100_100',$this->topic_info['topic_pic']);?><?php } else { ?><?php echo G_STATIC_URL; ?>/common/topic-max-img.jpg<?php } ?>" alt="" id="edit_topic_pic"/>
+		<?php if ($this->topic_info['topic_lock'] == 0){ ?>
+		<a class="editor_htFace hide" title="编辑" href="javascript:;">编辑</a>
+		<?php } ?>
+	  </li>
+      <li class="lsr">
+        <p><span id="topic_title"><b class="tx" val="<?php echo $this->topic_info['topic_title']; ?>"><?php echo $this->topic_info['topic_title']; ?></b></span>
+		<?php if ($this->topic_info['topic_lock'] == 0){ ?>
+		<?php if ($this->topic_info['topic_modify']){?>
+		<a href="#" title="编辑" onclick="ajax_edit($('#topic_title'), $('#topic_title b'), G_BASE_URL+'/topic/?c=ajax&act=modfiy_topic_title&topic_id=<?php echo $this->topic_info['topic_id']; ?>', false, false, $(this)); return false;" class="editorTxt">编辑</a>
+		<?php } ?>
+		<?php } ?>
+		</p>
+        <div class="xfo">
+		<span id="XFO_Text"><?php if ($this->topic_info['topic_description']) { echo nl2br($this->topic_info['topic_description']); } else { echo "请为话题编辑头像和详细说明..."; } ?>
+		</span>
+		<p style="display:inline;">
+		<?php if ($this->topic_info['topic_lock'] == 0){ ?>	
+		<a href="javascript:;" id="default_edite" title="编辑" onclick="ajax_edit($('#XFO_Text'), $('#XFO_Text'),G_BASE_URL+ '/topic/?c=ajax&act=modify_topic_desc&topic_id=<?php echo $this->topic_info['topic_id']; ?>&target_id=XFO_Text', false, true, $(this)); return false;" class="editorTxt">编辑</a>
+		<?php } ?></p>
+		</div>
+		<div class="default_SZ default_xfo_txt">
+			<a title="加关注" class="default_blue_but" href="javascript:;" onclick="focus_topic($(this), $(this), <?php echo $this->topic_info['topic_id']; ?>); return false;" title="<?php if ($this->topic_info['has_focus']) { ?>取消<?php } ?>关注"><?php if ($this->topic_info['has_focus']) { ?>取消<?php } ?>关注</a>
+			
+			<a onclick="elementClickEvent.letter.default_anonymity(event);" title="设置" href="javascript:" class="default_set"></a>
+			<p class="default_setPosition hide"><a title="修改记录" href="<?php echo get_setting('base_url');?>/topic/?act=log&topic_title=<?php echo $this->topic_info['topic_title']; ?>">话题日志</a></p>
+		</div>
+      </li>
+	 <div style="clear:both;"></div>
+    </ul>
+  </div>
+  <div class="contant_left readns_discus dis_ListEntry index">
+    <h2 class="c_title">
+     
+		<ul class="default_question">
+			<li><a onclick="elementClickEvent.letter.default_question(this,0,'');" class="cur" href="javascript:;">所有问题<span class="default_nums"><?php echo $this->topic_info['topic_count'];?></span></a></li>
+		<!--	<li><a onclick="elementClickEvent.letter.default_question(this,1,'');" href="javascript:;">最佳问题<span class="default_nums">340</span></a></li>-->
+			<li><a onclick="elementClickEvent.letter.default_question(this,1,'');" href="javascript:;">等待回答<span class="default_nums"><?php echo $this->no_answer_question_count; ?></span></a></li>
+	   </ul>
+	</h2>
+	
+	
+    <div id="layer_0"> 
+
+      <div id="c_all_list">
+		
+	  <p style="padding: 15px 0" align="center"><img src="<?php echo G_STATIC_URL; ?>/css/img/loading_b.gif" alt="" /></p></div>
+      
+      <div class="moreDiv" id="bp_all_more"><a href="#" class="mores">更多<em></em></a></div>
+    </div>
+    
+
+    
+ 
+	
+	<div id="layer_1" class="hide">
+	
+	      <div id="c_noanswer_list">
+		
+	  <p style="padding: 15px 0" align="center"><img src="<?php echo G_STATIC_URL; ?>/css/img/loading_b.gif" alt="" /></p></div>
+      
+      <div class="moreDiv" id="bp_noanswer_more"><a href="#" class="mores">更多<em></em></a></div>
+	  
+	  
+		
+			
+	</div>
+  </div>
+  <!--left_nav_e-->
+</div>
+
+<script type="text/javascript">
+	var TOPIC_ID = '<?php echo $this->topic_info['topic_id']; ?>';
+
+	
+</script>
+<script src="<?php echo G_STATIC_URL; ?>/js/topic.js" type="text/javascript"></script>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

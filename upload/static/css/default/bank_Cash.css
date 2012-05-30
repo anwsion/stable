@@ -1,0 +1,115 @@
+﻿@charset "utf-8";
+
+.bank_article{border:1px solid #d9d9d9;width:958px;margin:10px auto;background-color:#fff;color:#666;}
+.bank_article img{vertical-align:text-bottom;}
+.bank_article input{vertical-align:middle;}
+.bank_article input[type="radio"]{margin:0;vertical-align:sub;}
+.bank_article .pay_h2{height:40px;background-color:#f7f7f7;text-indent:30px;line-height:40px;color:#000;font-size:14px;}
+.bank_article .pay_h2 img{margin-right:5px;}
+.bank_article .nav_pay{padding:30px;border-bottom:1px dotted #ccc;}
+.bank_article .nav_pay p{padding:5px 0;}
+.bank_article .nav_pay .user_email{color:#000;}
+.bank_article .nav_pay .blue_num{color:#0092dd;margin-right:5px;}
+.bank_article .ul_adb{padding:30px;}
+.bank_article .ul_adb li{padding-left:110px;padding-bottom:18px;}
+.bank_article .ul_adb label{float:left;margin-left:-110px;width:110px;display:block;text-align:right;font-weight:bold;color:#333;font-size:14px;height:30px;line-height:30px;}
+.bank_article .ul_adb .i_cur,.bank_article .bank_Lister .i_cur{border:1px solid #ccc;padding:8px 5px;margin-right:5px;width:300px;border-radius:5px;}
+.bank_article .ul_adb .i_cur:hover,.bank_article .ul_adb .i_cur:focus,.bank_article .bank_Lister .i_cur:hover,.bank_article .bank_Lister .i_cur:focus{box-shadow:0 0 3px #ccc;}
+.bank_article .ul_adb .i_width,.bank_article .bank_Lister .i_width{width:120px;}
+.bank_article .ul_adb a:hover{text-decoration:underline;}
+.srue_button{background:url(../img/idunion_52.png) -2px -208px no-repeat;height:27px;width:73px;display:inline-block;color:#fff;line-height:25px;text-align:center;}
+.srue_button:hover,.bank_article .ul_adb .srue_button:hover{text-decoration:none;background-position:-2px -176px;color:#fff;}
+
+
+.bank_article .bank_Lister{padding:30px;}
+.bank_article .bank_Lister li span.cur{border:1px solid #ff6602;}
+.bank_article .bank_Lister li .list_bankPic{display:inline-block;width:125px;height:35px;border:1px solid #ddd;margin:10px 25px 10px 20px;background:url(../img/bank.png) 0 0 no-repeat;cursor:pointer;}
+.bank_article .bank_Lister li .list_bankPic label{float:left;margin-left:-20px;display:block;height:35px;}
+.bank_article .bank_Lister li span.dis{display:block;}
+.bank_article .bank_Lister li .s_zhifubao{background-position:10px 2px;}
+.bank_article .bank_Lister li .s_gongshang{background-position:0px -34px;}
+.bank_article .bank_Lister li .s_zhaoshang{background-position:0px -66px;}
+.bank_article .bank_Lister li .s_jianshe{background-position:0px -100px;}
+.bank_article .bank_Lister li .s_nongye{background-position:0px -132px;}
+.bank_article .bank_Lister li .s_zhonggou{background-position:0px -167px;}
+.bank_article .bank_Lister li .s_pufa{background-position:0px -198px;}
+.bank_article .bank_Lister li .s_fazhang{background-position:0px -232px;}
+.bank_article .bank_Lister li .s_guangda{background-position:0px -330px;}
+.bank_article .bank_Lister li .s_jiaotong{background-position:0px -363px;}
+.bank_article .bank_Lister li .s_zhongxin{background-position:0px -430px;}
+.bank_article .bank_Lister li .s_pingan{background-position:0px -496px;}
+.bank_article .bank_Lister li .s_youzhen{background-position:-4px -527px;}
+
+.bank_article .bank_Lister li.list_bank{padding-left:55px}
+.bank_article .bank_Lister li span.label {display:inline-block;width:70px;}
+
+/*cash_Account*/
+.cash_Account{width:715px;margin:10px 0;padding-bottom:50px;}
+.cash_Account .nav_pay .pay_cash,.cash_Account .nav_pay .pay_num{float:right;}
+.cash_Account .nav_pay .pay_num span{color:#06BF01;font-weight:bold;margin:0 4px;}
+a.btn_white,a.btn_red{display:inline-block;width:75px;height:23px;line-height:23px;overflow:hidden;background:url(../img/idunion_52.png) 0 0 no-repeat;margin-left:10px;color:#fff;text-align:center;}
+a.btn_white{background-position:-87px -212px;color:#666;}
+a.btn_red{background-position:-174px -212px;}
+a.btn_white:hover{background-position:-87px -180px;}
+a.btn_red:hover{background-position:-174px -180px;}
+.cash_Account .nav_pay .accunt_sum,.cash_Account .cash_date{font-size:14px;font-weight:bold;color:#000;}
+.cash_Account .nav_pay .accunt_sum .blue_num{font-size:25px;font-weight:normal;}
+.cash_Account .nav_pay .cash_date{color:#666;padding-top:3px;}
+.cash_Account .cash_date input[type="text"]{border:1px solid #ccc;width:150px;padding:3px;}
+.cash_Account .cash_date input[type="text"]:hover,.cash_Account .cash_date input[type="text"]:focus,.tx_frist .ul_listerForme li input[type="text"]:hover,.tx_frist .ul_listerForme li input[type="text"]:focus,.tx_frist .ul_listerForme li input[type="password"]:hover,.tx_frist .ul_listerForme li input[type="password"]:focus{box-shadow:0 0 3px #ccc;}
+.cash_Account .cash_date .btn_seach{display:inline-block;background:url(../img/ask_q.png) 0 -157px no-repeat;width:58px;height:23px;line-height:23px;color:#fff;text-align:center;vertical-align:top;font-weight:normal;font-size:12px;margin-left:5px;}
+.cash_Account .b{border:1px solid #ccc;background:#f2f2f2;width:615px;margin:10px auto;height:45px;padding:0 20px;}
+.cash_Account .b p.cash_date,.cash_Account .b p{padding-top:10px;font-weight:normal;line-height:22px;}
+.cash_Account .b p.cash_date input[type="text"]{width:110px;}
+.cash_Account .b .btn_seach{ margin-left:15px;margin-top:1px;}
+.cash_Account .b span.c{color:#FEA81F}
+.cash_Account .account_data{ width:655px; margin:0 auto; height:20px;line-height:20px;padding:15px 0 10px;}
+.cash_Account .account_data span,.cash_Account .account_data a,.cash_Account .account_data em{display:inline-block;color:#999;}
+.cash_Account .account_data em{font-style:normal;}
+.cash_Account .account_data a{padding:0 10px;}
+.cash_Account .account_data a.cur{background:#9a9a9a;color:#fff;border-radius:5px;}
+.cash_Account .account_data span{font-weight:bold;font-size:14px;color:#000;}
+.btn_ques{padding-top:15px;text-align:right;}
+.tx_frist{width:375px;margin:0 auto;}
+.tx_frist .f_txt{background:#feffbb;padding:10px;text-align:center;}
+.tx_frist .ul_listerForme{width:375px;margin:20px 0 10px;}
+.tx_frist .ul_listerForme li{padding-left:100px;padding-bottom:20px;}
+.tx_frist .ul_listerForme li label{display:block;float:left;width:100px;margin-left:-100px;text-align:right;height:25px;line-height:25px;}
+.tx_frist .ul_listerForme li input[type="text"],.tx_frist .ul_listerForme li input[type="password"]{border:1px solid #ccc;padding:5px;border-radius:4px;width:200px;}
+
+
+.cash_Account .number_lister {width:655px;margin:0 auto;}
+.cash_Account .number_lister li{border-bottom:1px dotted #ccc;padding:15px 0;text-align:center;}
+.cash_Account .number_lister .th{font-weight:bold;}
+.cash_Account .number_lister .th span,.cash_Account .number_lister .td span{display:inline-block;color:#000;}
+.cash_Account .number_lister .t1{width:130px;}
+.cash_Account .number_lister .t2{width:200px;}
+.cash_Account .number_lister .t3,.cash_Account .number_lister .t4,.cash_Account .number_lister .t5{width:100px;}
+.cash_Account .number_lister span.t5,.cash_Account .number_lister span.t4{font-weight:bold;color:#666;}
+.cash_Account .number_lister span.recharge_clr{color:#06bf01;}
+.cash_Account .number_lister span.deposit_clr{color:#fea81f;}
+.cash_Account .number_lister .color_td{background:#f1f8ff;}
+.cash_Account .number_lister li:hover{background:#e7f3fe}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,6 @@
+<?php foreach ($this->competitions_list AS $key => $val) { ?>
+<ul class="contxt_List">
+	<li class="u"><p>￥<?php echo $val['bonus']; ?></p><?php if (get_last_days($val['expire_time']) > 0) { ?> 剩余 <?php echo get_last_days($val['expire_time']); ?> 天<?php } else { ?>已结束<?php } ?></li>
+	<li class="txli"><a href="<?php echo get_setting('base_url');?>/contest/<?php echo $val['competitions_id']; ?>" target="_blank"><!--<em>[IBM]</em>--><?php echo $val['competitions_content']; ?></a> <a href="javascript:void(0);" class="addtips<?php if ($val['focus']) { ?> cur<?php } ?>" onclick="focus_competition($(this), $(this).find('em'), <?php echo $val['competitions_id']; ?>);"><em><?php if ($val['focus']) { ?>取消<?php } ?>关注</em></a></li>
+</ul>
+<?php } ?>

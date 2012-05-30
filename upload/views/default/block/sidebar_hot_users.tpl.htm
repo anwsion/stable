@@ -1,0 +1,14 @@
+<div class=" RightListDiv" style="border-bottom:none;">
+  <h3 class="h3 default_h">热门用户<em></em></h3>
+  <?php if(is_array($this->sidebar_hot_users)){ ?>
+	<?php foreach($this->sidebar_hot_users AS $key => $val) { ?>
+	<p class="porela default_liste_line">
+		<?php if ($this->user_id != $val['uid'] AND $this->user_id) { ?><a href="javascript:void(0);" class="addtips fr<?php if ($val['focus']) { ?> cur<?php } ?>" rel="<?php if ($val['focus']) { ?>取消<?php } ?>关注" onclick="follow_people($(this), $(this).find('em'), <?php echo $val['uid']; ?>);"><em><?php if ($val['focus']) { ?>取消<?php } ?>关注</em></a><?php } ?>
+	<a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['user_name']; ?>"><?php echo $val['user_name']; ?></a><span class="s" title=""><?php echo $val['signature']; ?></span>
+		<a class="facepostionImgs" href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['user_name']; ?>">
+		<img src="<?php echo get_avatar_url($val['uid'],'mid',$val['avatar_file']); ?>" onmouseover="eventsMouseM(this);" rel="<?php echo $val['uid']; ?>">
+		</a>
+	</p>
+	<?php } ?>
+	<?php } ?>
+</div>

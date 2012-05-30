@@ -1,0 +1,100 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.bd .logGed .xb_h3{padding-right:0;width:655px;}
+.bd .logGed .xb_h3 .user_info{width:605px;}
+.bd .logGed .xb_h3 .user_info .posiMgs_face{left:0px;top:38px}
+.bd .logGed .xb_h3 .user_info .user_programs{margin-left:-50px;font-size:16px;height:30px;}
+.bd .logGed .xb_h3 .user_info .Endorse{margin-left:30px;padding:5px 35px 5px 10px;position:relative;width:520px;margin-top:10px;}
+.bd .logGed .xb_h3 .user_info .Endorse .spread{width:510px;}
+.bd .logGed .xb_h3 .user_info .el_agree{left:-80px;top:2px;}
+.bd .logGed .xb_h3 .user_info .Endorse .IndexTarget{background-position:0 -385px;height:14px;margin-top:2px;margin-left:-19px;}
+.bd .logGed .xb_h3 .Endorse .Click_moreErose{height:20px;}
+
+.bd .sreach .s_reg{border-right:1px solid #000;width:102px; display:inline-block;text-align:center; }
+.bd .sreach .s_reg a{color:#e6e6e6;}
+.bd .sreach .s_loginBox,.bd .sreach .s_reg{float:left;height:25px;line-height:25px;font-size:14px;font-weight:bold;margin-top:12px;color:#e6e6e6;}
+.bd .sreach .s_loginBox{border-left:1px solid #666;width:695px;padding-left:25px;}
+.bd .sreach .s_loginBox .s_inputs{border:1px solid #333;box-shadow:0 1px 3px #707070;padding:4px;border-radius:4px;margin-left:5px;color:#999;height:18px;line-height:18px;}
+.bd .sreach .s_loginBox .s_label,.bd .sreach .s_loginBox .s_small,.bd .sreach .s_loginBox .s_login{font-weight:normal;font-size:12px;color:#999;}
+.bd .sreach .s_loginBox input{vertical-align:middle;}
+.bd .sreach .s_loginBox .s_checkBox{}
+.bd .sreach .s_loginBox .s_small{ margin:0 7px;}
+.bd .sreach .s_loginBox .s_login,.bd .sreach .s_loginBox .s_login:active{height:23px;width:58px;display:inline-block;text-align:center;margin-left:20px;background:url(../img/ask_q.png) 0 -478px no-repeat;line-height:22px;border-radius:3px;color:#fff;}
+.bd .sreach .s_loginBox .s_login:hover{background-position:0 -509px;}
+
+.bd .logGed .regSection{height:377px;width:655px;margin:0 auto; background:#f0f0f0;position:relative;z-index:1;margin-bottom:30px;}
+.bd .logGed .regSection .regtitle{background:url(../img/reg_05.png) 0 0px no-repeat;height:56px;}
+.bd .logGed .regSection .regtitle,.bd .logGed .regSection .regtitle a{color:#fff;}
+.bd .logGed .regSection .regtitle .t{font-size:14px;font-weight:bold;text-indent:45px;height:56px;width:150px;line-height:58px;}
+.bd .logGed .regSection .regtitle .fb{background:url(../img/reg_07.png) 0 0px no-repeat;}
+.bd .logGed .regSection .regtitle .fb img{vertical-align:middle;}
+.bd .logGed .regSection .regtitle .reg{float:right;margin-right:20px;line-height:56px;font-weight:normal;}
+.bd .logGed .regSection .regtitle .reg a:hover,body.idunionReg a:hover{text-decoration:underline;}
+.bd .logGed .regSection .regmoster{margin-left:140px;padding-top:35px;}
+.bd .logGed .regSection .regmoster img,.bd .logGed .regSection .regmoster input{vertical-align:middle;}
+.bd .logGed .regSection .regmoster li{padding-bottom:18px;text-align:left;}
+.bd .logGed .regSection .regmoster li.pos{position:relative;}
+.bd .logGed .regSection .regmoster li.pos .tps{position:absolute;top:0;left:340px;}
+.bd .logGed .regSection .regmoster .err,.bd .logGed .regSection .regmoster .explain,.bd .logGed .regSection .regmoster .right{margin-left:10px;display:inline-block;}
+.bd .logGed .regSection .regmoster .explain{background:#fffceb;border:1px solid #ececd5;border-radius:5px;padding:0px 10px 0;width:133px;vertical-align:middle;line-height:16px; color:#999;height:34px;}
+.bd .logGed .regSection .regmoster .err{background:url(../img/a_l_25.png) -58px -80px no-repeat;color:#cb0000;text-indent:20px;height:20px;line-height:20px;font-style:normal;}
+.bd .logGed .regSection .regmoster .right{background:url(../img/a_l_25.png) -58px -112px no-repeat;height:22px;width:50px;}
+.bd .logGed .regSection .regmoster .userTxt{width:320px;padding:10px;border:1px solid #b3b3b3;box-shadow:0 2px 2px #f2f2f2 inset;border-radius:5px;font-size:16px;font-family:"Î¢ÈíÑÅºÚ";color:#666;height:20px;}
+.bd .logGed .regSection .regmoster .txtare{height:120px;overflow:hidden;}
+.bd .logGed .regSection .regmoster .cur{color:#ccc;border:1px solid #bfd6de;height:20px;}
+.bd .logGed .regSection .regmoster .on{color:#000;}
+.bd .logGed .regSection .regmoster .userTxt:focus{box-shadow:0 0 5px #c6eaf7;border:1px solid #bfd6de;}
+.bd .logGed .regSection .regmoster .yzm{width:150px;}
+.bd .logGed .regSection .regmoster .elp{width:150px;display:inline-block;}
+.bd .logGed .regSection .regmoster .elp .s{height:103px;height:44px;overflow:hidden;display:inline-block; vertical-align:middle;}
+
+
+.bd .logGed .regSection .regmoster .regbut{width:345px; height:43px; display:block;font-size:14px;line-height:43px;text-align:center;color:#fff;text-shadow:0 1px 0 #008fc8;background:url(../img/reg_06.png) 0 0 no-repeat;}
+.bd .logGed .regSection .regmoster .regbut:hover{background-position:0 -43px;text-decoration:none;}
+.bd .logGed .regSection .regmoster .regbut:active{background-position:0 -86px;}
+.bd .logGed .xb_t h3.h_file_upload{font-weight:bold;height:35px; line-height:35px;font-size:14px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,10 @@
+<div class="contant_left readns_discus dis_ListEntry index">
+    <h2 class="c_title">
+      <p class="sux" id="sort_control">
+		
+	  <a href="javascript:void(0);" class="cur" onClick="reloadSortList(this,'hot', <?php echo intval($_GET['category']); ?>);">热门</a> • <a href="javascript:void(0);" onClick="reloadSortList(this,'new', <?php echo intval($_GET['category']); ?>);">最新</a></p>
+      <?php if ($this->category_info) { echo $this->category_info['title']; } else { ?>全部问题<?php } ?><?php if ($this->category_info) { ?><span class="default_hots">该分类有 <em class="em"><?php echo $this->topic_count; ?></em> 个话题 </span><?php } ?></h2>
+	<div id="c_list"><p style="padding: 15px 0" align="center"><img src="<?php echo G_STATIC_URL; ?>/css/img/loading_b.gif" alt="" /></p></div>
+	
+	<p class="more" id="bp_more"><a href="javascript:void(0);">更多 >></a></p>
+</div>

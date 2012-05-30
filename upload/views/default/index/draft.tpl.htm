@@ -1,0 +1,7 @@
+<?php foreach ($this->drafts AS $key => $val) { ?>
+<li>
+	<a href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $val['item_id']; ?>#answer_form" class="default_title_txt"><?php echo $val['question_info']['question_content']; ?></a>
+	<p><?php echo nl2br(htmlspecialchars($val['data']['message'])); ?></p>
+	<p class="default_edit"><a href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $val['item_id']; ?>#answer_form">编辑草稿</a>&nbsp;•&nbsp;<a href="#" class="delete_draft" onclick="delete_draft(<?php echo $val['item_id']; ?>, 'answer'); $(this).parent().parent().fadeOut(); return false;">删除草稿</a>&nbsp;•&nbsp;<?php echo date_friendly($val['time']); ?></p>
+</li>
+<?php } ?>

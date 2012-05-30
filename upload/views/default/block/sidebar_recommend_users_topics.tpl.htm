@@ -1,0 +1,41 @@
+    <div class="RightListDiv">    	
+      <h5 class="f_news">可能感兴趣的人或话题：<em></em></h5>	  
+<?php foreach($this->sidebar_recommend_users_topics AS $key => $val) { ?>
+	<?php if ((isset($val['topic_id']))&&($val['topic_id']>0)){ ?>	
+	<div class="porela default_liste">
+		<a onclick="focus_topic($(this), $(this).find('em'), <?php echo $val['topic_id']; ?>);" rel="添加关注" class="addtips fr" href="javascript:void(0);"><em>添加关注</em></a>
+		<a href="<?php echo get_setting('base_url');?>/topic/?topic_title=<?php echo $val['topic_title']; ?>" onmouseover="eventstalk(this);" rel="<?php echo $val['topic_id']; ?>"><?php echo cutmbstr_zhcn($val['topic_title'],10); ?></a>		
+<?php if($val['focus_users']['user_name']!=""){ ?>
+		 <span class="s"><a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['focus_users']['user_name'];?>"  onMouseOver="eventsMouseM(this);" rel="<?php echo $val['focus_users']['uid'];?>"><?php echo $val['focus_users']['user_name']; ?></a> 关注了该话题</span>
+<?php } else { ?>
+
+ <span class="s"></span>
+<?php } ?>
+	<a class="facepostionImgs" href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['focus_users']['user_name'];?>" onmouseover="eventstalk(this);" rel="<?php echo $val['topic_id']; ?>"><img  src="<?php if (empty($val['topic_pic'])) { echo G_STATIC_URL.'/common/topic-mid-img.jpg'; } else { echo get_setting('upload_url').'/topic/'.$val['topic_pic']; } ?>"></a>
+</div>
+	<?php }else{ ?>
+				  <div class="porela default_liste">
+				<a onclick="follow_people($(this), $(this).find('em'), <?php echo $val['uid'];?>);" rel="添加关注" class="addtips fr" href="javascript:void(0);"><em>添加关注</em></a>
+				  <a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['user_name']; ?>" onMouseOver="eventsMouseM(this);" rel="<?php echo $val['uid'];?>"><?php echo $val['user_name']; ?> </a>
+				  <?php if ($val['signature']) { ?>
+				  <!--<p class="defa_referral"><?php echo $val['signature']; ?></p>-->
+				  <?php } ?>
+				  <span class="s">
+	<?php
+	 switch($val['rtype']['type'])
+	 {
+		case 'friend':
+			?><a href='<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['friend_users']['user_name'];?>'  onMouseOver="eventsMouseM(this);" rel="<?php echo $val['friend_users']['uid'];?>"><?php echo $val['friend_users']['user_name'];?></a> 关注了 TA
+	<?php
+			break;
+		case 'topic':
+			?> TA 也关注&nbsp;&nbsp;<a href='<?php echo get_setting('base_url');?>/topic/?topic_title=<?php echo $val['topic_info']['topic_title'];?>'><?php echo $val['topic_info']['topic_title'];?></a> <?php
+			break;
+	 }
+	?>
+	 </span><a class="facepostionImgs" href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['user_name']; ?>" onMouseOver="eventsMouseM(this);" rel="<?php echo $val['uid'];?>"><img  src="<?php echo get_avatar_url($val['uid'],'min',$val['avatar_file']); ?>"></a></div>	
+	
+	<?php } ?>
+<?php } ?>
+
+  </div>

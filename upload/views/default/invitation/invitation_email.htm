@@ -1,0 +1,16 @@
+<html style="border: medium none;font-size: 1em; list-style: none outside none; margin: 0; outline: medium none; padding: 0; text-decoration: none;">
+<div class="wrapper" style="margin: 20px auto 0; width: 500px; padding:15px auto 10px">
+<div class="header clearfix">
+<a class="logo" style="float:left">
+<b><?php echo get_setting('site_name'); ?></b>
+</a>
+</div>
+<br style="clear:both; height:0"  />
+<div class="content" style="background: none repeat scroll 0 0 #FFFFFF; border: 1px solid #E9E9E9; margin: 10px 0 0; padding: 30px;">
+<p><b><?php echo $from_name;?></b> 邀请你加入 <?php echo get_setting('site_name'); ?></p>
+<p><?php echo get_setting('site_name'); ?> 是一个由大家共建的问答社区，这里也许没有标准回复，但有更多不同经验，观点和建议，我们希望能让最合适的人来回答最合适的问题。</p>
+<p class="answer" style="border-top: 1px solid #DDDDDD;margin: 15px 0 25px;padding: 15px;">请点击以下链接完成注册：<br  /><a href="<?php echo $reg_code_url;?>"><?php echo $reg_code_url;?></a></p>
+<p class="footer" style="border-top: 1px solid #DDDDDD; padding-top:6px; margin-top:25px; color:#838383;">&copy; <?php echo get_setting('site_name'); ?> 2011&nbsp; </p>
+</div>
+</div>
+</html>

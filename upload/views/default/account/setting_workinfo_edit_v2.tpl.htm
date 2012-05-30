@@ -1,0 +1,71 @@
+<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+
+
+<!--header_e-->
+<div class="bd pbd">
+ 
+  <!--left_nav_s-->
+
+  <div class="contant_left readns_discus ps-wd">
+  <?php TPL::output('account/setting_menu.tpl.htm'); ?>
+	<div id="td-0" style="display:block;">
+
+    <form id="setting_form" method="post" action="<?php echo get_setting('base_url');?>/account/?c=setting&act=edit_workinfo_process_ajax">
+	<input type="hidden" name="wid" value="<?php echo $this->work_experience_row[work_id]; ?>"/>
+	<ul class="ps-info" >
+		<li><label>公司名称：</label>
+		<input type="text" name="company_name" id="company_name" class="rx-txt" value="<?php echo $this->work_experience_row['company_name']; ?>">
+		</li>
+		<li><label>工作地点：</label>
+        <select name="province" id="level0" class="select_area"></select>
+		<select name="city" id="level1"  class="select_area"></select>
+		<select name="district" id="level2"  class="select_area"></select>
+		</li>
+		<li><label>公司职位：</label>
+        <select name="jobs_id"  class="field" >
+        <?php echo H::display_options($this->jobs_list,$this->jobs_list_select); ?>
+		</select>
+		</li>
+		<li><label>工作时间：</label>
+		<select name="start_year"  class="" >
+  <?php echo H::display_options($this->years_list,$this->start_year); ?>
+
+					</select> 
+<select name="start_month"  class="" >
+  <?php echo H::display_options($this->month_list,$this->start_month); ?>
+
+					</select>      
+<span">至</span>                     
+<select name="end_year"  class="" >
+  <?php echo H::display_options($this->years_list,$this->end_year); ?>
+
+					</select> 
+<select name="end_month"  class="" >
+  <?php echo H::display_options($this->month_list,$this->end_month); ?>
+		</select>
+        </li>
+		<li><a href="javascript:;" onclick="ajax_post($('#setting_form'),_tips_form_processer); return false;" class="seve_s">保存</a></li>
+	</ul>
+    </form>
+	</div>
+	</div>
+
+	<!--微博绑定_e-->
+    </div>
+  <!--left_nav_e-->
+</div>
+
+<script type="text/javascript" language="javascript1.5">
+		
+$(document).ready(function() {
+		$(".select_area").LocationSelect({
+			labels :["请选择省份或直辖市", " ", " "],
+			elements : document.getElementsByTagName("select"),	
+			detector: function () {this.selectID(["<?php echo $this->work_experience_row[province]; ?>","<?php echo $this->work_experience_row[city]; ?>","<?php echo $this->work_experience_row[district]; ?>"]);},//默认显示的城市,
+			dataUrl: "<?php echo G_STATIC_URL; ?>/js/areas_1.0.json",
+		});
+});
+
+</script>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

@@ -1,0 +1,6 @@
+<?php foreach ($this->topics_list AS $key => $val) { ?>
+<ul class="utr">
+	<li class="pictrue"><a href="<?php echo get_setting('base_url');?>/topic/?topic_title=<?php echo $val['topic_title']; ?>" target="_blank"><img src="<?php if ($val['topic_pic']) { echo $val['topic_pic']; } else { echo G_STATIC_URL.'/common/topic-min-img.jpg'; } ?>" class="Lmg"/></a></li>
+    <li class="lsi"><a href="<?php echo get_setting('base_url');?>/topic/?topic_title=<?php echo $val['topic_title']; ?>" target="_blank"><?php echo $val['topic_title']; ?></a><a href="javascript:void(0);" class="addtips<?php if ($val['focus']) { ?> cur<?php } ?>" rel="添加关注" onclick="focus_topic($(this), $(this).find('em'), <?php echo $val['topic_id']; ?>);"><em><?php if ($val['focus']) { ?>取消<?php } ?>关注</em></a><span class="s"><?php echo $val['focus_count']; ?> 人关注了该话题</span></li>
+</ul>
+<?php } ?>

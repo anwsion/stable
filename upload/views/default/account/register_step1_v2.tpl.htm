@@ -1,0 +1,45 @@
+<?php TPL::output('global/__public_header_v2.tpl.htm'); ?>
+
+<section class="regSection">
+<h3 class="regtitle"><span class="reg">已有账号？<a href="<?php echo get_setting('base_url');?>/account/?c=login&act=login&url=">登录</a></span><b class="b">新用户注册</b></h3>
+  <form action="<?php echo get_setting('base_url');?>/account/?c=register&act=step1&version=2" method="post" id="register_form">
+  <input type="hidden" name="act" value="step1_process_ajax"/>
+  <?php if($this->icode){ ?><input type="hidden" name="icode" id="icode" value="<?php echo $this->icode;?>"/><?php } ?>
+  <?php if($this->source){ ?>
+  	<?php if($this->invite_question_id){ ?>
+  		<input type="hidden" name="invite_question_id" value="<?php echo $this->invite_question_id; ?>"/>
+  	<?php } ?>
+  	<?php if($this->invite_competition_id){ ?>
+  		<input type="hidden" name="invite_competition_id" value="<?php echo $this->invite_competition_id; ?>"/>
+  	<?php } ?>
+  <?php } ?>
+  <ul class="regmoster" id="reg_moster">
+	<li><input type="text" name="user_name" value="<?php echo $this->user_name;?>" id="userName" class="userTxt" title="真实姓名"/><span id="tip_userName"></span></li>
+	<li>
+	<?php if ($this->email != ""){ ?><input type="hidden" name="email_ref" id="userEmail_ref" value="<?php echo $this->email;?>" /><?php } ?>
+	<input type="text" name="email" id="userEmail" value="<?php echo $this->email;?>" class="userTxt" title="电子邮箱"<?php if($this->email != ""){ ?> disabled<?php } ?>/><span id="tip_userEamil"></span></li>
+	<li><input type="password" name="password" id="userPassword" class="userTxt hide" title="密码"/>
+	<input type="text" id="userPasswordx" class="userTxt" title="密码"/><span id="tip_userPassword"></span></li>
+	
+	<?php if ($this->source){ ?>
+	<input type="hidden" name="source" value="<?php echo $this->source;?>" />
+	<?php } else { ?>
+	<!--<li><input type="text" name="icode" id="userICode" class="userTxt" value="<?php echo $this->icode;?>" title="邀请码"/><span id="tip_userICode"></span></li>-->
+	<?php  } ?>
+	
+	<li<?php if($this->source || $this->icode){?> style="display:none;"<?php } ?>><input type="text" name="seccode_verify" id="userCode" class="userTxt yzm" title="验证码"/>
+	<span class="elp"><em class="s"><img src="" onclick="this.src='<?php echo get_setting('base_url');?>/account/?c=captcha&' + Math.random();" id="seccode" /></em><a href="javascript:void(0);" onclick="$('#seccode').click();">换一张</a></span>
+	<span id="tip_userCode"></span>
+	</li>
+    
+	<li class="default_cl"><input type="checkbox" name="agreement_chk" value="agree" />我同意<a href="javascript:;">用户协议</a>中的条款</li>
+  </ul>
+  </form>
+</section>
+<section class="userLister" id="regLister">
+	<a href="#" onclick="ajax_post($('#register_form'), _tips_form_processer); return false;" class="regbut">确认注册</a>
+</section>
+
+<script src="<?php echo G_STATIC_URL; ?>/js/reg.js" type="text/javascript"></script>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

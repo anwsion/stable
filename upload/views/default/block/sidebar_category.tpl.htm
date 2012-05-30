@@ -1,0 +1,8 @@
+<?php if (sizeof($this->sidebar_category) > 0) { ?>
+<p class="default_tal default_class"><span class="default_arr" title="展开" onclick="elementClickEvent.clickSort(event);"></span>分类</p>
+<ul class="default_liste_module hide" id="default_liste_module">
+	<?php foreach($this->sidebar_category as $key => $val){ ?>		
+	<li><a href="<?php echo get_setting('base_url'); ?>/question/?category=<?php echo $val['id'];?>"><?php echo $val['title']; ?></a></li>
+<?php } ?>
+</ul>
+<?php } ?>

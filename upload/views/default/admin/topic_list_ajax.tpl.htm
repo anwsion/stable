@@ -1,0 +1,15 @@
+﻿	<input id="load_parent_id" type="hidden" value="<?php echo $this->parent_id;?>" />
+	<p class="p"><span style="padding-left:5px;padding-top:5px;float:left">位置:
+	<?php foreach($this->pos as $key => $val){ ?>
+		<a href="javascript:;" name="load_topic_list" rel="<?php echo $val['topic_id']; ?>"><?php echo $val['topic_title']; ?></a>&nbsp;>>&nbsp;
+	<?php } ?>
+	</span><a href="javascript:void(0);" id="close">关闭</a></p>
+	<p style="padding:5px;"><a href="javascript:;" name="load_topic_list" rel="<?php echo $this->topic['parent_id'];?>">返回上一级</a></p>
+	<p style="padding:5px;">
+	<?php if(!$this->topics){ ?>
+		<a href="javascript:;" name="load_topic_list" rel="<?php echo $this->topic['parent_id'];?>"><font color=red>没有可选父话题，请返回上一级</font></a>
+	<?php } ?>
+	<?php foreach($this->topics as $key => $val){ ?>
+		<a href="javascript:;" name="load_topic_list" rel="<?php echo $val['topic_id']; ?>"><?php echo $val['topic_title']; ?></a>&nbsp;[<a name="select_parent" href="javascript:;" topic_title="<?php echo $val['topic_title']; ?>" rel="<?php echo $val['topic_id']; ?>">选择</a>]&nbsp;&nbsp;
+	<?php } ?>
+    </p>

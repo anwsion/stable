@@ -1,0 +1,112 @@
+<?php TPL::output('admin/admin_header.tpl.htm'); ?>
+
+<body >
+
+<div id="body-wrapper">
+	<div id="main-content">
+		<div class="clear"></div>
+		<div class="content-box">
+			<div class="content-box-header">
+				<h3>在线用户</h3>
+				
+				<span style=" float:left; margin-left:20px; line-height:30px; color:#57A000; font-weight:bold">当前在线(<?php echo get_setting('online_interval');?>分钟内)： <font color="#FF0000" style="font-size:18px;"><?php echo $this->total_count; ?></font>&nbsp 当前时间:<?php echo date("H:i:s");?></span>
+				
+				<!--span style=" float:right; margin-right:10px; line-height:50px; color:#57A000;">当前列表 1 分钟更新一次</span-->
+				
+				<ul class="content-box-tabs">
+				</ul>
+				
+				<div class="clear"></div>
+			</div>
+			<div class="content-box-content">
+				<div class="tab-content default-tab" id="tab1">
+					<!--form action="" method="get">
+					<input type="hidden" name="c" value="withdraw" />
+					<input type="hidden" name="act" value="verify_list" />
+						<p>
+							<label>
+							搜索：&nbsp;&nbsp;
+							<input class="text-input small-input" type="text" id="small-input" name="keyword" value="<?php echo $this->keyword; ?>"/>
+							&nbsp;&nbsp;
+							<input class="button" type="submit" value="搜  索" />
+							<?php if($this->keyword){ ?>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<input class="button" type="submit" onClick="window.location.href='?c=question&act=list_v2';return false;" value="显示全部" />
+							<?php } ?>
+							</label>
+						</p>
+					</form-->
+					
+					<?php if(!$this->list){ ?>
+					<div class="notification attention png_bg"> <a href="javascript:;" class="close"><img src="resources/images/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
+						<div> 没有内容 </div>
+					</div>
+					<?php }else{ ?>
+					<table>
+						<thead>
+							<tr>
+								<!--th><input class="check-all" type="checkbox" /></th-->
+								<th>用户ID</th>
+								<th>用户名</th>
+								<th>活动时间</th>
+								<th style=" width:450px;">活动页面</th>
+								<th>IP</th>
+							</tr>
+						</thead>
+						<tbody>
+        				<?php foreach ($this->list AS $key => $val) { ?>
+							<tr>
+								<td><?php echo $val['uid']; ?></td>
+								<td><a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['userinfo']['user_name']; ?>" target="_blank"><?php echo $val['userinfo']['user_name']; ?></a></td>
+								<td><?php echo date("Y-m-d H:i:s", $val['last_active']); ?></td>
+								<td><a href="<?php echo $val['active_url']; ?>" target="_blank"><?php echo $val['active_url']; ?></a></td>
+								<td><?php echo long2ip($val['ip']); ?></td>
+							</tr>
+       					<?php } ?>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="10">
+									<div class="pagination">
+										<?php echo $this->pagination; ?>
+									</div>
+									<div class="clear"></div>
+									</td>
+							</tr>
+						</tfoot>
+					</table>
+					<?php } ?>
+				</div>
+		</div>
+		
+		<div class="clear"></div>
+		<div id="notf_tip" style="display:none;" class="notification png_bg"> <a href="javascript:;" class="close"><img src="resources/images/icons/cross_grey_small.png" alt="关闭" /></a>
+			<div id="notf_cont"></div>
+		</div>
+		
+	</div>
+</div>
+
+<script>
+
+function setWithdraw(withdraw_id, status)
+{
+
+	$.getJSON('?c=withdraw&act=verify_process_ajax&withdraw_id=' + withdraw_id + '&status=' + status, function (result){
+	
+		if(result)
+		{
+			alert(result.err);
+		}
+		
+		if(result.errno == 1)
+		{
+			window.location.reload();
+		}
+		
+	});
+}
+
+</script>
+
+<?php TPL::output('admin/admin_footer.tpl.htm'); ?>

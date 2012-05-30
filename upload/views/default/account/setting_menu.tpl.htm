@@ -1,0 +1,14 @@
+<h2 class="c_title u_lister" id="uLister">
+	<span class="ps-fx">账户设置</span>
+	
+	<a href="<?php echo get_setting('base_url');?>/account/?c=setting&act=user"  <?php if (!$_GET['act'] OR $_GET['act'] == 'user') { ?> class="cur"<?php } ?>>基本资料</a> 
+	<a href="<?php echo get_setting('base_url');?>/account/?c=setting&act=contact"<?php if ($_GET['act'] == 'contact') { ?> class="cur"<?php } ?>>联系方式</a> 
+	<a href="<?php echo get_setting('base_url');?>/account/?c=setting&act=educationinfo"<?php if ($_GET['act'] == 'educationinfo') { ?> class="cur"<?php } ?>>教育经历</a> 
+	<a href="<?php echo get_setting('base_url');?>/account/?c=setting&act=workinfo"<?php if ($_GET['act'] == 'workinfo') { ?> class="cur"<?php } ?>>工作经历</a>
+	<a href="<?php echo get_setting('base_url');?>/account/?c=setting&act=inbox"<?php if ($_GET['act'] == 'inbox') { ?> class="cur"<?php } ?>>私信/邮件/通知</a>
+	<a href="<?php echo get_setting('base_url');?>/account/?c=setting&act=editpassword"<?php if ($_GET['act'] == 'editpassword') { ?> class="cur"<?php } ?>>修改密码</a>
+	
+	<?php if (get_setting('sina_weibo_enabled') == 'Y' OR get_setting('qq_t_enabled') == 'Y') { ?>
+	<a href="<?php echo get_setting('base_url');?>/account/?c=setting&act=accountbind"<?php if ($_GET['act'] == 'accountbind') { ?> class="cur"<?php } ?>>绑定微博帐号</a>
+	<?php } ?>
+</h2>

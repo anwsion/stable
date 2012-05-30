@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="<?php echo X_UA_COMPATIBLE; ?>" />
+<meta name="description" content="<?php echo get_setting('description'); ?>"  />
+<meta name="keywords" content="<?php echo get_setting('keywords'); ?>" />
+
+<title><?php echo $this->page_title; ?></title>
+
+<!-- Global require -->
+<?php foreach ($this->_global_css AS $global_css) { ?>
+<link href="<?php echo G_STATIC_URL; ?>/<?php echo str_replace('css/', 'css/' . $this->template_name . '/', $global_css); ?>" rel="stylesheet" type="text/css" />
+<?php } ?>
+<?php foreach ($this->_global_js AS $global_js) { ?>
+<script src="<?php echo G_STATIC_URL; ?>/<?php echo $global_js; ?>" type="text/javascript"></script>
+<?php } ?>
+<!-- / Global require -->
+
+<script type="text/javascript">
+	var G_SITE_NAME = '<?php echo get_setting('site_name'); ?>';
+	var G_BASE_URL = '<?php echo get_setting('base_url'); ?>';
+	var G_STATIC_URL = '<?php echo G_STATIC_URL; ?>';
+	var G_UPLOAD_URL = '<?php echo get_setting('upload_url'); ?>';
+	var USER_ID = <?php echo $this->user_id; ?>;	
+	var USER_NAME = '<?php echo $this->user_info['user_name']; ?>';
+</script>
+
+<?php if (is_array($this->_import_css_files)) { ?>
+<?php foreach ($this->_import_css_files AS $import_css) { ?>
+<link href="<?php echo G_STATIC_URL; ?>/<?php echo $import_css; ?>" rel="stylesheet" type="text/css" />
+<?php } ?>
+<?php } ?>
+
+<?php if (is_array($this->_import_js_files)) { ?>
+<?php foreach ($this->_import_js_files AS $import_js) { ?>
+<script src="<?php echo G_STATIC_URL; ?>/<?php echo $import_js; ?>" type="text/javascript"></script>
+<?php } ?>
+<?php } ?>
+</head>
+<body>

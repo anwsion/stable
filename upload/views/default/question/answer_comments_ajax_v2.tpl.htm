@@ -1,0 +1,12 @@
+<?php if (sizeof($this->comments) > 0) { ?>
+<div class="default_com_user">
+<?php foreach ($this->comments AS $key => $val) { ?>
+	<ul class="default_com_u">
+		<li>
+			<a href="<?php echo get_setting('base_url');?>/people/<?php echo $val['user_info']['user_name']; ?>" class="default_com_user_fs"><img src="<?php echo get_avatar_url($val['uid'],'min',$val['user_info']['avatar_file']); ?>" title="<?php echo $val['user_info']['user_name']; ?>" alt="<?php echo $val['user_info']['user_name']; ?>"/></a><a href="<?php echo get_setting('base_url');?>/people/<?php echo $val['user_info']['user_name']; ?>" title="<?php echo $val['user_info']['user_name']; ?>"><?php echo $val['user_info']['user_name']; ?></a> • <?php echo date_friendly($val['time']); ?>
+			<p><?php echo $val['message']; ?></p>
+		</li>
+	</ul>
+<?php } ?>
+</div>
+<?php } ?>

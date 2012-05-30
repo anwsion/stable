@@ -1,0 +1,60 @@
+<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+
+<!--header_e-->
+<div class="bd pbd">
+ 
+  <!--left_nav_s-->
+
+  <div class="contant_left readns_discus ps-wd">
+  <?php TPL::output('account/setting_menu.tpl.htm'); ?>
+	<div  id="td-0" style="display:block;">
+	
+
+    <form id="setting_form" method="post" action="<?php echo get_setting('base_url');?>/account/?c=setting&act=inbox_process_ajax">
+	<ul class="ps-info" >
+		<li><label>谁可以给我发私信：</label>
+<input name="inbox_recv" id="inbox_recv" class="rad-b" type="radio" value="0" <?php if($this->inbox_recv == 0){ ?>checked="checked"<?php } ?>/>所有人
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input name="inbox_recv" id="inbox_recv"   class="rad-b" type="radio" value="1" <?php if($this->inbox_recv == 1){ ?>checked="checked"<?php } ?> />我关注的人
+		</li>
+		<li>
+
+			<p class="chackBoxs">
+                 <input class="rad-b"  name="sender_11"  type="checkbox"  value="1" <?php if($this->email_setting[sender_11] == 1){ ?>checked="checked"<?php } ?>   />&nbsp;有人关注了我<br />
+
+    <!--input class="rad-b"  name="sender_12"   type="checkbox"   value="1" <?php if($this->email_setting[sender_12] == 1){ ?>checked="checked"<?php } ?>   />&nbsp;有人问了我一个问题<br /-->
+
+    <input class="rad-b"  name="sender_13"   type="checkbox"   value="1" <?php if($this->email_setting[sender_13] == 1){ ?>checked="checked"<?php } ?>   />&nbsp;有人邀请我问答问题<br />
+
+    <input class="rad-b"  name="sender_14"   type="checkbox"   value="1" <?php if($this->email_setting[sender_14] == 1){ ?>checked="checked"<?php } ?>   />&nbsp;我关注的问题有了新回复<br />
+
+    <input  class="rad-b" name="sender_15"   type="checkbox"  value="1"  <?php if($this->email_setting[sender_15] == 1){ ?>checked="checked"<?php } ?>   />&nbsp;有人向我发送私信<br />
+            </p>
+			<label>什么情况下给我发邮件：</label>
+
+			<div style="clear:both;"></div>
+		</li>
+		<li>
+			<p class="chackBoxs">
+			<?php foreach($this->notify_actions as $key => $val){ ?>
+				<?php if($val['user_setting']){ ?>
+     <input class="rad-b"  name="nt_setting[<?php echo $key;?>]"  type="checkbox"  value="1" <?php if(!in_array($key, $this->nt_setting['data']) || !$this->nt_setting['data']){ ?>checked="checked"<?php } ?>   />&nbsp;<?php echo $val['desc'];?> <br />
+				<?php } ?>
+            <?php } ?>
+            </p>
+			<label>什么情况下给我发通知：</label>
+			<div style="clear:both;"></div>
+		</li>
+        <li><a href="javascript:void(0);" onclick="ajax_post($('#setting_form'),_tips_form_processer); return false;" class="seve_s">保存</a></li>
+	</ul>
+    </form>
+	</div>
+   
+	</div>
+
+	<!--微博绑定_e-->
+    </div>
+  <!--left_nav_e-->
+</div>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

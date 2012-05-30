@@ -1,0 +1,88 @@
+<?php TPL::output('global/__public_header_v2.tpl.htm'); ?>
+
+<section class="regSection wb_reg">
+<h3 class="regtitle"><p class="t">微博登录</p></h3>
+
+ <form id="login_form" method="post" action="<?php echo get_setting('base_url');?>/account/?c=login&act=login_process_ajax" onsubmit="return false">
+ <ul class="regmoster wb_login">
+	<li>已有帐号？请输入帐号进行绑定</li>
+	<li><input type="text" name="user_name" id="wb-mail" class="userTxt" title="电子邮箱" value="账号(电子邮箱)"/></li>
+	<li><input type="password" name="password" class="userTxt hide" id="wb-pword" title="密码"/>
+	<input type="text" name="wb-txt"  class="userTxt" title="密码" id="wb-txt" value="密码"/></li>
+	<li><a href="javascript:void(0);" onclick="ajax_post($('#login_form')); return false;" class="regbutx">确认绑定</a></li>
+  </ul>
+  </form>
+  
+  <form id="register_form" method="post" action="">
+  <ul class="regmoster" id="reg_moster">
+	<li><input type="text" name="user_name" id="userName" class="userTxt" title="真实姓名"/><span id="tip_userName"></span></li>
+	<li>
+	<input type="text" name="email" id="userEmail" class="userTxt" title="电子邮箱"/><span id="tip_userEamil"></span></li>
+	<li><input type="password" name="password" id="userPassword" class="userTxt hide" title="密码"/>
+	<input type="text" name="userPasswordx" id="userPasswordx" class="userTxt" title="密码"/><span id="tip_userPassword"></span></li>
+	<li style="display:none"><input type="text" name="userCode" id="userCode" class="userTxt yzm" title="验证码"/>
+	
+	<span class="elp"><em class="s"><img src="<?php echo G_STATIC_URL; ?>/css/img/reg_15.png" alt=""/></em><a href="javascript:void(0);">换一张</a></span>
+	<span id="tip_userCode"></span>
+	</li>
+	<li>确认注册即同意<a href="javascript:;">用户协议</a>中的条款</li>
+  </ul>
+  </form>
+  
+</section>
+<section class="userLister wb_sure" id="regLister">
+	<a href="javascript:void(0);" onclick="ajax_post($('#register_form')); return false;" class="regbutx">确认注册</a>
+  <span class="sl"></span> <span class="s2"></span> </section>
+
+<script src="<?php echo G_STATIC_URL; ?>/js/reg.js" type="text/javascript"></script>
+<script>
+//微博登录
+(function(){
+
+var s = document, wbMail = s.getElementById('wb-mail');
+var wbPsw = s.getElementById('wb-pword');
+var wbtxt = s.getElementById('wb-txt');
+
+wbMail.onfocus = function(){
+	
+	if(this.value == '账号(电子邮箱)'){
+		
+		this.value ='';
+	}
+}
+wbMail.onblur = function(){
+
+	if(this.value ==''){
+		
+		this.value ='账号(电子邮箱)';
+	}
+}
+
+wbtxt.onfocus = function(){
+	
+	if(this.value =='密码'){
+		
+		this.className ='userTxt hide';
+		wbPsw.className = 'userTxt';
+		wbPsw.focus();
+		
+	}
+}
+
+wbPsw.onblur = function(){
+	
+	if(this.value ==''){
+		
+		this.className ='userTxt hide';
+		wbtxt.className = 'userTxt';
+	}
+}
+
+
+
+})()
+
+</script>
+
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

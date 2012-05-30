@@ -1,0 +1,22 @@
+<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+
+<div class="bd">
+  <!-- 问题分类_top -->
+	<?php TPL::output('block/content_category.tpl.htm'); ?>
+	
+  <!--right_nav_s-->
+  <div class="tommy_rightDiv enTryAside">
+   
+	<?php //TPL::output('block/sidebar_new_dynamic.tpl.htm'); ?>
+	<?php TPL::output('block/sidebar_hot_users.tpl.htm'); ?>
+	  
+  </div>
+  <!--right_nav_e-->
+  <!--left_nav_s-->
+
+	<!-- 全部问题 -->  
+	<?php TPL::output('block/content_question.tpl.htm'); ?>	
+  <!--left_nav_e-->
+</div>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

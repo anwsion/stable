@@ -1,0 +1,70 @@
+<?php TPL::output('global/__public_header_v2.tpl.htm'); ?>
+
+<section class="regSection">
+  <h3 class="regtitle"><p class="t">注册成功</p></h3>
+  <h2 id="elhx" ><?php echo $this->user_info['user_name']; ?>，恭喜您注册成功！</h2>
+  <div class="bdx">
+	<div class="gzx">关注你感兴趣的内容</div>
+	<h4 class="hn"><em>·</em>竞赛</h4>
+	<div class="dhz" id="competitions_list">
+
+	</div>
+     <div class="c_arigud"><a href="#" id="reload_competitions_list">换一批</a> &nbsp;&nbsp;<a href="#" onclick="$.each($('#competitions_list a.addtips:not(.cur)'), function (i, e) { e.click(); }); return false;" class="cix">关注全部</a></div>
+     <h4 class="hn"><em>·</em>问题</h4>
+     <div class="dlt" id="questions_list"></div>
+       <div class="c_arigud"><a href="#" id="reload_questions_list">换一批</a> &nbsp;&nbsp;<a href="#" onclick="$.each($('#questions_list a.addtips:not(.cur)'), function (i, e) { e.click(); }); return false;" class="cix">关注全部</a></div>
+        <h4 class="hn"><em>·</em>话题</h4>
+        <div class="tak cl" id="topics_list">
+        	
+        </div>
+        <div class="c_arigud x"><a href="#" id="reload_topics_list">换一批</a> &nbsp;&nbsp;<a href="#" onclick="$.each($('#topics_list a.addtips:not(.cur)'), function (i, e) { e.click(); }); return false;" class="cix">关注全部</a></div>
+        
+        
+        
+        <div class="tEnd"><a href="<?php echo get_setting('base_url');?>/">进入首页</a><a href="<?php echo get_setting('base_url');?>/account/?c=setting">完善资料</a></div>
+  </div>
+  
+</section>
+
+<script type="text/javascript">
+	$('#reload_competitions_list').click(function () {
+		$('#competitions_list').html('<p class="p" align="center"><img src="'+G_STATIC_URL+'/common/loading.gif" alt="" /></p>');
+		
+		$.get(G_BASE_URL+'/account/?c=ajax&act=welcome_get_competitions', function (result) {
+			$('#competitions_list').html(result);
+		});
+		
+		return false;
+	});
+	
+	$('#reload_questions_list').click(function () {
+		$('#questions_list').html('<p class="p" align="center"><img src="'+G_STATIC_URL+'/common/loading.gif" alt="" /></p>');
+		
+		$.get(G_BASE_URL+'/account/?c=ajax&act=welcome_get_questions', function (result) {
+			$('#questions_list').html(result);
+		});
+		
+		return false;
+	});
+	
+	$('#reload_topics_list').click(function () {
+		$('#topics_list').html('<p class="p" align="center"><img src="'+G_STATIC_URL+'/loading.gif" alt="" /></p>');
+		
+		$.get(G_BASE_URL+'/account/?c=ajax&act=welcome_get_topics', function (result) {
+			$('#topics_list').html(result);
+		});
+		
+		return false;
+	});
+	
+	$(document).ready(function () {
+		$("body").removeClass("idunionReg");
+		$('body').addClass('success');
+		
+		$('#reload_competitions_list').click();
+		$('#reload_questions_list').click();
+		$('#reload_topics_list').click();
+	});
+</script>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

@@ -1,0 +1,21 @@
+<?php if ($this->invitation_list) { foreach($this->invitation_list as $key => $val) { ?>
+	<?php if($val['active_status'] == 1) { ?>
+<li>
+	<a class="fire_userFace" href="<?php echo $val['userinfo']['url']; ?>" rel="<?php echo $val['active_uid']; ?>" onmouseover="eventsMouseM(this);"><img src="<?php echo $val['userinfo']['avatar_file']; ?>"></a>
+	<p class="ag_sendDate"><span>激活成功</span></p>
+	<p class="frie_UserName"><a href="<?php echo $val['userinfo']['url']; ?>" rel="<?php echo $val['active_uid']; ?>" onmouseover="eventsMouseM(this);"><?php echo $val['userinfo']['user_name']; ?></a><!--span class="u_seCuse" title="邀请成功"></span--><span class="frie_mail"><?php echo $val['invitation_email']; ?></span></p>
+</li>
+	<?php }elseif($val['active_status'] == "0" ){ ?>
+<li>
+<a href="javascript:;" class="fire_userFace"><img  src="<?php echo G_STATIC_URL;?>/common/avatar-mid-img.jpg"></a>
+<p class="ag_sendDate"><b>邀请已发送</b><a href="javascript:;" rel="<?php echo $val['invitation_id']; ?>" name="invitation_del">取消邀请</a><a href="javascript:;" rel="<?php echo $val['invitation_id']; ?>" name="resend">重发邀请</a></p>
+	<p class="frie_UserName"><span class="frie_mail"><?php echo $val['invitation_email']; ?></span></p>
+</li>
+	<?php }elseif($val['active_status'] == "-1"){ ?>
+<li>
+<a href="javascript:;" class="fire_userFace"><img  src="<?php echo G_STATIC_URL;?>/common/avatar-mid-img.jpg"></a>
+<p class="ag_sendDate"><big>邀请已取消</big></p>
+  <p class="frie_UserName"><span class="frie_mail"><?php echo $val['invitation_email']; ?></span></p>
+</li>
+	<?php } ?>
+<?php } } ?>

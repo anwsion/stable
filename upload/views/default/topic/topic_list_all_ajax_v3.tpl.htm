@@ -1,0 +1,159 @@
+<?php
+$salt=fetch_salt();
+?>
+<?php foreach ($this->list AS $key => $val) { ?>
+<ul class="contxt_List">
+  <li>
+    <h4 class="titH4"> <a href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $val['question_id']; ?>"><?php echo $val['question_content']; ?></a></h4>
+    <p class="solutions clr"><?php echo $val['last_action_str']; ?>&nbsp; • <?php echo $val['answer_count']; ?>&nbsp;个回复 &nbsp;•
+<a href="javscript:;" class="gxz_b" onclick="focus_question($(this), $(this), <?php echo $val['question_id']; ?>); return false;" title="<?php if ($val['has_focus']) { ?>取消<?php } ?>关注"><?php if ($val['has_focus']) { ?>取消<?php } ?>关注</a>
+	</p>
+  
+  
+
+<!-- 发布问题	 -->
+<?php if ($val[associate_action]==101) { ?>
+
+    <div class="default_txt">
+	
+      <p class="infotx">
+<div id="q_min_<?php echo $val['question_id'];?>"> 	  
+<?php echo nl2br(cutmbstr_zhcn( $val[question_detail],130)); ?>
+        <?php  if (lenmbstr_zhcn($val[question_detail])>130): ?>
+        <a href="javascript:void(0);" class="showMore" onclick="content_switcher($('#q_min_<?php echo $val['question_id'];?>'), $('#q_max_<?php echo $val['question_id'];?>')); return false;">显示全部 »</a>
+        <?php endif;?>
+
+      <!-- 显示附件小图------->
+      <?php if($val[attachs]){ ?>
+      <div  class="picTrueD">
+        <div class="aScue">
+          <?php foreach($val[attachs] AS $t_key => $t_val){ ?>
+          <?php if ($t_val['is_image']): ?>
+          <a href="#" onclick="content_switcher($('#q_min_<?php echo $val['question_id'];?>'), $('#q_max_<?php echo $val['question_id'];?>')); return false;"><img src="<?php echo $t_val[thumb]['165x115']; ?>" alt="" /></a>
+          <?php else: ?>
+          <p><a href="<?php echo down_url($t_val[file_name], $t_val['attachment']); ?>" class="file_ico"><?php echo $t_val[file_name]; ?></a></p>
+          <?php endif; ?>
+          <?php } ?>
+        </div>
+      </div>
+      <?php } ?>
+      <!-- 显示附件小图 END -->
+</div>
+<div  style="display:none" id="q_max_<?php echo $val['question_id'];?>">
+<?php echo nl2br($val[question_detail]); ?>
+      
+      <!-- 显示附件大图(发表问题) -->
+      <?php if($val[attachs]){ ?>
+      <div  class="picTrueD">
+        <div class="aScue listPicTrueBig">
+          <?php foreach($val[attachs] AS $t_key => $t_val){ ?>
+          <?php if ($t_val['is_image']): ?>
+          <a href="<?php echo $t_val['attachment']; ?>" target="lightbox" rel="lightbox"><img src="<?php echo $t_val['attachment']; ?>" alt="" /></a>
+          <?php else: ?>
+          <p><a href="<?php echo down_url($t_val[file_name], $t_val['attachment']); ?>" class="file_ico"><?php echo $t_val[file_name]; ?></a></p>
+          <?php endif; ?>
+          <?php } ?>
+        </div>
+      </div>
+      <?php } ?>
+      <!-- 显示附件大图(发表问题) END -->
+</div>
+
+	  </p>
+    </div>
+  
+<?php } ?>
+<!-- 发布结束 --> 
+  
+    
+<!-- 回复开始	 -->
+<?php if ($val['answer_info']['answer_content'] && $val[associate_action]==201) { ?>
+
+    <div class="default_txt">
+    <a name="<?php echo $val['answer_info']['answer_id']; ?>" status="<?php echo $val['answer_info']['agree_status']; ?>"></a>
+	  <a href="javascript:;" class="default_num" onClick="agree_show($(this))"><?php echo $val['answer_info']['agree_count']; ?></a>
+	  
+	<a title="<?php if($val['answer_info']['agree_status'] == '1'){ ?>取消投票<?php }else{ ?>投一票<?php } ?>" class="default_num defa_agree<?php if($val['answer_info']['agree_status'] == '1'){ ?> up_cur<?php } ?>" onClick="change_agree($(this), '1')" style="display:none;" href="javascript:;">赞同 </a>
+	<a title="<?php if($val['answer_info']['agree_status'] == '-1'){ ?>取消反对<?php }else{ ?>反对，不会显示你的姓名<?php } ?>" class="default_num defa_oppose<?php if($val['answer_info']['agree_status'] == '-1'){ ?> down_cur<?php } ?>" onClick="change_agree($(this), '-1')" style="display:none;" href="javascript:;">反对</a>
+	
+	  <h3 class="default_uh"><a href="<?php echo $val['answer_info']['url']; ?>" rel="<?php echo $val['answer_info']['uid']; ?>" onmouseover="eventsMouseM(this);" class="default_ubd"><?php echo $val['answer_info']['uname']; ?></a> <?php if($val['answer_info']['signature']){echo "，".$val['answer_info']['signature'];} ?></h3>
+
+<p class="default_ticket" name="agree_user_list" style="display:none;">
+	<span name="agree_num"><?php echo $val['answer_info']['agree_count']; ?></span>票，来自
+	<span class="agee_people">
+		<?php if($val['answer_info']['agree_count'] > 0){ ?>
+			<?php $count = 0;
+			
+			foreach($val['answer_info']['agree_users'] as $uid => $user){ ?>
+				<a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $uid;?>" rel="<?php echo $uid;?>" onmouseover="eventsMouseM(this);" name="agee_people" class="a"><?php echo $user;?></a><?php if(count($val['answer_info']['agree_users']) != ++$count) { ?>、<?php } ?>
+			<?php } ?>
+		<?php } ?>
+	</span>
+</p>
+
+      <p class="infotx">
+<div id="q_min_<?php echo $val['question_id'];?>"> 	
+	  <?php echo nl2br(cutmbstr_zhcn($val['answer_info']['answer_content'],130)); ?>
+        <?php if  (lenmbstr_zhcn($val['answer_info']['answer_content'])>130): ?>
+        <a href="javascript:void(0);" class="showMore" onclick="content_switcher($('#q_min_<?php echo $val['question_id'];?>'), $('#q_max_<?php echo $val['question_id'];?>')); return false;">显示全部 »</a>
+        <?php endif;?>
+</div>
+
+<div  style="display:none" id="q_max_<?php echo $val['question_id'];?>">
+<?php echo nl2br($val['answer_info']['answer_content']); ?>
+</div>	
+		</p>
+		
+		 <p class="default_ticket"><?php echo date_friendly($val['answer_info']['add_time']); ?>&nbsp;&nbsp;•<a href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $val['question_id']; ?>#answers"><?php echo $val['answer_info']['comment_count']; ?>条评论</a></p>
+    </div>
+  
+<?php } ?>
+<!-- 回复-结束 --> 	
+
+
+
+ <!-- 赞同回复 ------------------------------------------------------->      
+<?php if ($val['answer_info']['answer_content'] && $val[associate_action]==204) { ?>
+
+ <div class="default_txt">
+	  <a href="javascript:;" class="default_num"><?php echo $val['answer_info']['agree_count']; ?></a>
+	  <h3 class="default_uh"><a href="<?php echo $val['answer_info']['url']; ?>" class="default_ubd"><?php echo $val['answer_info']['uname']; ?></a> <?php if($val['answer_info']['signature']){echo "，".$val['answer_info']['signature'];} ?>S</h3>
+	  
+	 <?php if ($val['answer_info']['agree_count']>0){ ?>
+	  <p class="default_ticket"><?php echo $val['answer_info']['agree_count']; ?>票，来自 	
+	  <?php $count = 0;
+			if(is_array($val['answer_info']['agree_users'])){
+			foreach($val['answer_info']['agree_users'] as $uid => $user){ ?>
+				<a href="javascript:;" rel="<?php echo $uid;?>" onmouseover="eventsMouseM(this);" class="a"><?php echo $user;?></a>
+				<?php if(count($val['answer_info']['agree_users']) != ++$count) { ?>、<?php } ?>
+			<?php } }?>
+		</p>
+		<?php } ?>
+		
+      <p class="infotx">
+<div id="q_min_<?php echo $val['question_id'];?>">	
+	  <?php echo nl2br(cutmbstr_zhcn($val['answer_info']['answer_content'],130)); ?>
+        <?php if  (lenmbstr_zhcn($val['answer_info']['answer_content'])>130): ?>
+        <a href="javascript:void(0);" class="showMore" onclick="content_switcher($('#q_min_<?php echo $val['question_id'];?>'), $('#q_max_<?php echo $val['question_id'];?>')); return false;">显示全部 »</a>
+        <?php endif;?>
+</div>
+
+<div  style="display:none" id="q_max_<?php echo $val['question_id'];?>">
+<?php echo nl2br($val['answer_info']['answer_content']); ?>
+</div>	
+		 <p class="default_ticket"><?php echo date_friendly($val['answer_info']['add_time']); ?>&nbsp;&nbsp;•<a href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $val['question_id']; ?>#answers"><?php echo $val['answer_info']['comment_count']; ?>条评论</a></p>
+		</p>
+    </div>	 
+<?php } ?>
+<!-- 赞同回复-结束 -->
+
+
+	
+	
+  </li>
+  
+    <li class="userFace"><a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['user_info']['user_name']; ?>"><img src="<?php echo get_avatar_url($val['user_info']['uid'],'mid',$val['user_info']['avatar_file']); ?>" title="" alt="<?php echo $val['user_info']['user_name']; ?>" onMouseOver="eventsMouseM(this);"  rel="<?php echo $val['user_info']['uid'];?>"/></a></li>
+  </ul>
+<?php }  ?>
+
+

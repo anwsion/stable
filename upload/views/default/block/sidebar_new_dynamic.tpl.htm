@@ -1,0 +1,17 @@
+<div class=" RightListDiv">
+      <h3 class="h3">最新动态<em></em></h3>
+      <h5 class="f_news p1">最新话题<em></em></h5>
+		<div class="newTopic">
+		<?php foreach ($this->sidebar_new_dynamic['new_topic'] AS $key => $val) { ?>
+			<a href="<?php echo get_setting('base_url');?>/topic/?topic_title=<?php echo $val['topic_title_full']; ?>" title="<?php echo $val['topic_title']; ?>" onmouseover="eventstalk(this);" rel="<?php echo $val['topic_id']; ?>"><?php echo $val['topic_title']; ?></a>
+		<?php } ?>
+		</div>
+  
+      <h5 class="f_news p1">最新问题<em></em></h5>
+      <p class="lis_que p2">
+	  <?php foreach($this->sidebar_new_dynamic['new_list'] AS $key => $val) { ?>
+	  <a href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $val['question_id']; ?>" title="<?php echo $val['question_content']; ?>"><?php echo $val['question_content']; ?></a>
+	  <?php } ?>
+	  </p>
+      <!--<p class="tr"><a href="#">更多&gt;&gt;</a></p>-->
+    </div>

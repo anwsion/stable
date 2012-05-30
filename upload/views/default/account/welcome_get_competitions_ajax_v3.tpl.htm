@@ -1,0 +1,10 @@
+<ul class="hot_comp">
+<?php foreach ($this->competitions_list AS $key => $val) { ?>
+	<li>
+		<a href="<?php echo get_setting('base_url');?>/contest/<?php echo $val['competitions_id']; ?>" target="_blank" class="xhr_0sx"><span class="s" title="￥<?php echo $val['bonus']; ?>">￥<?php echo $val['bonus']; ?></span><span class="d" title="<?php if (get_last_days($val['expire_time']) > 0) { ?> 剩余 <?php echo get_last_days($val['expire_time']); ?> 天<?php } else { ?>已结束<?php } ?>"><?php if (get_last_days($val['expire_time']) > 0) { ?><?php echo get_last_days($val['expire_time']); ?> 天<?php } else { ?>已结束<?php } ?></span></a>
+		<a class="bold" href="<?php echo get_setting('base_url');?>/contest/<?php echo $val['competitions_id']; ?>" target="_blank"><?php echo $val['competitions_content']; ?><a><a href="javascript:void(0);" class="addtips<?php if ($val['focus']) { ?> cur<?php } ?>" onclick="focus_competition($(this), $(this).find('em'), <?php echo $val['competitions_id']; ?>);"><em><?php if ($val['focus']) { ?>取消<?php } ?>关注</em></a>
+		<p><?php echo $val['focus_count']; ?> 人关注该竞赛&nbsp;&nbsp;解决方案：<?php echo $val['contribute_count']; ?></p>
+	</li>
+<?php } ?>
+	<div style="clear:both;"></div>
+</ul>

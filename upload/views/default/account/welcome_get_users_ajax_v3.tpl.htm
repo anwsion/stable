@@ -1,0 +1,11 @@
+<ul class="hot_comp user_ul">
+<?php foreach ($this->users_list AS $key => $val) { ?>
+	<li>
+		<a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['user_name']; ?>" target="_blank" class="xhr_0sx user_gz" onMouseOver="eventsMouseM(this);" rel="<?php echo $val['uid'];?>"><img src="<?php echo get_avatar_url($val['uid'],'mid',$val['avatar_file']); ?>" alt="" /></a>
+		<a class="bold" href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['user_name']; ?>" onMouseOver="eventsMouseM(this);" rel="<?php echo $val['uid'];?>" target="_blank"><?php echo $val['user_name']; ?><a><?php if ($this->user_id != $val['uid']) { ?><a href="javascript:void(0);" class="addtips<?php if ($val['focus']) { ?> cur<?php } ?>" rel="<?php if ($val['focus']) { ?>取消<?php } ?>关注" onclick="follow_people($(this), $(this).find('em'), <?php echo $val['uid']; ?>);"><em><?php if ($val['focus']) { ?>取消<?php } ?>关注</em></a><?php } ?>
+		<p><?php echo $val['area_name']; ?>&nbsp;&nbsp;<?php echo $val['user_job']; ?><p>
+		<p><?php echo $val['fans_count']; ?> 人关注该用户&nbsp;&nbsp;积分：<?php echo $val['integral']; ?></p>
+	</li>
+<?php } ?>
+	<div style="clear:both;"></div>
+</ul>

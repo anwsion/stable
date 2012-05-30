@@ -1,0 +1,40 @@
+<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+
+<div class="bd">
+  <div class="tommy_rightDiv index enTryAside ">
+  <?php TPL::output('global/__account_slidebar_v2.tpl.htm'); ?>
+  </div>
+  <!--left_nav_s-->
+  <div class="contant_left index readns_discus">
+    
+	<h2 id="uLister" class="c_title u_lister" >私信对话：<?php echo $this->send_name; ?></h2>
+   <div class="say_u trea rgfK">
+		<p class="sxg"><a href="<?php echo get_setting('base_url');?>/inbox/" >&lt;&lt; 返回所有私信 </a>
+		<form action="<?php echo get_setting('base_url');?>/inbox/index.php?c=main&act=write_message" method="post" id="recipient_form">
+			<div class="txtarea">
+			<a href="javascript:void(0);" class="faceImg"><img  class="i" src="<?php echo get_avatar_url($this->user_info['uid'],'mid', $this->user_info['avatar_file']);?>" /></a>
+			<input type="hidden" name="recipient" value="<?php echo $this->send_name; ?>" />
+			<textarea rows="3" class="answer_content" name="message" id="tUserInput" maxlength="500"></textarea>
+			<span class="crt"></span>
+			<p class="subMitSure submitsrue"><span class="sub" id="inputTips">还可以输入<big class="big">500</big>个字</span><a href="javascript:void(0);" class="default_blue_but" style="color:#fff;" id="sendForm" onclick="ajax_post($('#recipient_form'), _pm_form_processer); return false;" disabled="disabled">发送</a></p>
+			</div>
+		</form>
+		</div>
+
+	<a name="contents"></a>
+	<?php foreach($this->list AS $key => $val){ ?>
+	 <ul class="gnx clearborderBottom ">
+		<li class="ig_li<?php if ($val['sender_uid'] == $this->user_id){ ?> fa-img<?php } ?>"><a href="javascript:void(0);" rel="<?php echo $val['sender_uid']; ?>" onmouseover="eventsMouseM(this);">
+		<img class="i" src="<?php echo get_avatar_url($val['sender_uid'], 'mid', $val['avatar_file']); ?>" /></a></li>
+		<li class="txt<?php if ($val['sender_uid'] != $this->user_id){ ?> boxbg<?php } ?>"><?php if ($val['sender_uid'] != $this->user_id){ ?><a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['sender_uid']; ?>" rel="<?php echo $val['sender_uid']; ?>" onmouseover="eventsMouseM(this);"><?php echo $val['user_name']; ?></a><?php }else{ ?><?php echo $val['user_name']; ?><?php } ?>： <?php echo $val['notice_content']; ?>
+		<div class="tms tmspd"><span class="time"><?php echo date('Y-m-d H:i:s', $val['add_time']); ?></span>  <a href="javascript:void(0);" onclick="if (confirm('确认删除对话?')) { window.location  =G_BASE_URL+ '/inbox/?act=delete_message&recipient_id=<?php echo $val['recipient_id']; ?>' }">删除</a><?php if ($val['sender_uid'] != $this->user_id){ ?> <a href="#" onclick="$('#tUserInput').focus()">回复</a><?php } ?></div>
+		<span class="sub"></span>
+		</li>
+	 </ul>
+	 <?php } ?>
+	<?php echo $this->pagination; ?>
+  </div>
+  <!--left_nav_e-->
+</div>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

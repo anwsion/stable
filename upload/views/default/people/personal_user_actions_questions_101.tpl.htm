@@ -1,0 +1,8 @@
+<?php if(is_array($this->list)){ ?>
+<?php foreach ($this->list AS $key => $val) { ?>
+<li><a href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $val['question_id']; ?>"  class="default_title"><?php echo $val['question_content']; ?></a></li>
+      <li class="dfc_xline"><a href="javascript:;" class="df_egr"><?php echo $val['view_count']; ?></a><?php echo $val['answer_count']; ?> 个回答　• <a href="javscript:;" class="gxz_b" onclick="focus_question($(this), $(this), <?php echo $val['question_id']; ?>); return false;" title="<?php if ($val['has_focus']) { ?>取消<?php } ?>关注"><?php if ($val['has_focus']) { ?>取消<?php } ?>关注</a>
+	  </li>
+
+<?php }?>
+<?php } ?>

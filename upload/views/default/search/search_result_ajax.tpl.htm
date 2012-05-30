@@ -1,0 +1,31 @@
+<?php foreach ($this->search_result AS $key => $val) { ?>
+<?php if ($val['type'] == 1 OR $val['type'] == 4) { ?>
+<li>
+	<p class="t_cal">
+		<a href="<?php echo $val['url']; ?>" target="_blank"><?php echo $val['name']; ?></a>
+	</p>
+	<?php if ($val['type'] == 1) { ?>
+	<p>[问题] &nbsp; <?php echo $val['detail']['comment_count']; ?> 个评论</p>
+	<?php } else if ($val['type'] == 4) { ?>
+	<p>[竞赛] &nbsp; <?php echo $val['detail']['contribute_count']; ?> 个方案</p>
+	<?php } ?>
+</li>
+<?php } else if ($val['type'] == 2 OR $val['type'] == 3) { ?>
+<li>
+	<?php if ($val['type'] == 2) { ?>
+	<a href="<?php echo $val['url']; ?>" target="_blank" class="user_face"><img src="<?php echo get_setting('upload_url'); ?>/topic/<?php echo $val['detail']['topic_pic']; ?>"></a>
+	<?php } else if ($val['type'] == 3) { ?>
+	<a href="<?php echo $val['url']; ?>" target="_blank" class="user_face"><img src="<?php echo get_avatar_url($val['uid'], 'mid', $val['detail']['avatar_file']); ?>"></a>
+	<?php } ?>
+	<p class="t_cal">
+		<a href="<?php echo $val['url']; ?>" target="_blank"><?php echo $val['name']; ?></a>
+	</p>
+	
+	<?php if ($val['type'] == 2) { ?>
+	<p>[话题] &nbsp; <?php echo $val['detail']['focus_count']; ?> 个关注 &nbsp; <?php echo $val['detail']['topic_count']; ?> 个问题</p>
+	<?php } else if ($val['type'] == 3) { ?>
+	<p>[会员] &nbsp; <?php echo $val['detail']['signature']; ?></p>
+	<?php } ?>
+</li>
+<?php } ?>
+<?php } ?>

@@ -1,0 +1,77 @@
+<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+
+<div class="bd">
+  <div class="tommy_rightDiv index enTryAside ">
+  	<?php TPL::output('block/sidebar_menu.tpl.htm'); ?>
+   
+	<!-- 边栏可能感兴趣的人或话题 -->  
+	<?php TPL::output('block/sidebar_recommend_users_topics.tpl.htm'); ?>	   
+   </div>
+    
+  <!--left_nav_s-->
+  <div class="contant_left index readns_discus">
+    
+	<h2 id="uLister" class="c_title u_lister" ><!--<span class="s" onclick="">通知设置</span>--><a class="tr">新通知 </a><a class="cur" href="javascript:void(0);"<?php if (!$this->user_info['notification_unread']) { ?> style="display:none"<?php } ?>>未读通知<em class="m" id="announce_num"><?php echo $this->user_info['notification_unread']; ?></em></a> <a href="javascript:void(0);" id="tab_all_notifications">全部通知</a> </h2>
+    
+    <div id="layer1">
+    	<ul class="tz_ul" id="c_new_list">
+    		<li><p style="padding: 15px 0" align="center">正在读取...</p></li>  
+    	</ul>
+    	<div class="moreDiv" id="bp_new_more"><a href="#" title="点击查看更多>> " class="mores">更多<em></em></a></div>
+    	<p class="knonw_el"><a href="javascript:;" onclick="mark_notifications(); return false;" class="el_bt0">标全部已读</a></p>
+    </div>
+    
+    <div id="layer2" class="hide">
+		<ul class="tz_ul" id="c_all_list">
+      		<li><p style="padding: 15px 0" align="center">正在读取...</p></li>
+   	 	</ul>
+   	 	
+    	<div class="moreDiv" id="bp_all_more"><a href="#" title="点击查看更多>> " class="mores">更多<em></em></a></div>
+    </div>
+   
+  </div>
+  
+  <!--left_nav_e-->
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+	var uLister = _$("uLister")._$id();
+	var elements = uLister.getElementsByTagName("a");
+	var classCur = 'tz_ul show', classHide = 'tz_ul hide';
+	
+	for(var i=0,len=elements.length; ++i < len ;){
+		
+		(function(i){
+			
+			var element = elements[i];
+			
+			element['onclick'] = function(){
+				
+				for(var n=0,len=elements.length; ++n < len ;){
+				
+					var elementId = _$("layer"+n)._$id();
+					
+					elementId['className']= classHide;
+					elements[n]['className']='';
+				}
+				var elementId = _$("layer"+i)._$id();
+				
+				elementId['className']= classCur;
+				element['className']='cur';
+			}
+			
+		})(i)
+	}
+
+	<?php if ($this->user_info['notification_unread'] == 0) { ?>
+	$('#tab_all_notifications').click();
+	<?php } ?>
+	
+	bp_more_load(G_BASE_URL+'/notifications/?act=index_more_ajax&type=no', $('#bp_new_more'), $('#c_new_list'));
+	
+	bp_more_load(G_BASE_URL+'/notifications/?act=index_more_ajax&type=all', $('#bp_all_more'), $('#c_all_list'));
+});
+</script>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

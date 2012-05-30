@@ -1,0 +1,77 @@
+<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+
+<!--header_e-->
+<div class="bd">
+  <!--right_nav_s-->
+  <div class="tommy_rightDiv index enTryAside ">
+	<!-- 边栏菜单 -->
+	<?php TPL::output('block/sidebar_menu.tpl.htm'); ?>
+  </div>
+
+  <!--left_nav_s-->
+  <div class="contant_left readns_discus">
+      <h2 id="uLister" class="c_title u_lister"><span class="tal_Qstion">邀请好友</span></h2>
+      <form id="invitation_form" method="post" action="" onsubmit="return false">
+      <input type="hidden" name="act" value="invite_friend_ajax" />
+      <div class="tal_Rations">
+        <input type="text" onblur="if(this.value==''){this.value='请输入邮箱地址'}" onfocus="if(this.value=='请输入邮箱地址'){this.value=''}" onkeydown="if (event.keyCode == 13) { ajax_post($('#invitation_form')); }" class="tal_txtMail" value="请输入邮箱地址" name="email" id="email">
+        <a class="send_ForMail" href="javascript:;" onclick="ajax_post($('#invitation_form')); return false;" id="btn_submint">发送邀请</a>
+        <p class="tal_QyiC">你还有<b class="t_fontSize"><?php echo $this->user_info['invitation_available']; ?></b>个邀请名额</p>
+      </div>
+      </form>
+      </div>
+	<div class="contant_left readns_discus">
+	  <h2 class="c_title u_lister">已邀请好友</h2>
+      <ul class="friend_Lister" id="c_list">
+			<p style="padding: 15px 0" align="center"><img src="<?php echo G_STATIC_URL; ?>/css/img/loading_b.gif" alt="" /></p>
+      </ul>
+      <p id="bp_more" class="more"><a href="javascript:void(0);">更多&gt;&gt;</a></p>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function()
+{
+	bp_more_load(G_BASE_URL + '/invitation/?act=invitation_register_more_ajax', $('#bp_more'),  $('#c_list'));
+	
+	//取消邀请
+	$('a[name=invitation_del]').live("click", function ()
+	{
+		$.get(G_BASE_URL + '/invitation/?act=invite_del_ajax&invitation_id=' + $(this).attr('rel'), function (response)
+		{
+			if (response.errno == 1)
+			{
+				bp_more_load(G_BASE_URL + '/invitation/?act=invitation_register_more_ajax', $('#bp_more'),  $('#c_list'));
+			}
+			else
+			{
+				qAlert(response.err);
+			}
+		}, 'json');
+		
+		return false;
+	});
+	
+	//再次邀请
+	$('a[name=resend]').live("click", function ()
+	{
+		$.get(G_BASE_URL + '/invitation/?act=invite_resend_ajax&invitation_id=' + $(this).attr('rel'), function (response)
+		{
+			if (response.errno == 1)
+			{
+				qAlert(response.err);
+					
+				bp_more_load(G_BASE_URL + '/invitation/?act=invitation_register_more_ajax', $('#bp_more'),  $('#c_list'));
+			}
+			else
+			{
+				qAlert(response.err);
+			}
+		}, 'json');
+		
+		return false;
+	});	
+});
+</script>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

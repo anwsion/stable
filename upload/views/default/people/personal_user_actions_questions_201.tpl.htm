@@ -1,0 +1,12 @@
+<?php if(is_array($this->list)){ ?>
+<?php foreach ($this->list AS $key => $val) { ?>
+<li><a href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $val['question_id']; ?>"  class="default_title"><?php echo $val['question_content']; ?></a></li>
+      <li class="dfc_xline"><a href="javascript:;" class="df_egr"><?php echo $val['answer_info']['agree_count']; ?></a>
+	  <?php echo nl2br(cutmbstr_zhcn($val['answer_info']['answer_content'],130)); ?> 					
+		<?php if  (lenmbstr_zhcn($val['answer_info']['answer_content'])>130): ?>
+		<a href="javascript:void(0);" class="showMore" onclick="content_switcher($('#q_min_<?php echo $val['question_id'].$salt;?>'), $('#q_max_<?php echo $val['question_id'].$salt;?>')); return false;">显示全部</a>
+		<?php endif;?>
+	  </li>
+
+<?php }?>
+<?php }?>

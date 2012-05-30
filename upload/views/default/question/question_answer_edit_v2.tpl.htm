@@ -1,0 +1,66 @@
+<?php TPL::output('global/__header_blank_v2.tpl.htm'); ?>
+
+<div class="detaListerDiv" style="overflow:hidden; width: 700px;">
+	<h2><em>●</em>编辑回答</h2>
+	<div class="congtxt">
+		<form action="<?php echo get_setting('base_url');?>/question/?c=ajax&act=edit_question_answer&question_id=<?php echo $this->answer_info['question_id']; ?>&answer_id=<?php echo $this->answer_info['answer_id']; ?>" method="post" id="answer_form" onsubmit="return false">
+		<input type="hidden" name="attach_access_key" value="<?php echo $this->attach_access_key; ?>" />
+		<ul class="data_ul">
+		  <li>
+		    <label>内容：</label>
+		    <textarea class="lx" name="content"><?php echo $this->answer_info['answer_content']; ?></textarea>
+		  </li>
+		  <li><label>上传附件：</label>
+		    <div id="file_uploader_answer"></div>
+		    <div style="clear:left"></div>
+		  </li>
+		  <li><a href="javascript:void(0);" onclick="ajax_post($('#answer_form'), _edit_answer_proccess); return false;" class="sruesub">确定提交</a></li>
+		</ul>
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+var ATTACH_ACCESS_KEY = '<?php echo $this->attach_access_key; ?>';
+var answer_id = '<?php echo $this->answer_info['answer_id']; ?>';
+	
+$(document).ready(function () {
+	$('body').css('background', 'none');
+	
+	init_fileuploader('file_uploader_answer', '/question/?c=ajax&act=answer_attach_upload&attach_access_key=' + ATTACH_ACCESS_KEY);
+		
+		
+	if ($("#file_uploader_answer .qq-upload-list"))
+	{
+		$.post('/question/?c=ajax&act=answer_attach_edit_list', "answer_id=" + answer_id, function (data) {
+			if (data['err'])
+			{
+				alert(data['err']);
+				
+				return false;
+			}
+			else
+			{
+				$.each(data['rsm']['attachs'], function(i, v)
+				{
+					_ajax_uploader_append_file("#file_uploader_answer ._ajax_upload-list", v);
+				});
+			}
+		}, 'json');
+	}
+});
+	
+function _edit_answer_proccess(result)
+{
+	if (result.errno != 1)
+	{		
+		qAlert(result.err);
+	}
+	else
+	{
+		parent.location.reload();
+	}
+}
+</script>
+
+<?php TPL::output('global/__footer_blank_v2.tpl.htm'); ?>

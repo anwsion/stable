@@ -1,0 +1,3 @@
+<?php foreach ($this->questions_list AS $key => $val) { ?>
+<p><a href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $val['question_id']; ?>" title="<?php echo $val['question_content']; ?>" target="_blank"><?php echo $val['question_content']; ?></a> <a href="javascript:void(0);" class="addtips<?php if ($val['focus']) { ?> cur<?php } ?>" rel="<?php if ($val['focus']) { ?>取消<?php } ?>关注" onclick="focus_question($(this), $(this).find('em'), <?php echo $val['question_id']; ?>);"><em><?php if ($val['focus']) { ?>取消<?php } ?>关注</em></a></p>
+<?php } ?>

@@ -1,0 +1,23 @@
+<?php if($this->list){ ?>
+<?php foreach ($this->list AS $key => $val) { ?>
+
+<ul class="contxt_List">
+  <li>
+  	<?php if ($val['associate_type'] == 1) { ?>
+	<?php pd($val); ?>
+    <h4 class="titH4">
+    	<a href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $val['question_id']; ?>"><?php echo $val['question_content']; ?></a> <a href="javascript:void(0);" class="addtips<?php if ($val['has_focus']) { ?> cur<?php } ?>" rel="添加关注" onclick="focus_question($(this), $(this).find('em'), <?php echo $val['question_id']; ?>);"><em><?php if ($val['has_focus']) { ?>取消<?php } ?>关注</em></a>
+    </h4>
+
+	<p class="solutions clr">回复: <?php echo $val['answer_count']; ?><?php if($val['topics']){ ?> &nbsp; 所属话题: <?php $topics_i = 1; foreach($val['topics'] AS $t_key => $t_val) { ?><a href="<?php echo get_setting('base_url');?>/topic/?topic_title=<?php echo $t_val['topic_title']; ?>" onmouseover="eventstalk(this);" rel="<?php echo $t_val['topic_id']; ?>"><?php echo $t_val['topic_title']; ?></a><?php $topics_i++; if ($topics_i > 2) { break; } } } ?><?php if (sizeof($val['topics']) > 2) { ?>等 <?php echo sizeof($val['topics']); ?> 个话题<?php } ?> &nbsp; 最后更新: <a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['last_user']['user_name']; ?>" onMouseOver="eventsMouseM(this);"  rel="<?php echo $val['last_user']['uid'];?>"><?php echo $val['last_user']['user_name']; ?></a>  
+	<?php echo date_friendly($val['update_time']?$val['update_time']:$val['modify_time']); ?>
+	
+	</p>
+	
+</div>	
+   <?php } ?>
+  </li>
+  <li class="userFace"><a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['user_info']['user_name']; ?>"><img src="<?php echo get_avatar_url($val['user_info']['uid'],'mid',$val['user_info']['avatar_file']); ?>" title="" alt="<?php echo $val['user_info']['user_name']; ?>" onMouseOver="eventsMouseM(this);"  rel="<?php echo $val['user_info']['uid'];?>"/></a></li>
+</ul>
+<?php } ?>
+<?php } ?>

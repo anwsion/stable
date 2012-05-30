@@ -1,0 +1,109 @@
+<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+
+<!--header_e-->
+<div class="bd pbd">
+ 
+  <!--left_nav_s-->
+
+  <div class="contant_left readns_discus ps-wd">
+  <?php TPL::output('account/setting_menu.tpl.htm'); ?>
+	<div id="td-0" style="display:block;">
+<?php if($this->work_experience_list){ ?>
+<div class="x-tab-d">
+<table class="tab">
+<tr>
+    <th>公司名称</th>
+    <th>公司职位</th>
+    <th>工作时间</th>
+    <th>操作</th>
+</tr>
+<?php foreach($this->work_experience_list as $k=>$v){ ?>
+
+ <tr>  
+    <td><?php echo $v['company_name']; ?></td>
+    <td><?php echo $v['jobs_name']; ?></td>
+    <td><?php echo $v['start_year']."-".$v['end_year']."/".$v['end_month']; ?></td>
+    <td width="20%">[<a href="?c=setting&act=workinfo_edit&wid=<?php echo $v[work_id]; ?>">修改</a>][<a href="javascript:void(0);" onclick="javascript:ee_del(<?php echo $v['work_id']; ?>);">删除</a>]</td>
+</tr>    
+<?php } ?>    
+  </table>
+</div>
+<?php } ?>    
+
+    <form id="setting_form" method="post" action="<?php echo get_setting('base_url');?>/account/?c=setting&act=add_workinfo_process_ajax">
+	<ul class="ps-info" >
+		<li><label>公司名称：</label>
+			<input type="text" value="" name="company_name" id="company_name" class="rx-txt">
+		</li>
+		<li><label>工作地点：</label>
+        <select name="province" id="level0" class="select_area"></select>
+	    <select name="city" id="level1"  class="select_area"></select>
+    	<select name="district" id="level2"  class="select_area"></select>
+		</li>
+		<li><label>公司职位：</label>
+        <select name="jobs_id"  class="select_area" >
+        <?php echo H::display_options($this->jobs_list); ?>
+		</select>
+		</li>
+		<li><label>工作时间：</label>
+		<select name="start_year"  class="select_area" >
+  <?php echo H::display_options($this->years_list); ?>
+
+					</select> 
+<select name="start_month"  class="select_area" >
+  <?php echo H::display_options($this->month_list); ?>
+
+					</select>      
+<span>至</span>
+<select name="end_year"  class="select_area" >
+  <?php echo H::display_options($this->years_list); ?>
+
+					</select> 
+<select name="end_month"  class="select_area" >
+  <?php echo H::display_options($this->month_list); ?>	
+					</select>
+        </li>
+		<li><span style="float: right; margin-right: 334px;">(继续添加工作经历)</span><a href="javascript:;" onclick="ajax_post($('#setting_form'),_tips_form_processer); return false;" class="seve_s">保存并添加</a></li>
+	</ul>
+    </form>
+	</div>
+	</div>
+
+	<!--微博绑定_e-->
+    </div>
+  <!--left_nav_e-->
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".select_area").LocationSelect({
+		labels :["请选择省份或直辖市", "请选择城市", "请选择区"],
+		elements : document.getElementsByTagName("select"),	
+		dataUrl: "<?php echo G_STATIC_URL; ?>/js/areas_1.0.json",
+	});			
+});
+
+function ee_del(id)
+{
+	if (!confirm("确定删除？"))
+	{
+		return false;
+	}
+
+	$.get(G_BASE_URL+'/account/?c=setting&act=workinfo_del_ajax&wid=' + id, function (result)
+	{
+		if (result.errno == -1)
+		{
+			qAlert(result.err);
+		}
+		else
+		{
+			window.location.reload();
+		}
+	});
+
+	return false;
+}
+</script>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

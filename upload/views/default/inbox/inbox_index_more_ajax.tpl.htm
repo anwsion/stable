@@ -1,0 +1,8 @@
+<?php if(is_array($this->list)){ ?>
+<?php foreach($this->list AS $key => $val) { ?>
+<li id="inbox_<?php echo $val['dialog_id']; ?>">
+<?php echo $val['per_tile']; ?>&nbsp;给你发了一条私信:&nbsp;<a href="<?php echo get_setting('base_url');?>/inbox/?act=read_message&dialog_id=<?php echo $val['dialog_id']; ?>#contents"><?php echo nl2br($val['title']); ?></a>
+<span>（<?php echo date('Y-m-d H:i:s', $val['last_time']); ?>）</span>
+</li>
+<?php } ?>
+<?php } ?>

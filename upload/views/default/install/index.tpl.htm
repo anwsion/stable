@@ -1,0 +1,56 @@
+<?php TPL::output('install/header.tpl.htm'); ?>
+
+<p class="default_head"><span class="default_logo"></span> </p>
+<div class="default_contents">
+  <h2 class="dedault_hx"> • 欢迎使用</h2>
+  <p class="default_txt dedault_line">欢迎使用 Anwsion 五分钟安装程序，开始使用这个世界上最强大的问答交流平台。</p>
+  <h2 class="dedault_hx"> • 环境检查</h2>
+  <p class="default_txt">您的服务器需要满足系统的运行需求才能安装。</p>
+  <form action="" method="post" id="installer">
+  <input type="hidden" name="step" value="2" />
+  <ul class="default_ul">
+    <li>
+      <label class="label">PHP 版本</label>
+      <span class="txt_color"><?php echo PHP_VERSION; ?></span> &nbsp; &nbsp; <?php if (!$this->system_require['php']) { ?><span style="color: red; font-weight: bold;">× Anwsion 需要最低 5.2.10 版本的 PHP 才能正常运行, 我们推荐使用 PHP 5.3</span><?php } else { ?><span style="color: green;">√</span><?php } ?>
+    </li>
+    <li>
+      <label class="label">数据库模块</label>
+      <span class="txt_color"><?php echo $this->system_require['db']; ?></span> &nbsp; &nbsp; <?php if (!$this->system_require['db']) { ?><span style="color: red; font-weight: bold;">× Anwsion 支持 MySQLi 与 PDO_MYSQL 两种数据库模块</span><?php } else { ?><span style="color: green;">√</span><?php } ?>
+    </li>
+    <li>
+      <label class="label" style="width:90px;">Session 支持</label> &nbsp; &nbsp; <?php if (!$this->system_require['session']) { ?><span style="color: red; font-weight: bold;">×</span><?php } else { ?><span style="color: green;">√</span><?php } ?>
+    </li>
+    <li>
+      <label class="label">Cookie 支持</label> &nbsp; &nbsp; <?php if (!$this->system_require['cookie']) { ?><span style="color: red; font-weight: bold;">×</span><?php } else { ?><span style="color: green;">√</span><?php } ?>
+    </li>
+    <li>
+      <label class="label">图象处理库</label> <span class="txt_color"><?php echo $this->system_require['image_lib']; ?></span> &nbsp; &nbsp; <?php if (!$this->system_require['image_lib']) { ?><span style="color: red; font-weight: bold;">× Anwsion 至少需要有 GD 图象处理库才能正常运行</span><?php } else { ?><span style="color: green;">√ <?php if ($this->system_require['image_lib'] == 'GD') { ?>(推荐加装 ImageMagick)<?php } ?></span><?php } ?>
+    </li>
+    <li>
+      <label class="label">CURL 支持</label> &nbsp; &nbsp; <?php if (!$this->system_require['curl']) { ?><span style="color: red; font-weight: bold;">×</span><?php } else { ?><span style="color: green;">√</span><?php } ?>
+    </li>
+    <li>
+      <label class="label">MB 支持</label> &nbsp; &nbsp; <?php if (!$this->system_require['mb_strlen']) { ?><span style="color: red; font-weight: bold;">×</span><?php } else { ?><span style="color: green;">√</span><?php } ?>
+    </li>
+    <li>
+      <label class="label">ICONV 支持</label> &nbsp; &nbsp; <?php if (!$this->system_require['iconv']) { ?><span style="color: red; font-weight: bold;">×</span><?php } else { ?><span style="color: green;">√</span><?php } ?>
+    </li>
+    <li>
+      <label class="label">上传尺寸限制</label> <span class="txt_color"><?php echo get_cfg_var('upload_max_filesize'); ?> (此处建议值 > 8M)</span>
+    </li>
+    <li>
+      <label class="label">目录权限</label> <span class="txt_color"><?php echo GZ_PATH; ?></span> &nbsp; &nbsp; <?php if (!$this->system_require['config_writable_core']) { ?><span style="color: red; font-weight: bold;">×</span><?php } else { ?><span style="color: green;">√</span><?php } ?>
+    </li>
+    <li>
+      <label class="label">目录权限</label> <span class="txt_color"><?php echo GZ_PATH; ?>config/</span> &nbsp; &nbsp; <?php if (!$this->system_require['config_writable_config']) { ?><span style="color: red; font-weight: bold;">×</span><?php } else { ?><span style="color: green;">√</span><?php } ?>
+    </li>
+    <li>
+      <label class="label">安装目录</label> <span class="txt_color"><?php if($this->base_dir){ ?><?php echo $this->base_dir; ?><?php }else{ ?>/<?php } ?></span> &nbsp; &nbsp; 
+    </li>
+    
+    <li class="default_setup_n" id="setup_control"><a href="#" class="default_install"<?php if (sizeof($this->system_require) != 10) { ?> onclick="alert('抱歉, 您的服务器需要满足系统的运行需求才能安装.'); return false;"<?php } else { ?> onclick="document.getElementById('installer').submit(); document.getElementById('setup_control').style.display = 'none'; return false;"<?php } ?>>开始安装</a></li>
+  </ul>
+  </form>
+</div>
+
+<?php TPL::output('install/footer.tpl.htm'); ?>

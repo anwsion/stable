@@ -1,0 +1,103 @@
+﻿<?php TPL::output('admin/admin_header.tpl.htm'); ?>
+
+<body style="overflow-y:auto; background:#fff;">
+
+<div id="body-wrapper">
+	<div id="main-content">
+<p class="p">
+<span>位置：
+<?php foreach($this->pos as $key => $val){ ?>
+	<a href="<?php echo $this->ajax_link;?>&parent_id=<?php echo $val['topic_id']; ?>"><?php echo $val['topic_title']; ?></a>&nbsp;>&nbsp;
+<?php } ?>
+</span>
+</p>
+
+<p>
+<?php if(!$this->topic_list){ ?>
+	<a href="<?php echo $this->ajax_link;?>&topic_id=<?php echo $this->topic_parent['parent_id']; ?>"><font color=red>没有可选父话题，点击返回上一级</font></a>
+<?php }else{ ?>
+<?php foreach($this->topic_list as $key => $val){ ?>
+	<a topic_id="<?php echo $val['topic_id']; ?>" href="<?php echo $this->ajax_link;?>&parent_id=<?php echo $val['topic_id']; ?>">
+	<?php echo $val['topic_title']; ?></a>
+	[<a name="select_parent" href="javascript:;" topic_title="<?php echo $val['topic_title']; ?>" rel="<?php echo $val['topic_id']; ?>">选择</a>]
+	&nbsp;&nbsp;
+<?php } ?>
+<?php } ?>
+</p>
+
+
+<?php if($this->topic['topic_id'] != 0 && $this->topic_list){ ?>
+<p><a href="<?php echo $this->ajax_link;?>&topic_id=<?php echo $this->topic_parent['parent_id']; ?>">返回上一级</a></p>
+<?php } ?>
+
+</div>
+</div>
+
+<script>
+
+var topic_id = <?php echo $this->topic_id; ?>;
+var target_id = '<?php echo $this->target_id; ?>';
+
+$(document).ready(function (){
+
+	$("a[name=select_parent]").click(function (){
+	
+		parent_id = $(this).attr("rel");
+		
+		topic_title = $(this).attr("topic_title");
+		
+		dparent = $(window.parent.document);
+		
+		if(topic_id == 0)
+		{
+			dparent.find("#" + target_id).html(topic_title);
+			$(window.parent.$.facebox.close());
+			if($("#parent_id", dparent)) $("#parent_id", dparent).val(parent_id);
+		}
+		else
+		{
+			url = "?c=topic&act=edit_parent_ajax&topic_id=" + topic_id + "&parent_id=" + parent_id;
+			
+			$.getJSON(url, function(result){
+				if(result)
+				{
+					if(result.errno == 1)
+					{
+						dparent.find("#" + target_id).html(topic_title);
+						$(window.parent.$.facebox.close());
+						if($("#parent_id", dparent)) $("#parent_id", dparent).val(parent_id);
+					}
+				}
+				else
+				{
+					alert("系统错误");
+				}
+			});
+		}
+		
+	});
+});
+
+
+(function(){
+		try{
+			var db = Math.max(document.body.offsetHeight,document.body.clientHeight);
+			var prarentH = Math.max(window.parent.document.documentElement.offsetHeight,window.parent.document.documentElement.clientHeight);
+			var prabd = window.parent.document.getElementById("edit_topic_parent_frame");
+			var rdom = 13 + Math.random();//缓存问题
+			
+			if(db < prarentH)
+			{
+				prabd.style.height = db+rdom+'px';
+			}
+			else
+			{
+				prabd.style.height = prarentH+rdom+'px';
+			}
+		}catch(e){}
+	})()
+
+</script>
+
+</body>
+</html>

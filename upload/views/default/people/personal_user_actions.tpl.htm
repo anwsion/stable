@@ -1,0 +1,7 @@
+<?php if(is_array($this->list)){ ?>
+<?php foreach ($this->list AS $key => $val) { ?>
+ 
+ <li class="li"><span class="defa_time"><?php echo date_friendly($val['add_time']); ?></span><?php echo $val['last_action_str']; ?>，<a href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $val['question_id']; ?>"><?php echo $val['question_content']; ?></a></li>
+
+<?php }?>
+<?php } ?>

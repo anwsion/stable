@@ -1,0 +1,97 @@
+<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+
+<!--header_e-->
+<div class="bd pbd">
+ 
+  <!--left_nav_s-->
+
+  <div class="contant_left readns_discus ps-wd">
+  <?php TPL::output('account/setting_menu.tpl.htm'); ?>
+	<div  id="td-0" style="display:block;">
+<?php if($this->education_experience_list){ ?>
+<div class="x-tab-d">
+<table class="tab">
+			<tbody><tr>
+				<th>学校名称</th>
+				<th>入学年份</th>
+				<th>院系</th>
+				<th>学校类型</th>
+				<th></th>
+			</tr>
+<?php foreach($this->education_experience_list as $k=>$v){
+?>
+          <tr>
+            <td><?php echo $v["school_name"]; ?></td>
+            <td><?php echo $v["education_years"]; ?></td>
+            <td><?php echo $v["departments"]; ?></td>
+            <td><?php 
+            switch($v["school_type"]){
+            	case "1" : echo "小学";break;
+                case "2" : echo "初中";break;
+                case "3" : echo "中技";break;
+                case "4" : echo "高中";break;
+                case "5" : echo "大学";break;
+            }
+            ?></td>
+            <td style="text-align:center;">[<a href="?c=setting&act=educationinfo_edit&eid=<?php echo $v['education_id']; ?>">修改</a>]&nbsp;&nbsp;&nbsp;&nbsp;[<a href="javascript:void(0);" onclick="javascript:ee_del(<?php echo $v[education_id]; ?>);">删除</a>]</td>
+          </tr>
+<?php } ?>          
+</tbody></table>
+</div>
+<?php } ?>
+
+    <form id="setting_form" method="post" action="<?php echo get_setting('base_url');?>/account/?c=setting&act=add_educationinfo_process_ajax">
+	<ul class="ps-info" >
+		<li><label>学校类型：</label>
+			<select name="school_type" id="school_type" class="select_area" >
+                  <option value="5">大学</option>
+                  <option value="4">高中</option>
+                  <option value="3">中技</option>
+                  <option value="2">初中</option>
+                  <option value="1">小学</option>
+            </select>
+		</li>
+		<li><label>学校名称：</label><input type="text" name="school_name" id="school_name" class="rx-txt" /></li>
+		
+		<li><label>院系：</label><input type="text" name="departments" id="departments" class="rx-txt"/></li>
+		<li><label>入学年份：</label>
+                <select name="education_years" class="select_area">
+                <?php echo H::display_options($this->education_years_list); ?>;
+                </select>
+        </li>
+		<li><span style="float: right; margin-right: 334px;">(继续添加教育经历)</span><a href="javascript:;" onclick="ajax_post($('#setting_form'),_tips_form_processer); return false;" class="seve_s">保存并添加</a></li>
+	</ul>
+    </form>
+	</div>
+	</div>
+
+	<!--微博绑定_e-->
+    </div>
+  <!--left_nav_e-->
+</div>
+
+<script type="text/javascript">
+	function ee_del(id)
+	{
+		if (!confirm("确定删除？"))
+		{
+			return false;
+		}
+	
+		$.get(G_BASE_URL+'/account/?c=setting&act=educationinfo_del_ajax&eid=' + id, function (result)
+		{
+			if (result.errno == -1)
+			{
+				qAlert(result.err);
+			}
+			else
+			{
+				window.location.reload();
+			}
+		});
+	
+		return false;
+	}
+</script>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

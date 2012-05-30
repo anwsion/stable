@@ -1,0 +1,38 @@
+﻿<?php TPL::output('admin/admin_header.tpl.htm'); ?>
+
+<style>
+body{
+	background:#e6e6e6;
+}
+</style>
+
+<div id="body-wrapper">
+<div id="sidebar" style="height:auto;top:0;">
+		<div id="sidebar-wrapper">
+			
+			<ul id="main-nav">
+			<?php foreach($this->list as $key => $val){  ?>
+				<li class="menu_nav_<?php echo $val['cname'];?>"> <a href="javascript:;" id="menu_<?php echo $val['id'];?>" class="nav-top-item no-submenu"><span class="menu_nav_s"></span><?php echo $val['title'];?></a>
+				<?php if($val['children']){ ?>
+				<ul>
+				<?php foreach($val['children'] as $c_key => $child){ ?>
+					<li><a href="javascript:;" id="menu_<?php echo $child['id'];?>" rel="<?php echo $child['url'];?>"><?php echo $child['title'];?></a></li>
+				<?php } ?>
+				</ul>
+				<?php } ?>
+				</li>
+			<?php } ?>
+			</ul>
+		</div>
+</div>
+</div>
+</div>
+
+<script>
+$(document).ready(function(){
+	$("#menu_3").click();
+});
+</script>
+<script type="text/javascript" src="resources/js/left_iframe.js"></script>
+</html>
+</body>

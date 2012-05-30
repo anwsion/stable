@@ -1,0 +1,49 @@
+<?php
+$salt = fetch_salt();
+
+foreach($this->hot_list as $key => $val) { 
+?>
+<div class="xb_t">
+  <p class="txts"><a href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $val['question_id']; ?>" title="<?php echo $val['title_all']; ?>"><?php echo $val['title']; ?></a> <a href="javascript:void(0);" class="addtips<?php if ($val['focus']) { ?> cur<?php } ?>" rel="添加关注" onclick="focus_question($(this), $(this).find('em'), <?php echo $val['question_id']; ?>);"><em><?php if ($val['focus']) { ?>取消<?php } ?>关注</em></a></p>
+  <?php if ($val['answer']['answer_content']) { ?>
+  <h3 class="xb_h3 x"><i><a href="<?php echo $val['answer']['u_url']; ?>"><?php echo $val['answer']['user_name']; ?></a> 回复了该问题&nbsp;&nbsp;<?php echo date_friendly($val['answer']['modify_time']); ?></i> </h3>
+ <!-- 小内容 -->
+ <div  style="" id="q_min_<?php echo $val['question_id'] . $salt;?>">
+ <p class="infotx">
+ <?php echo nl2br(cutmbstr_zhcn($val['answer']['answer_content'], 130)); ?>
+   	<?php if (lenmbstr_zhcn($val['answer']['answer_content']) > 130){ ?>
+		 <a href="javascript:void(0);" class="showMore" onclick="content_switcher($('#q_min_<?php echo $val['question_id'] . $salt;?>'), $('#q_max_<?php echo $val['question_id'] . $salt;?>')); return false;">显示全部</a>	
+	<?php } ?>
+ </p>
+ </div>
+<!-- 小内容 -->
+<!-- 问题大内容 -------------------------------------------------------->
+<div  style="display:none" id="q_max_<?php echo $val['question_id'].$salt;?>">
+ <p class="infotx"><?php echo nl2br($val['answer']['answer_content']); ?></p>
+</div>
+
+  <div class="userFace"><a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['answer']['uid']; ?>"><img src="<?php echo get_avatar_url($val['answer']['uid'],'min',$val['answer']['avatar_file']); ?>" onMouseOver="eventsMouseM(this);"  rel="<?php echo $val['answer']['uid'];?>" /></a></div>
+  <?php } else { ?>
+ 
+  <h3 class="xb_h3 x"><i><a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['user_info']['uid']; ?>"><?php echo $val['user_info']['user_name']; ?></a> 发起了该问题&nbsp;&nbsp;<?php echo date_friendly($val['add_time']); ?></i></h3>
+
+<!-- 小内容 -->
+ <div  style="" id="q_min_<?php echo $val['question_id'].$salt;?>">
+ <p class="infotx">
+ <?php echo nl2br(cutmbstr_zhcn($val['question_detail'], 130)); ?>
+   	<?php if (lenmbstr_zhcn($val['question_detail'])>130){ ?>
+		 <a href="javascript:void(0);" class="showMore" onclick="content_switcher($('#q_min_<?php echo $val['question_id'].$salt;?>'), $('#q_max_<?php echo $val['question_id'].$salt;?>')); return false;">显示全部</a>	
+	<?php } ?>
+ </p>
+ </div>
+<!-- 小内容 -->
+<!-- 问题大内容 -------------------------------------------------------->
+<div  style="display:none" id="q_max_<?php echo $val['question_id'].$salt;?>">
+ <p class="infotx"><?php echo nl2br($val['question_detail']); ?></p>
+</div>
+
+
+  <div class="userFace"><a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['user_info']['uid']; ?>" class="tface"><img src="<?php echo get_avatar_url($val['user_info']['uid'],'min',$val['user_info']['avatar_file']); ?>" onMouseOver="eventsMouseM(this);"  rel="<?php echo $val['user_info']['uid'];?>"/></a></div>
+  <?php } ?>
+</div>
+<?php } ?>

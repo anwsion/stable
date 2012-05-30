@@ -1,0 +1,159 @@
+<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+
+<div class="bd pbd">
+<!--right_nav_s-->
+<div class="tommy_rightDiv xBlog_tag enTryAside">
+  <ul id="i_tabs" class="i_lsitecontents">
+    <li class="cur"><a href="javascript:;">个人主页</a></li>
+    <li><a href="javascript:;" display="block_3">最新动态</a></li>
+    <li><a href="javascript:;" display="block_2">发起<span class="default_s"><?php echo $this->user['question_count'];?></span></a></li>
+    <li><a href="javascript:;" display="block_1">回答<span class="default_s"><?php echo $this->user['answer_count'];?></span></a></li>
+    <!--  <li><a href="#">收藏<span class="default_s">1</span></a></li>
+    <li><a href="#">编辑日志<span class="default_s">9</span></a></li>
+-->
+  </ul>
+  <div class="RightListDiv">
+    <h3 class="h3">关注了 <span class="default_vor"  onclick="" id="rbtn_more_friend"><?php echo $this->user['friend_count'];?></span> 个人</h3>
+    <p class="default_GZ">
+      <?php foreach($this->right_friends_list AS $key => $val) { ?>
+      <a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['user_name']; ?>" title="<?php echo $val['user_name']; ?>" ><img src="<?php echo get_avatar_url($val['uid'],'mid',$val['avatar_file']); ?>" alt="<?php echo $val['user_name']; ?>" onMouseOver="eventsMouseM(this);"  rel="<?php echo $val['uid'];?>"/></a>
+      <?php } ?>
+    </p>
+    <h3 class="h3">关注者 <span class="default_vor"  onclick=""  id="rbtn_more_fans"><?php echo $this->user['fans_count'];?></span> 人</h3>
+    <p class="default_GZ">
+      <?php foreach($this->right_fans_list AS $key => $val) { ?>
+      <a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['user_name']; ?>" title="<?php echo $val['user_name']; ?>" ><img src="<?php echo get_avatar_url($val['uid'],'mid',$val['avatar_file']); ?>" alt="<?php echo $val['user_name']; ?>" onMouseOver="eventsMouseM(this);"  rel="<?php echo $val['uid'];?>"/></a>
+      <?php } ?>
+    </p>
+  </div>
+  <div class="RightListDiv" style="border:none;">
+    <h3 class="h3">关注了 <span class="default_vor" onclick="" id="rbtn_more_topic_focus"><?php echo $this->user['topic_focus_count'];?></span> 个话题</h3>
+    <?php foreach ($this->focus_topics AS $key => $val) {?>
+    <div class="porela default_liste">
+      <?php if($val['has_focus']){ ?>
+      <a onclick="focus_topic($(this), $(this).find('em'), <?php echo $val['topic_id']; ?>);" rel="取消关注" class="addtips fr cur" href="javascript:void(0);"><em>取消关注</em></a>
+      <?php } else { ?>
+      <a onclick="focus_topic($(this), $(this).find('em'), <?php echo $val['topic_id']; ?>);" rel="添加关注" class="addtips fr" href="javascript:void(0);"><em>添加关注</em></a>
+      <?php } ?>
+      <a href="<?php echo get_setting('base_url');?>/topic/?topic_title=<?php echo $val['topic_title']; ?>" onmouseover="eventstalk(this);" rel="<?php echo $val['topic_id']; ?>"><?php echo $val['topic_title']; ?></a>
+      <p>&nbsp;<?php echo nl2br(cutmbstr_zhcn($val['topic_description'],12)); ?> </p>
+      <a class="facepostionImgs" href="#">
+      <?php if (!$val['topic_pic']) {?>
+      <img src="<?php echo G_STATIC_URL; ?>/common/avatar-mid-img.jpg">
+      <?php } else { ?>
+      <img src="<?php echo get_setting('upload_url').'/topic/'.$val['topic_pic'];  ?>">
+      <?php } ?>
+      </a> </div>
+    <?php } ?>
+  </div>
+  <p class="tk_rocs"><span class="s"></span>个人首页被 <?php echo $this->user['views_count'];?> 人浏览过</p>
+</div>
+<!--right_nav_e--> 
+<!--left_nav_s-->
+<div class="contant_left pfo discussion_element">
+  <ul class="ur" style="min-height:110px;">
+    <li class="lr"><img  src="<?php echo get_avatar_url($this->user['uid'],'max',$this->user['avatar_file']); ?>"/></li>
+    <li class="lsr">
+      <p><b class="tx"><?php echo $this->user['user_name']; ?></b><span class="default_referrals"><?php echo $this->user['signature']; ?></span> </p>
+      <p class="default_pro" style="padding:5px 0;"><?php echo $this->user['area_name']; ?> <?php echo $this->jobs_name; ?> &nbsp; <a href="#" onclick="Quick_Tips.info(this, '<?php echo $this->user['user_name']; ?>'); return false;">发私信</a> 
+        <!--<a href="#" title="详细资料">详细资料</a> &nbsp;&nbsp;<a href="#" title="新浪微博">新浪微博</a>--></p>
+      <div class="default_xjr">
+        <?php if ($this->user_id != $this->user['uid']) { ?>
+        <a href="javascript:;" class="default_blue_but fr" onclick="follow_people($(this), $(this), <?php echo $this->user['uid']; ?>); return false;"><?php if ($this->user_follow_check) { ?>取消<?php } ?>关注</a>
+        <?php } ?>
+        <a href="#" class="xjr xjr_zt"><b><?php echo $this->user['agree_count']; ?></b> 赞同</a> <a href="#" class="xjr xjr_gx"><b><?php echo $this->user['thanks_count']; ?></b> 感谢</a></div>
+    </li>
+  </ul>
+</div>
+<!--tab0_s-->
+<div id="default_person_layer0"  class="">
+  <div class="contant_left readns_discus div_select  dis_ListEntry index" id="block_1">
+    <h2 class="c_title"><a  class="all_answer" href="javascript:;" rel="0" title="收起" onclick="elementClickEvent.letter.default_v2(this);"></a><?php echo $this->user["ta"];?>的回答<span class="dx_rols">（<?php echo $this->user['answer_count'];?>）<span></h2>
+	<div class="display_hide">
+    <div class="default_divs"  id="answer_v0">
+      <ul class="default_ul" id="contents_t0">
+        <p style="padding: 15px 0" align="center"><img src="<?php echo G_STATIC_URL; ?>/css/img/loading_b.gif" alt="" /></p>
+      </ul>
+    </div>
+    
+    <div class="moreDiv" id="bp_more_t0"><a href="#" title="点击查看更多>> " class="mores">更多<em></em></a></div>
+	</div>
+    <!--left_nav_e--> 
+  </div>
+  <div class="contant_left readns_discus  div_select"  id="block_2">
+    <h2 class="c_title"><a  class="all_answer" href="javascript:;" rel="0" title="收起" onclick="elementClickEvent.letter.default_v2(this);"></a><?php echo $this->user["ta"];?>的发问<span class="dx_rols">（<?php echo $this->user['question_count'];?>）<span></h2>
+	<div class="display_hide">
+    <div class="default_divs" id="question_v0">
+      <ul class="default_ul defa_ask" id="contents_t1">
+        <p style="padding: 15px 0" align="center"><img src="<?php echo G_STATIC_URL; ?>/css/img/loading_b.gif" alt="" /></p>
+      </ul>
+    </div>
+    
+    <div class="moreDiv" id="bp_more_t1"><a href="#" title="点击查看更多>> " class="mores">更多<em></em></a></div>
+	</div>
+  </div>
+  <div class="contant_left readns_discus  div_select dis_ListEntry index"  id="block_3">
+    <h2 class="c_title"><a  class="all_answer" href="javascript:;" rel="0" title="收起" onclick="elementClickEvent.letter.default_v2(this);"></a><?php echo $this->user["ta"]; ?>的动态<span class="dx_rols"><span></h2>
+    <div class="display_hide">
+	<div class="default_divs" id="default_divs_v0">
+      <ul class="default_trends" id="contents0">
+        <p style="padding: 15px 0" align="center"><img src="<?php echo G_STATIC_URL; ?>/css/img/loading_b.gif" alt="" /></p>
+      </ul>
+    </div>
+    
+    <div class="moreDiv" id="bp_more0"><a href="#" title="点击查看更多>> " class="mores">更多<em></em></a></div>
+  </div>
+  </div>
+</div>
+<!--tab0_e--> 
+<!--tab1_s-->
+<div id="default_person_layer1">
+  <div class="contant_left readns_discus   dis_ListEntry index hide  div_select"  id="block_4" >
+    <h2 class="c_title">  <?php echo $this->user["ta"]; ?>关注了 <?php  echo $this->user['friend_count']; ?> 个人<span class="dx_rols"><span> </h2>
+
+	
+      <ul class="Lister_attentionPersonal" id="contents_g0">
+        <p style="padding: 15px 0" align="center"><img src="<?php echo G_STATIC_URL; ?>/css/img/loading_b.gif" alt="" /></p>
+      </ul>
+   
+    <div class="moreDiv" id="bp_more_g0"><a href="#" title="点击查看更多>> " class="mores">更多<em></em></a></div>
+
+   
+  </div>
+</div>
+<!--tab1_e--> 
+<!--tab2_e-->
+<div id="default_person_layer2">
+	<div class="contant_left readns_discus   dis_ListEntry index hide div_select"  id="block_5" >
+    <h2 class="c_title">  <?php echo $this->user["ta"]; ?>被  <?php  echo $this->user['fans_count']; ?> 人关注<span class="dx_rols"><span> </h2>
+      
+	 <ul class="Lister_attentionPersonal" id="contents_g1">
+        <p style="padding: 15px 0" align="center"><img src="<?php echo G_STATIC_URL; ?>/css/img/loading_b.gif" alt="" /></p>
+      </ul>
+   
+    <div class="moreDiv" id="bp_more_g1"><a href="#" title="点击查看更多>> " class="mores">更多<em></em></a></div>
+	
+  </div>
+</div>
+<!--tab3_e--> 
+<!--tab4_e-->
+<div id="default_person_layer3">
+	<div class="contant_left readns_discus   dis_ListEntry index div_select hide"  id="block_6">
+    <h2 class="c_title"> <?php echo $this->user["ta"]; ?>关注了  <?php  echo $this->user['topic_focus_count']; ?> 个话题<span class="dx_rols"><span> </h2>
+	
+	<ul class="Lister_attentionPersonal" id="contents_tp1">
+        <p style="padding: 15px 0" align="center"><img src="<?php echo G_STATIC_URL; ?>/css/img/loading_b.gif" alt="" /></p>
+      </ul>
+   
+    <div class="moreDiv" id="bp_more_tp1"><a href="#" title="点击查看更多>> " class="mores">更多<em></em></a></div>
+	
+	
+    
+  </div>
+</div>
+<!--tab4_e--> 
+<script type="text/javascript">
+	var PEOPLE_USER_ID = '<?php echo $this->user['uid']; ?>';
+</script> 
+<script type="text/javascript" src="<?php echo G_STATIC_URL; ?>/js/people.js"></script> 
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

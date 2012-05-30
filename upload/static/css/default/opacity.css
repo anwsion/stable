@@ -1,0 +1,14 @@
+
+/* set elements opacity css styles */
+.default_blue_but:hover,
+.default_gray_but:hover,
+.header .sreach .sreachLis .default_seach a.flx:hover,
+.bd .dis_ListEntry .contxt_List .default_txt .default_num:hover,
+.readns_discus .submitsrue .default_submit:hover,
+.tagDiv .tcon .u li.subm .sbumi:hover,
+.class_share .set_msg:hover,
+.w_tagPupD .w_submte .w_sub:hover,
+.w_tagPupD .file_upLoadPic .w_sub:hover,
+.RightListDiv .default_inbites .default_user:hover img.default_imgs,
+._ajax_upload-button:hover
+{opacity:0.8;fliter:alpha(opacity=80);color:#fff;}

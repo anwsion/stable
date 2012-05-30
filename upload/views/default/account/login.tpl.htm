@@ -1,0 +1,19 @@
+<?php TPL::output('global/__public_header_v2.tpl.htm'); ?>
+
+<div class="default_account" id="default_account">
+	<form id="login_form" method="post" onsubmit="return false" action="<?php echo get_setting('base_url');?>/account/?c=login&act=login_process_ajax">
+	<ul id="userLogin" class="defa_login ulxForm">
+		<li><input type="text" name="user_name" value="<?php echo $this->r_uname; ?>" class="usertxt" id="UserName" title="请输入你的邮箱.." tabIndex="1"/></li>
+		<li id="ulx"><input type="password" name="password" value="" class="usertxt hide" id="PassWord" onkeydown="if (event.keyCode == 13) { ajax_post($('#login_form')); }" title="你的密码..."/></li>
+		
+	</ul>
+	  <div class="de_subForm">
+			<a onclick="ajax_post($('#login_form'));" class="default_user_login default_blue_but" href="javascript:;" title="登录">登录 </a>
+			<p class="default_reg"><a href="<?php echo get_setting('base_url');?>/account/?c=register" title="点击快速注册">注册</a><?php if (get_setting('guest_explorer') == 'Y') { ?> <a href="<?php echo get_setting('base_url');?>/question/?guest" title="游客浏览">游客</a><?php } ?></p>
+			<input type="checkbox" name="net_auto_login" value="1" id="checkBox" /><label for="checkBox">记住我</label>    
+            &nbsp;&nbsp;&nbsp;&nbsp;<a href="<?php echo get_setting('base_url');?>/account/?c=find_password" title="忘记密码？点击快速找回">忘记密码？</a>
+      </div>
+	</form>
+</div>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

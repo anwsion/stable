@@ -1,0 +1,9 @@
+<?php if($this->log_list){ ?>
+<?php foreach($this->log_list as $key => $val) { ?>
+<div class="xb_t">  
+  <h3 class="xb_h3 x"><?php echo $val['title']; ?></h3>
+  
+  <div class="xb_tis tam">#<?php echo $val['log_id']; ?> <em><?php echo $val['add_time']; ?></em></div>
+</div>
+<?php  } ?>
+<?php  } ?>

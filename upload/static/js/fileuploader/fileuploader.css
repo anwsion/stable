@@ -1,0 +1,125 @@
+/*._ajax_uploader
+{
+	position:relative;
+	width:100%;
+}*/
+
+._ajax_upload-button
+{
+	display:block;
+	width:75px;
+	text-align:center;
+	color:#fff;
+	background: url(../../css/default/img/default.png) no-repeat scroll 0 -86px transparent;
+	box-shadow:0 1px 0 #fff;
+	height:27px;
+	line-height:27px;
+	
+}
+
+._ajax_upload-drop-area
+{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	min-height:70px;
+	z-index:2;
+	background:#FF9797;
+	text-align:center;
+}
+
+._ajax_upload-drop-area span
+{
+	display:block;
+	position:absolute;
+	top:50%;
+	width:100%;
+	margin-top:-8px;
+	font-size:16px;
+}
+
+._ajax_upload-drop-area-active
+{
+	background:#FF7171;
+}
+
+._ajax_upload-list
+{
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+
+._ajax_upload-list li
+{
+	/*line-height:15px;
+	font-size:12px;
+	display:block;
+	border:1px #CCC solid;
+	width:100px !important;
+	height:100px !important;
+	float:left;
+	background-image:url(loading.gif);
+	background-repeat:no-repeat;
+	background-position:center center;*/
+	margin:5px 5px 5px 0 !important;
+	/*padding:0 !important;*/
+}
+
+/*._ajax_upload-file,._ajax_upload-spinner,._ajax_upload-size,._ajax_upload-cancel,._ajax_upload-failed-text
+{
+	margin-right:7px;
+}
+
+._ajax_upload-file
+{
+	line-height:18px;
+	height:18px;
+	width:90px;
+	text-align:center;
+	overflow:hidden;
+	position:relative;
+	top:80px;
+	display:block;
+	left:5px;
+}*/
+
+._ajax_upload-spinner
+{
+	background: url(loading.gif) center center no-repeat !important;
+	/*width:15px;
+	height:15px;
+	vertical-align:text-bottom;
+	display:none;*/
+}
+
+/*._ajax_upload-size,._ajax_upload-cancel
+{
+	line-height:18px;
+	height:18px;
+	width:90px;
+	text-align:center;
+	overflow:hidden;
+	position:relative;
+	top:45px;
+	display:block;
+	left:5px;
+}*/
+
+._ajax_upload-fail
+{
+	border:1px solid red!important;
+	background-image:none!important;
+}
+
+/*._ajax_upload-success
+{
+	background-image:url(attach.jpg)!important;
+}*/
+
+._ajax_upload-cancel,._ajax_upload-failed-text,._ajax_upload-fail ._ajax_upload-failed-text
+{
+	display:none;
+}

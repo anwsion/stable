@@ -1,0 +1,138 @@
+<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+
+<div class="search_Gary">
+    <h2 class="Sea_Keywords">搜索<q><?php echo $this->keyword; ?></q></h2>
+	<p class="enTire_all" id="list_nav"><!--<a href="#competitions">竞赛</a>--><a href="#questions">问题</a><a href="#topics">话题</a><a href="#users">用户</a></p>
+	<div class="search_result">
+		<ul class="search_lister" id="search_result">
+			
+		</ul>
+	</div>
+    <p class="more" id="bp_more"><a href="#">更多 >></a></p>
+</div>
+
+<script type="text/javascript">
+var cur_page = 0;
+var bp_more_inner_o = '';
+var search_query = '<?php echo urldecode($_GET['q']); ?>';
+
+function reload_list()
+{	
+	//window.location.hash = 'all';
+	
+	cur_page = 0;
+	
+	$('#search_result').html('<p style="padding: 15px 0" align="center"><img src="<?php echo G_STATIC_URL; ?>/css/img/loading_b.gif" alt="" /></p>');
+	
+	$('#bp_more').html(bp_more_inner_o);
+	
+	$('#bp_more').click();
+}
+
+$('#list_nav a').click(function () {
+	$('#list_nav a').removeClass('current');
+	
+	$(this).addClass('current');
+	
+	window.location.hash = $(this).attr('href').replace(/#/g, '');
+	
+	cur_page = 0;
+	
+	$('#search_result').html('<p style="padding: 15px 0" align="center"><img src="<?php echo G_STATIC_URL; ?>/css/img/loading_b.gif" alt="" /></p>');
+	
+	$('#bp_more').html(bp_more_inner_o);
+	
+	$('#bp_more').click();
+	
+	return false;
+});
+/*
+$(window).bind('hashchange', function() {
+	reload_list();
+});
+*/
+$(document).ready(function()
+{	
+	bp_more_inner_o = $('#bp_more').html();
+	
+	$('#list_nav a').removeClass('current');
+	
+	switch (window.location.hash)
+	{
+		default:
+			$('#list_nav a[href=#questions]').addClass('current');
+		break;
+		
+		case '#questions':
+		case '#topics':
+		case '#users':
+			$('#list_nav a[href=' + window.location.hash + ']').addClass('current');
+		break;
+	}
+	
+	$('#bp_more').click(function()
+	{
+		var _this = this;
+		
+		switch (window.location.hash)
+		{
+			default:
+			/*case '#competitions':
+				$('#list_nav a[href=#all]').addClass('current');
+				
+				var request_url = '/search/?c=ajax&act=search_result&search_type=all&q=' + encodeURIComponent(search_query) + '&page=' + cur_page;
+			break;*/
+			
+			case '#questions':
+			case '#topics':
+			case '#users':
+				var request_url = G_BASE_URL+'/search/?c=ajax&act=search_result&search_type=' +  window.location.hash.replace(/#/g, '') + '&q=' + encodeURIComponent(search_query) + '&page=' + cur_page;
+			break;
+		}
+		
+		$(this).addClass('loading');
+		$(this).find('a').html('正在载入...');
+		
+		$.get(request_url, function (response)
+		{
+			if (response.length)
+			{
+				if (cur_page == 0)
+				{
+					$('#search_result').html(response);
+				}
+				else
+				{
+					$('#search_result').append(response);
+				}
+					
+				cur_page++;
+				
+				$(_this).html(bp_more_inner_o); 
+				
+				$('#search_result li p.t_cal a').highText(search_query, 'span', 's');
+			}
+			else
+			{
+				if (cur_page == 0)
+				{
+					$('#search_result').html('<p style="padding: 15px 0" align="center">没有内容</p>');
+				}
+					
+				$(_this).addClass('disabled');
+				
+				$(_this).find('a').html('没有更多了');
+			}
+			
+			$(_this).removeClass('loading');
+			
+		});
+		
+		return false;
+	});
+	
+	$('#bp_more').click();
+});
+</script>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

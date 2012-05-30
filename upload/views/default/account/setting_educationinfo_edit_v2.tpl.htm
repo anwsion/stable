@@ -1,0 +1,42 @@
+<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+
+
+<!--header_e-->
+<div class="bd pbd">
+ 
+  <!--left_nav_s-->
+
+  <div class="contant_left readns_discus ps-wd">
+  <?php TPL::output('account/setting_menu.tpl.htm'); ?>
+	<div id="td-0" style="display:block;">
+
+    <form id="setting_form" method="post" action="<?php echo get_setting('base_url');?>/account/?c=setting">
+    <input type="hidden" name="act" value="edit_educationinfo_process_ajax"/>
+    <input type="hidden" name="eid" value="<?php echo $this->education_experience_row[education_id]; ?>"/>  
+	<ul class="ps-info" >
+		<li><label>学校类型：</label>
+          <select name="school_type" id="school_type" class="field" >
+          <?php echo H::display_options($this->school_type_list,$this->school_type); ?>                                                        
+          </select>
+		</li>
+		<li><label>学校名称：</label>
+        <input type="text" name="school_name" id="school_name" value="<?php echo $this->education_experience_row[school_name]; ?>" class="field" />
+		</li>
+		
+		<li><label>院系：</label><input type="text" name="departments" id="departments"  value="<?php echo $this->education_experience_row[departments]; ?>"  class="field" /> </li>
+		<li><label>入学年份：</label>
+        <select name="education_years" class="field" style="width:70px;">          
+          <?php echo  H::display_options($this->education_years_list,$this->education_years); ?>
+		</select>
+        </li>
+		<li><a href="javascript:;" onclick="ajax_post($('#setting_form'),_tips_form_processer); return false;" class="seve_s">保存</a></li>
+	</ul>
+    </form>
+	</div>
+	</div>
+	
+    </div>
+  <!--left_nav_e-->
+</div>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

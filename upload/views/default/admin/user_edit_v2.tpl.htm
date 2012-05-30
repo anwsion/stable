@@ -1,0 +1,168 @@
+﻿<?php TPL::output('admin/admin_header.tpl.htm'); ?>
+
+<body >
+
+<div id="body-wrapper">
+	<div id="main-content">
+		<div class="clear"></div>
+		<div class="content-box">
+			<div class="content-box-header">
+				<h3><?php echo $this->crumb['last']['name']; ?></h3>
+				<ul class="content-box-tabs">
+				</ul>
+				<div class="clear"></div>
+			</div>
+			<div class="content-box-content">
+				<div class="tab-content default-tab" id="tab1">
+					<form id="_save_form" action="?c=user&act=user_edit_ajax" method="post">
+						<input name="uid" type="hidden" value="<?php echo $this->user['uid']; ?>">
+						<fieldset>
+						
+						<p>
+						<label>用户名：</label>
+						<?php echo $this->user['user_name']; ?>
+						</p>
+						
+						<p>
+						<label>邮箱：</label>
+						<input name="email" class="text-input small-input" type="text" value="<?php echo $this->user['email']; ?>"/>
+						</p>
+						
+						<p>
+						<label>邮箱激活状态：</label>
+							<input type="radio" name="valid_email" value="1" <?php if($this->user['valid_email']=='1') echo " checked"; ?>/>是
+							<input type="radio" name="valid_email" value="0" <?php if($this->user['valid_email']=='0') echo " checked"; ?>/>否
+						</p>
+						
+						<p>
+						<label>新密码：</label>
+						<input name="password" class="text-input small-input" type="text" value=""/>&nbsp;&nbsp;不更改请勿填写
+						</p>
+						
+						<p>
+						<label>头像：</label>
+						<img src="<?php echo get_avatar_url($this->user['uid'],'max',$this->user_info['avatar_file']); ?>"/><br/>
+						<input name="delete_avatar" type="checkbox" value="1">删除头像
+						</p>
+						
+						<?php if($this->admin_info['group_id'] == '1'){ ?>
+						<p>
+						<label>用户组：</label>
+						<select class="small-input" name="group_id">
+							<?php foreach($this->user_groups as $skey => $val){ ?>
+								<option value="<?php echo $val['id']; ?>"<?php if($this->user['group_id'] == $val['id']){ ?> selected=true<?php } ?>><?php echo $val['group_name']; ?></option>
+							<?php } ?>
+						</select>
+						</p>
+						<?php } ?>
+						
+						<p>
+						<label>锁定当前用户：</label>
+							<input type="radio" name="forbidden" value="1" <?php if($this->user['forbidden']=='1') echo " checked"; ?>/>是
+							<input type="radio" name="forbidden" value="0" <?php if($this->user['forbidden']=='0') echo " checked"; ?>/>否
+						</p>
+						
+						<p>
+						<label>注册时间：</label>
+						<input name="reg_time" class="text-input small-input" type="text" value="<?php echo $this->user['reg_time']; ?>"/>
+						</p>
+						
+						<p>
+						<label>注册IP：</label>
+						<input name="reg_ip" class="text-input small-input" type="text" value="<?php echo $this->user['reg_ip']; ?>"/>
+						</p>
+						
+						<p>
+						<label>上次登录时间：</label>
+						<input name="last_login" class="text-input small-input" type="text" value="<?php echo $this->user['last_login']; ?>"/>
+						</p>
+						
+						<p>
+						<label>上次登录IP：</label>
+						<input name="last_ip" class="text-input small-input" type="text" value="<?php echo $this->user['last_ip']; ?>"/>
+						</p>
+						
+						<p>
+						<label>性别：</label>
+<input type="radio" name="sex" value="1" <?php if($this->user['sex']=='1') echo " checked"; ?>/>男
+<input type="radio" name="sex" value="2" <?php if($this->user['sex']=='2') echo " checked"; ?>/>女
+<input type="radio" name="sex" value="3" <?php if($this->user['sex']=='3') echo " checked"; ?>/>保密
+						</p>
+						
+						<p>
+						<label>出生日期：</label>
+						<input name="birthday" class="text-input small-input" type="text" value="<?php echo $this->user['birthday']; ?>"/>
+						</p>
+						
+						<!--p>
+						<label>居住地：</label>
+						<input name="p1assword" class="text-input small-input" type="text" value="<?php echo $this->user['']; ?>"/>
+						</p>
+						
+						<p>
+						<label>职业：</label>
+						<input name="p1assword" class="text-input small-input" type="text" value="<?php echo $this->user['']; ?>"/>
+						</p-->
+						
+						<p>
+						<label>个性网址：</label>
+						<?php echo get_setting('base_url'); ?>/people/?u=<input name="url" class="text-input small-input" style="width:80px !important;" type="text" value="<?php echo $this->user['url']; ?>"/>
+						</p>
+						
+						<p>
+						<label>积分：</label>
+						<input name="integral" class="text-input small-input" type="text" value="<?php echo $this->user['integral']; ?>"/>
+						</p>
+						
+						<p>
+						<label>可用邀请名额：</label>
+						<input name="invitation_available" class="text-input small-input" type="text" value="<?php echo $this->user['invitation_available']; ?>"/>
+						</p>
+						
+						<?php if($this->vars){ ?>
+					<?php  foreach($this->vars as $key => $var){ ?>
+					<p>
+					<?php if($var['varname'] == "upload_dir"){ ?>
+						<label><?php echo $var['desc']; ?>：(目前网站根目录绝对路径:<?php echo realpath(GZ_PATH . '../'); ?>)</label>
+						<input name="<?php echo $var['varname']; ?>" class="text-input small-input" type="text" value="<?php echo $var['value']; ?>"/>
+					<?php }else{ ?>
+						<label><?php echo $var['desc']; ?>：</label>
+						<?php if($var['type'] == "string"){?>
+							<input name="<?php echo $var['varname']; ?>" class="text-input small-input" type="text" value="<?php echo $var['value']; ?>"/>
+						<?php }elseif($var['type'] == "textarea"){?>
+							<textarea name="<?php echo $var['varname']; ?>" cols="100" rows="3" id="<?php echo $var['varname']; ?>"><?php echo $var['value']; ?></textarea>
+						<?php }elseif($var['type'] == "bool"){?>
+							<input type="radio" name="<?php echo $var['varname']; ?>" value="Y" <?php if($var['value']=='Y') echo " checked"; ?>/>是
+							<input type="radio" name="<?php echo $var['varname']; ?>" value="N" <?php if($var['value']=='N') echo " checked"; ?>/>否
+						<?php }elseif($var['type'] == "int"){?>
+							<input name="<?php echo $var['varname']; ?>" class="text-input small-int" type="text" value="<?php echo $var['value']; ?>"/>
+						<?php }elseif($var['type'] == "select"){?>
+						<select class="small-input" name="<?php echo $var['varname']; ?>">
+							<?php foreach($var['select_list'] as $skey => $val){ ?>
+								<option value="<?php echo $val['id']; ?>"<?php if($var['value'] == $val['id']){ ?> selected<?php } ?>><?php echo $val['title']; ?></option>
+							<?php } ?>
+						</select>
+						<?php } ?>
+					<?php } ?>
+					</p>
+					<?php } ?>
+					<?php } ?>
+					
+						<p>
+							<input class="button" type="button" onClick="ajax_post($('#_save_form'), _form_process);" value="  保  存  " />
+						</p>
+						</fieldset>
+						<div class="clear"></div>
+					</form>
+				</div>
+		</div>
+		
+		<div class="clear"></div>
+		<div id="notf_tip" style="display:none;" class="notification png_bg"> <a href="javascript:;" class="close"><img src="resources/images/icons/cross_grey_small.png" alt="关闭" /></a>
+			<div id="notf_cont"></div>
+		</div>
+		
+	</div>
+</div>
+
+<?php TPL::output('admin/admin_footer.tpl.htm'); ?>

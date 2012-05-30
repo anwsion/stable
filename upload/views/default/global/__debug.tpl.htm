@@ -1,0 +1,13 @@
+<?php if (GZ_APP::config()->get('system')->debug) { ?>
+<div style="border: 1px #ccc solid; background: #FFF; padding: 10px; margin: 15px; line-height: 20px;">
+	<b style="font-weight: bold; color: red;">Debug message:</b><br >
+	<?php foreach (GZ_APP::$_debug AS $key => $val) { ?>
+	<br /><p><b style="font-weight: bold;"><?php echo ucfirst($key); ?></b></p>
+		<?php foreach ($val AS $_key => $_val) { ?>
+		<p><?php if ($_val['expend_time']) { ?>[Expend time: <?php echo $_val['expend_time']; ?>]<?php } ?> <?php echo $_val['message']; ?></p>
+		<?php } ?>
+	<?php } ?>
+	<br />
+	<p style="color: #666;">Escape time: <?php echo (microtime(TRUE) - START_TIME); ?></p>
+</div>
+<?php } ?>

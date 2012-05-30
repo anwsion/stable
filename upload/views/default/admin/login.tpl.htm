@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="<?php echo X_UA_COMPATIBLE; ?>" />
+<title><?php echo $this->page_title;?></title>
+<style type="text/css" media="all">
+	@import url("resources/css/default/admin_login.css");
+</style>
+<script type="text/javascript" src="../static/js/jquery.js"></script>
+<script type="text/javascript" src="resources/js/simpla.jquery.configuration.js"></script>
+<script type="text/javascript" src="resources/js/facebox.js"></script>
+<script type="text/javascript" src="resources/js/jquery.wysiwyg.js"></script>
+<script type="text/javascript" src="../static/js/jquery.form.js"></script>
+<script type="text/javascript" src="../static/js/functions.js"></script>
+<script type="text/javascript">
+	var G_BASE_URL = '<?php echo get_setting('base_url'); ?>';
+</script>
+</head>
+<body>
+<div class="default_setup">
+  <p class="default_head"><span class="default_logo"></span></p>
+  <div class="default_contents">
+    <div class="default_error" id="notification"><h3 id="not_cont">请输入 E-mail / 账号、密码</h3></div>
+    <form id="login_form" onsubmit="return false" action="?c=login&act=login_process_ajax" method="post">
+      <input type="hidden" value="3" name="step">
+      <ul class="default_ul">
+        <li>
+          <label class="label">E-mail：</label>
+		  <?php if($this->user_info){ ?>
+        <span class="txt_color"><?php echo $this->user_info['email']; ?></span>
+        <input class="default_textt" value="<?php echo $this->user_info['email']; ?>" type="hidden" name="username" id="username"/>
+        <?php }else{ ?>
+        <input class="default_text" type="text" name="username" id="username" />
+        <?php } ?>
+          </li>
+        <li>
+          <label class="label">密码：</label>
+		    <input class="default_text" type="password" name="password" value="" id="password" onkeydown="if(event.keyCode == 13) { ajax_post($('#login_form'), _login_post_processer); };"/>
+        </li>
+        <li>
+          <label class="label">验证码：</label>
+		    <input class="default_text" style="width:60px;" type="text" name="seccode_verify" value="" id="seccode_verify" onkeydown="if (event.keyCode == 13) { ajax_post($('#login_form'), _login_post_processer); };"/> &nbsp; <img src="<?php echo get_setting('base_url'); ?>/account/?c=captcha" onclick="this.src='<?php echo get_setting('base_url'); ?>/account/?c=captcha&rnd=' + Math.random();" id="seccode" style="vertical-align:middle" /> <a href="javascript:void(0);" onclick="$('#seccode').click();">换一张</a>
+        </li>
+        <li  class="default_setup_n"><a  class="default_install" href="javascript:;" onclick="ajax_post($('#login_form'), _login_post_processer);return false;">登 录</a></li>
+      </ul>
+    </form>
+  </div>
+</div>
+
+<script>
+
+function _login_post_processer(result)
+{
+	if(result.errno == "-1")
+	{
+		$("#notification").removeClass("information").addClass("error");
+		$("#not_cont").html(result.err);
+	}
+	else if(result.errno=="1")
+	{
+		if(result.rsm.url != undefined)
+		{
+			window.location.href = result.rsm.url;
+		}
+		else
+		{
+			window.location.href = '?c=main';
+		}
+	}
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+
+<!--header_e-->
+<div class="bd pbd">
+ 
+  <!--left_nav_s-->
+
+  <div class="contant_left readns_discus ps-wd">
+  <?php TPL::output('account/setting_menu.tpl.htm'); ?>
+	<div id="td-6">
+   
+   <div class="wb-div">
+	<?php if (!($this->sina_show_row && $this->qq_show_row)) { ?> 
+		<h2>未绑定微博帐号：</h2>
+		<?php if(!$this->sina_weibo_bind AND get_setting('sina_weibo_enabled') == 'Y') { ?><p class="sc-wb"><a href="<?php echo get_setting('base_url');?>/account/?c=sina&act=binding" title="新浪微博"><img src="<?php echo G_STATIC_URL; ?>/css/img/icoSina.gif"/>绑定新浪微博帐号</a></p><?php } ?>
+		<?php if (!$this->qq_weibo_bind AND get_setting('qq_t_enabled') == 'Y') { ?><p class="sc-wb"><a href="<?php echo get_setting('base_url');?>/account/?c=qq&act=binding"  title="腾讯微博"><img src="<?php echo G_STATIC_URL; ?>/css/img/share_tx_wb.gif"/>绑定腾讯微博帐号</a></p><?php } ?>
+		<p class="p">绑定微博之后，可以方便把精彩问答分享到该微博，并可以邀请你的微博好友来回答该问题或者加入 <?php $this->eprint(get_setting('site_name')); ?></p>
+	<?php } ?>
+
+	<?php if ($this->sina_show_row || $this->qq_show_row) { ?> 
+		<h2>已经绑定微博帐号：</h2>
+	<?php if ($this->sina_show_row AND get_setting('sina_weibo_enabled') == 'Y') { ?>
+	<?php foreach($this->sina_show_row as $key=>$val) { ?>
+      <?php if ($val["profile_image_url"]){ ?>
+       <a href="#"><img class="pri-game1" src="<?php echo $val["profile_image_url"]; ?>"></a>
+	  <?php } ?>
+		<p class="sc-wb"><a href="<?php echo get_setting('base_url');?>/account/?c=sina&act=del_bind&sina_id=<?php echo $val["id"]; ?>" class="ex">取消绑定</a><img src="<?php echo G_STATIC_URL; ?>/css/img/icoSina.gif"/>新浪微博：<a href="javascript:;" class="a"><?php echo $val["name"]; ?></a></p>
+	<?php } ?>
+	<?php } ?>
+
+	<?php if ($this->qq_show_row AND get_setting('qq_t_enabled') == 'Y') { ?>
+	<?php foreach($this->qq_show_row as $key=>$val) { ?> 
+		<p class="sc-wb"><a href="<?php echo get_setting('base_url');?>/account/?c=qq&act=del_bind&name=<?php $val["nick"]; ?>"  class="ex">取消绑定</a><img src="<?php echo G_STATIC_URL; ?>/css/img/share_tx_wb.gif"/>腾讯微博：<a href="javascript:;"  class="a"><?php echo $val["nick"]; ?></a></p>
+	<?php } ?>
+	<?php } ?>
+
+  <?php } ?>
+
+	</div>
+	</div>
+    
+	</div>
+
+	<!--微博绑定_e-->
+    </div>
+  <!--left_nav_e-->
+</div>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

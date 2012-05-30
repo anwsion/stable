@@ -1,0 +1,31 @@
+<?php foreach($this->nt_list AS $key => $val) { ?>
+	<li id="notification_<?php echo $val['notification_id']; ?>">
+	<?php if(!$this->type){ ?><span title="删除" class="del_Msg" onclick="mark_notifications(<?php echo $val['notification_id']; ?>, true)">x</span><?php } ?>
+<?php if($val['handled']){ ?>
+	<?php if($val['model_type'] == notify_class::CATEGORY_QUESTION){?>
+		<?php echo $val['data']['num']; ?> 项关于问题 <a href="<?php echo $val['data']['key_url']; ?>" target=_blank><?php echo $val['data']['title']; ?></a>
+	<?php } ?>
+<?php }else{ ?>
+	<?php if($val['action_type'] == notify_class::TYPE_PEOPLE_FOCUS){ ?>
+		<a href="<?php echo $val['data']['key_url']; ?>" title="<?php echo $val['data']['p_username']; ?>" target=_blank><?php echo $val['data']['p_username']; ?></a> 关注了你
+	<?php }else if($val['action_type'] == notify_class::TYPE_COMMENT_QUESTION){ ?>
+		<?php if($val['data']['p_username']){ ?>
+			<a href="<?php echo $val['data']['p_url']; ?>" target=_blank><?php echo $val['data']['p_username']; ?></a> 回答了问题 <a href="<?php echo $val['data']['key_url']; ?>" target=_blank><?php echo $val['data']['title']; ?></a>
+		<?php }else{ ?>
+			您关注的问题 <a href="<?php echo $val['data']['key_url']; ?>" target=_blank><?php echo $val['data']['title']; ?></a> 有了新的回复
+		<?php } ?>
+	<?php }else if($val['action_type'] == notify_class::TYPE_COMMENT_BE_REPLY){ ?>
+		<?php if($val['data']['p_username']){ ?>
+			<a href="<?php echo $val['data']['p_url']; ?>" target=_blank><?php echo $val['data']['p_username']; ?></a> 评论了你在问题 <a href="<?php echo $val['data']['key_url']; ?>" target=_blank><?php echo $val['data']['title']; ?></a> 中的回复
+		<?php }else{ ?>
+			您在问题 <a href="<?php echo $val['data']['key_url']; ?>" target=_blank><?php echo $val['data']['title']; ?></a> 中的回复被评论
+		<?php } ?>
+	<?php }else if($val['action_type'] == notify_class::TYPE_INVITE_QUESTION){ ?>
+		<a href="<?php echo $val['data']['p_url']; ?>" target=_blank><?php echo $val['data']['p_username']; ?></a> 邀请您参与问题 <a href="<?php echo $val['data']['key_url']; ?>" target=_blank><?php echo $val['data']['title']; ?></a>
+	<?php }else if($val['action_type'] == notify_class::TYPE_CONTEXT){ ?>
+		<?php echo $val['data']['content']; ?>
+	<?php } ?>
+<?php } ?>
+	<span>（<?php echo date('Y-m-d H:i:s', $val['add_time']); ?>）</span>
+	</li>
+<?php } ?>

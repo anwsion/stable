@@ -1,0 +1,12 @@
+<?php TPL::output('install/header.tpl.htm'); ?>
+
+<p class="default_head"><span class="default_logo"></span> </p>
+<div class="default_contents">
+  <h2 class="dedault_hx" style="color: #00CC00"> • 安装成功</h2>
+  <p class="default_txt dedault_line">欢迎使用 Anwsion, 世界上最强大的问答交流平台</p>
+  <h2 class="dedault_hx"> • <a href="/" target="_blank">访问网站首页</a></h2>
+  <p class="default_txt" style="color: red;">为了增强安全性, 请将 install 目录删除</p>
+  <p class="default_txt"><a href="<?php echo get_setting('base_url');?>/account/?c=login" target="_blank"><?php echo get_setting('base_url');?>/account/?c=login</a> 使用上一步填写的管理员信息登录</p>
+</div>
+
+<?php TPL::output('install/footer.tpl.htm'); ?>

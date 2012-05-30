@@ -1,0 +1,29 @@
+﻿<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+<div class="bd">
+  <div class="tommy_rightDiv index enTryAside ">
+	<?php TPL::output('block/sidebar_menu.tpl.htm'); ?>
+   
+	<!-- 边栏可能感兴趣的人或话题 -->  
+	<?php TPL::output('block/sidebar_recommend_users_topics.tpl.htm'); ?>	   
+   </div>
+    
+  <!--left_nav_s-->
+  <div class="contant_left index readns_discus">
+    
+	<h2 id="uLister" class="c_title u_lister" ><a href="javascript:void(0);"  class="xsf" onclick="Quick_Tips.info(this);">发私信</a>私信 <!--<big class="big">（已有4个联系人）</big>--></h2>
+   
+   <?php foreach($this->list AS $key => $val) { ?>
+	 <ul class="gnx<?php if($val['unread'] > 0){ ?> msg_unread<?php } ?>">
+		<li class="ig_li"><a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['uid']; ?>" ><img class="i" src="<?php echo get_avatar_url($val['uid'],'mid',$val['avatar_file']); ?>" /></a></li>
+		<li class="txt"><span class="s"><?php echo $val['per_tile']; ?></span> <?php echo nl2br($val['title']); ?></li>
+		<li class="tms xrl"><span class="time"><?php echo date('Y-m-d H:i', $val['last_time']); ?></span>   <a href="<?php echo get_setting('base_url');?>/inbox/?act=read_message&dialog_id=<?php echo $val['dialog_id']; ?>#contents"><?php echo $val['btn_title']; ?></a> <a href="<?php echo get_setting('base_url');?>/inbox/?act=read_message&dialog_id=<?php echo $val['dialog_id']; ?>#recipient_form">回复</a> <a href="javascript:void(0);" onclick="if (confirm('确认删除对话?')) { window.location = G_BASE_URL+'/inbox/?act=delete_dialog&dialog_id=<?php echo $val['dialog_id']; ?>' }">删除</a></li>
+	 </ul>
+   <?php } ?>
+      
+	 <?php echo $this->pagination; ?>
+  </div>
+  
+  <!--left_nav_e-->
+</div>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

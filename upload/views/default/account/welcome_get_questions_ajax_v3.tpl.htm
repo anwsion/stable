@@ -1,0 +1,8 @@
+<ul class="dis_ht">
+	<?php foreach ($this->questions_list AS $key => $val) { ?>
+	<li>
+		<a href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $val['question_id']; ?>" title="<?php echo $val['question_content']; ?>" target="_blank" class="bold"><?php echo $val['question_content']; ?></a><a href="javascript:void(0);" class="addtips<?php if ($val['focus']) { ?> cur<?php } ?>" rel="<?php if ($val['focus']) { ?>取消<?php } ?>关注" onclick="focus_question($(this), $(this).find('em'), <?php echo $val['question_id']; ?>);"><em><?php if ($val['focus']) { ?>取消<?php } ?>关注</em></a>
+		<p><?php echo $val['focus_count']; ?> 人关注该问题&nbsp;&nbsp;回复：<?php echo $val['answer_count']; ?></p>
+	</li>
+	<?php } ?>
+</ul>

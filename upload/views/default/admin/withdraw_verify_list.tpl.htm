@@ -1,0 +1,140 @@
+<?php TPL::output('admin/admin_header.tpl.htm'); ?>
+
+<body >
+
+<div id="body-wrapper">
+	<div id="main-content">
+		<div class="clear"></div>
+		<div class="content-box">
+			<div class="content-box-header">
+				<h3>提现审核</h3>
+				<ul class="content-box-tabs">
+				</ul>
+				<div class="clear"></div>
+			</div>
+			<div class="content-box-content">
+				<div class="tab-content default-tab" id="tab1">
+					<form id="_search_form" action="" method="get">
+					<input type="hidden" name="c" value="withdraw" />
+					<input type="hidden" name="act" value="verify_list" />
+						<p>
+							<label>
+							根据提现单号搜索：&nbsp;&nbsp;
+							<input class="text-input small-input" type="text" id="keyword" name="keyword" value="<?php echo $this->keyword; ?>"/>
+							&nbsp;&nbsp;
+							<input class="button" type="submit" value="搜  索" />
+							<?php if($this->keyword){ ?>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<input class="button" type="submit" onClick="$('#keyword').val('');$('#_search_form').submit();" value="显示全部" />
+							<?php } ?>
+							</label>
+						</p>
+					</form>
+					
+					<?php if(!$this->list){ ?>
+					<div class="notification attention png_bg"> <a href="javascript:;" class="close"><img src="resources/images/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
+						<div> 没有内容 </div>
+					</div>
+					<?php }else{ ?>
+					<table>
+						<thead>
+							<tr>
+								<!--th><input class="check-all" type="checkbox" /></th-->
+								<th>单号</th>
+								<th>用户</th>
+								<th>金额</th>
+								<th>类型</th>
+								<th>帐号</th>
+								<th>姓名</th>
+								<th>说明</th>
+								<th>提交时间</th>
+								<th>用户IP</th>
+								<th>状态</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+        				<?php foreach ($this->list AS $key => $val) { ?>
+							<tr>
+								<td><?php echo $val['withdraw_log_id']; ?></td>
+								<td><a href="?c=user&act=edit&uid=<?php echo $val['uid']; ?>" title="title"><?php echo $val['user']['user_name']; ?></a></td>
+								<td><?php echo $val['credit']; ?></td>
+								<td><?php echo ($val['withdraw_type'] == 1) ? "银行" : "支付宝"; ?></td>
+								<td>
+								<?php if($val['withdraw_type'] == 1){ ?>
+									<?php echo $val['withdraw_bank_id']; ?>(<?php echo $val['withdraw_bank']; ?>)
+								<?php }else{ ?>
+									<?php echo $val['withdraw_alipay']; ?>
+								<?php } ?>
+								</td>
+								<td><?php echo $val['withdraw_user_name']; ?></td>
+								<td><?php echo $val['note']; ?></td>
+								<td><?php echo date("Y-m-d H:i:s", $val['add_time']); ?></td>
+								<td><?php echo long2ip($val['client_ip']); ?></td>
+								<td>
+								<?php if($val['status'] == 1){ ?>
+									审核通过-正在处理
+								<?php }else if($val['status'] == -1){ ?>
+									审核失败-退回金额
+								<?php }else if($val['status'] == 2){ ?>
+									提现成功-处理完成
+								<?php }else if($val['status'] == -2){ ?>
+									提现失败-退回金额
+								<?php } ?>
+								</td>
+								<td>
+									<?php if($val['status'] == 0){ ?>
+									<a href="javascript:;" onClick="setWithdraw(<?php echo $val['withdraw_log_id'];?>, 1)" title="通过审核"><img src="resources/images/icons/tick_circle.png"/></a>
+									&nbsp;
+									<a href="javascript:;" onClick="setWithdraw(<?php echo $val['withdraw_log_id'];?>, -1)" title="申请不通过，退回金额。"><img src="resources/images/icons/cross_circle.png"/></a>
+									<?php } ?>
+								</td>
+							</tr>
+       					<?php } ?>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="10">
+									<div class="pagination">
+										<?php echo $this->pagination; ?>
+									</div>
+									<div class="clear"></div>
+									</td>
+							</tr>
+						</tfoot>
+					</table>
+					<?php } ?>
+				</div>
+		</div>
+		
+		<div class="clear"></div>
+		<div id="notf_tip" style="display:none;" class="notification png_bg"> <a href="javascript:;" class="close"><img src="resources/images/icons/cross_grey_small.png" alt="关闭" /></a>
+			<div id="notf_cont"></div>
+		</div>
+		
+	</div>
+</div>
+
+<script>
+
+function setWithdraw(withdraw_id, status)
+{
+
+	$.getJSON('?c=withdraw&act=verify_process_ajax&withdraw_id=' + withdraw_id + '&status=' + status, function (result){
+	
+		if(result)
+		{
+			alert(result.err);
+		}
+		
+		if(result.errno == 1)
+		{
+			window.location.reload();
+		}
+		
+	});
+}
+
+</script>
+
+<?php TPL::output('admin/admin_footer.tpl.htm'); ?>

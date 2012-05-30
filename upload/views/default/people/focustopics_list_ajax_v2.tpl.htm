@@ -1,0 +1,15 @@
+<ul class="Lister_attentionPersonal">
+
+<?php 
+
+foreach($this->topic_list as $key => $val){ ?>
+			<li>
+				<a href="javascript:;" class="a"><img src="<?php echo $val[topic_pic_mid];?>" rel="<?php echo $val['topic_id']; ?>" onmouseover="eventstalk(this);" /></a>
+				<span class="span" title="取消关注" onclick="focus_topic($(this), $(this), <?php echo $val['topic_id']; ?>);setAttri(this); return false;" href="javascript:void(0);">取消关注</span>
+				<big><a href="<?php echo get_setting('base_url');?>/topic/?topic_title=<?php echo $val['topic_title']; ?>" rel="<?php echo $val['topic_id']; ?>" onmouseover="eventstalk(this);" ><?php echo $val['topic_title']; ?></a></big>
+				<p><?php echo cutmbstr_zhcn($val['topic_description'],188);?>			</p>
+			</li>
+<?php } ?>			
+</ul>
+
+

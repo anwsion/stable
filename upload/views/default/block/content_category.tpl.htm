@@ -1,0 +1,41 @@
+<div class="contant_left dis_ListEntry default_itemize">
+  <h2 class="c_title"><span class="default_class_module">分类</span><span class="dx_rols"><a href="./?">(全部)</a></span></h2>
+  
+  <?php if (get_setting('category_display_mode') == 'icon') { ?>
+  <ul class="default_class_items">
+    <?php foreach($this->content_category as $key => $val) { ?>
+    <li<?php if ($_GET['category'] AND ($val['id'] == $this->category_info['id'] OR $this->category_info['parent_id'] == $val['id'])) { ?> class="cur"<?php } ?>> <a href="./?category=<?php echo $val['id']; ?>" class="default_class_imgs"><img src="<?php echo $val['icon']; ?>" title="<?php echo $val['title']; ?>" alt=""/></a> <a href="./?category=<?php echo $val['id']; ?>" class="default_class_txt"><?php echo $val['title']; ?></a> <span class="class_disSor"><?php echo $val['description']; ?></span>
+      <?php if ($val['child']) { ?>
+      <p class="itme_class_v2">
+      <?php foreach ($val['child'] AS $_key => $_val) { ?>
+      	<a href="./?category=<?php echo $_val['id']; ?>"<?php if ($_val['id'] == $this->category_info['id']) { ?> style="font-weight:bold"<?php } ?>><?php echo $_val['title']; ?></a>
+      <?php } ?>
+      </p>
+      <span class="itme_class"><!--箭头-->&nbsp;</span>
+      <?php } ?>
+    </li>
+    <?php } ?>
+    <div style="clear:both;"></div>
+  </ul>
+  <?php } else { ?>
+  <ul class="default_class_items small_class_icon">
+  <?php foreach($this->content_category as $key => $val) { ?>
+    <li<?php if ($_GET['category'] AND ($val['id'] == $this->category_info['id'] OR $this->category_info['parent_id'] == $val['id'])) { ?> class="cur"<?php } ?>> 
+		<a class="default_class_txt" href="./?category=<?php echo $val['id']; ?>"><?php echo $val['title']; ?></a> 
+		
+		<?php if ($val['child']) { ?>
+		<?php foreach ($val['child'] AS $_key => $_val) { ?>
+        <p class="itme_class_v2"> 
+			<?php foreach ($val['child'] AS $_key => $_val) { ?>
+				<a href="./?category=<?php echo $_val['id']; ?>"<?php if ($_val['id'] == $this->category_info['id']) { ?> style="font-weight:bold"<?php } ?>><?php echo $_val['title']; ?></a>
+			<?php } ?>
+		</p>
+        <span class="itme_class"><!--箭头-->&nbsp;</span>
+        <?php } ?>
+        <?php } ?>
+	</li>
+  <?php } ?>
+    <div style="clear:both;"></div>
+  </ul>
+  <?php } ?>
+</div>

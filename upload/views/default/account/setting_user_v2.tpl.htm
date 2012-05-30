@@ -1,0 +1,87 @@
+<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+
+<!--header_e-->
+<div class="bd pbd">
+ 
+  <!--left_nav_s-->
+
+  <div class="contant_left readns_discus ps-wd">
+  <?php TPL::output('account/setting_menu.tpl.htm'); ?>
+	<div id="td-0" style="display:block;">
+	<ul class="ps-xhr">
+		<li class="ps-user-face-img"><img id="avatar_src" src="<?php echo get_avatar_url($this->user_id,'max',$this->user_info['avatar_file']); ?>"/></li>
+		<li><b>头像设置</b>
+			<p class="SH-font">支持 jpg、gif、png 等格式的图片<br/>建议图片尺寸大于 100 × 100 像素</p>
+			<span><a href="javascript:;" class="Img-load" id="avatar_uploader" name="button_upload">上传</a></span>			
+			<span id="avatar_uploading_status" style="display:none"><img src="<?php echo G_STATIC_URL; ?>/css/img/load.gif" align="absmiddle"> 文件上传中...</span>
+			
+		</li>
+	</ul>
+	
+
+    <form id="setting_form" method="post" action="<?php echo get_setting('base_url');?>/account/?c=setting&act=user_process_ajax">
+	<ul class="ps-info" >
+		<li><label>帐号：</label><span class="sFONT">
+<?php if (!H::isemail($this->user_info['email'])) { ?><input type="text" class="field"  name="email" id="email" value="" /><span id="email_tips" style="margin-left:10px;"></span> <?php } else { echo $this->user_info['email']; if ($this->user_info['valid_email'] == 0) { ?>&nbsp;&nbsp;(<a href='javascript:void(0);' onclick="ajax_request(G_BASE_URL+'/account/?c=valid&act=valid_email_step1_process_ajax');">您的邮件地址还未验证,请点击进行验证</a>)<?php } else { ?> &nbsp;&nbsp;(已验证)<?php } } ?>
+
+</li>
+		<li><label>真实姓名：</label><input type="text" class="add-t2"  name="user_name" id="user_name"  style="width:100px;" value="<?php echo $this->user_info[user_name]; ?>"/><span style="padding-left:10px;">请输入2-7个汉字，或4-14个英文</span></li>
+		<li><label>性别：</label><input type="radio" name="sex" id="sex" value="1" <?php if ($this->user_info['sex']==1 || empty($this->user_info['sex'])){ echo "checked";} ?>/>男
+		<input type="radio" name="sex" id="sex" value="2" <?php if ($this->user_info['sex']==2){ echo "checked";} ?>/>女
+		<input type="radio" name="sex" id="sex" value="3" <?php if ($this->user_info['sex']==3){ echo "checked";} ?>/>保密</li>
+		<li><label>生日：</label>
+			<select name="birthday_y">
+			<?php echo H::display_options($this->birthday_y,$this->birthday_y_s); ?>
+			</select>  年
+			<select name="birthday_m">
+			<?php echo H::display_options($this->birthday_m,$this->birthday_m_s); ?>
+			</select> 月
+			<select name="birthday_d">
+			<?php echo H::display_options($this->birthday_d,$this->birthday_d_s); ?>
+			</select> 日
+		</li>
+
+		<li><label>现居：</label>
+			<select name="province" id="level0" class="select_area"></select>
+			<select name="city" id="level1"  class="select_area"></select>
+			<select name="district" id="level2"  class="select_area"></select>
+		</li>
+		<li><label>职业：</label>
+        <select name="job_id"  class="select_area" >
+		<option value="">请选择</option>
+        <?php echo H::display_options($this->jobs_list, $this->user_info['job_id']); ?>
+		</select>
+		</li>
+		<li><label>个性网址：</label><?php echo get_setting('base_url'); ?>/people/?u=<input name="domain_url" type="text"class="add-t2" id="domain_url"  style="width:70px;"  value="<?php echo $this->user_info['url']; ?>"  size="20"/> (可输入4~20位的英文或数字)</li>
+		<li><label>一句话介绍：</label><input name="signature" type="text" id="signature"  class="add-t2" size="40"  value="<?php echo $this->user_info['signature']; ?>"></li>
+		<li><a href="javascript:;" onclick="$('#signature').focus(); ajax_post($('#setting_form'), _tips_form_processer); return false;" class="seve_s">保存</a></li>
+	</ul>
+    </form>
+	</div>
+	
+	</div>
+
+	<!--微博绑定_e-->
+    </div>
+  <!--left_nav_e-->
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $(".select_area").LocationSelect({
+        labels: ["请选择省份或直辖市", "请选择城市", "请选择区"],
+        
+        elements: document.getElementsByTagName("select"),
+        
+        detector: function () {
+            this.selectID(["<?php echo $this->user_info['province']; ?>", "<?php echo $this->user_info['city']; ?>", "<?php echo $this->user_info['district']; ?>"]);
+        },	// 默认显示的城市
+        
+		dataUrl: "<?php echo G_STATIC_URL; ?>/js/areas_1.0.json"
+    });
+    
+    init_avatar_uploader($('#avatar_uploader'), $('#avatar_uploading_status'), $("#avatar_src"));
+});
+</script>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

@@ -1,0 +1,52 @@
+
+/*public buttons css styles*/
+
+
+.default_blue_but,
+.default_gray_but,
+.readns_discus .submitsrue .default_submit,
+.tagDiv .tcon .u li.subm .sbumi,
+.class_share .set_msg,
+.w_tagPupD .w_submte .w_sub,
+.w_tagPupD .file_upLoadPic .w_sub,
+.suicEe_u li .submitCansel,
+.say_u .subMitSure .default_submit
+{background:url(img/default.png) 0 0 no-repeat;width:75px;height:27px;display:inline-block;text-align:center;line-height:27px;box-shadow:0 1px 0 #fff;text-decoration:none;}
+
+/**blue buttons style**/
+.default_blue_but,
+.readns_discus .submitsrue .default_submit,
+.tagDiv .tcon .u li.subm .sbumi,
+.class_share .set_msg,
+.w_tagPupD .w_submte .w_sub,
+.w_tagPupD .file_upLoadPic .w_sub
+{color:#fff;background-position:0 -86px;}
+
+/**gray buttons style**/
+.default_gray_but,
+.suicEe_u li .submitCansel,
+.say_u .subMitSure .default_submit
+
+{color:#6b6b6b;background-position:0 -205px;}
+
+.default_gray_but:hover,
+.suicEe_u li .submitCansel:hover,
+.say_u .subMitSure .default_submit:hover
+{color:#6b6b6b;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

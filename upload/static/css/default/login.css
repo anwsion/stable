@@ -1,0 +1,232 @@
+@charset "utf-8";
+/*public default css states*/
+@import url("base.css");
+
+/*public footer css styles*/
+@import url("footer.css");
+
+/*public tips css styles*/
+@import url("tipswindown.css");
+
+/*public buttons css styles*/
+@import url("button.css");
+
+/*public set opacity css style */
+@import url("opacity.css");
+
+
+.idunion_login{ width:950px; margin:0 auto; }
+.idunionbackGround .HeaderiduPd{ position:relative;height:65px;width:950px; z-index:1;margin:20px auto 0 auto;}
+.HeaderiduPd .idunion_logo{ background:url(../img/idunion_03.png) 0 0 no-repeat;position:absolute; top:0; right:0; z-index:3;}
+.HeaderiduPd .idunion_logo,.HeaderiduPd .idunion_logo a{ height:64px; width:355px; overflow:hidden;}
+.HeaderiduPd .idunion_logo a{ display:block; line-height:30em;}
+.idunion_trebuchet{ width:950px; position:relative; z-index:1;}
+
+.idunion_trebuchet .user_login{ position:absolute; top:-1px; right:0px; z-index:10px; background:url(../img/idunion_05.png) 0 0 no-repeat; height:376px; width:335px;}
+.idunion_trebuchet .user_login .u-title{height:60px; background:url(../img/idunion_06.png) 30px center no-repeat; line-height:60px; font-size:14px; text-indent:60px; color:#fff; font-family:"微软雅黑";}
+.idunion_trebuchet .user_login .loginForm{ width:300px; margin:0 auto; background:url(../img/idunion_38.png) 0 bottom no-repeat; padding-bottom:10px; height:220px; position:relative; z-index:10;}
+.idunion_trebuchet .user_login .loginForm .ulxForm{ padding-top:25px;}
+.idunion_trebuchet .user_login .loginForm .ulxForm li{ padding-left:30px; width:250px; position:relative; z-index:1; overflow:hidden; color:#5B5B5B;}
+.idunion_trebuchet .user_login .loginForm .ulxForm li input{ vertical-align:middle; color:#777; font-size:12px; font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;}
+.idunion_trebuchet .user_login .loginForm .ulxForm li input[type="checkbox"]{ margin:0 8px 0 0;}
+.idunion_trebuchet .user_login .loginForm .ulxForm li input[type="password"]{ font-weight:bolder; font-family:"微软雅黑"; font-size:22px;}
+.idunion_trebuchet .user_login .loginForm .ulxForm li .usertxt{ border:1px solid #a3a3a3; padding:3px 4px; width:230px; height:25px; line-height:25px; border-radius:4px;box-shadow:0 1px 0px #fff;margin:5px 0;}
+.idunion_trebuchet .user_login .loginForm .ulxForm li .cur{ box-shadow:0 0 3px #99a2a9;}
+
+.ulxForm li .clear{background:url(../img/idunion_52.png) -233px 0 no-repeat;height:17px;width:17px;position:absolute;overflow:hidden;top:13px; right:25px;z-index:10;display:none;}
+.ulxForm li:hover .clear{display:block;}
+.ulxForm li .clear:hover{background:url(../img/idunion_52.png) -209px 0 no-repeat;}
+
+.idunion_trebuchet .user_login .loginForm .ulxForm li .subMit,.subMits{ background:url(../img/idunion_52.png) -2px -208px no-repeat; width:73px; height:27px;float:right;cursor:pointer; margin-right:10px; position:relative; margin-top:-5px; display:block;color:#fff;text-align:center;line-height:25px;}
+.idunion_trebuchet .user_login .loginForm .ulxForm li .subMit:hover,.subMits:hover{ background:url(../img/idunion_52.png) -2px -176px no-repeat;color:#fff;}
+.idunion_trebuchet .user_login .loginForm .ulxForm li .subMit:active,.subMits:active{ background:url(../img/idunion_52.png) -2px -240px no-repeat;}
+.idunion_trebuchet .user_login .loginForm .ulxForm li .iCod{ width:90px;}
+.idunion_trebuchet .user_login .loginForm .ulxForm li .s{ position:absolute; font-size:12px; top:2px; left:33px; z-index:10; display:block; height:28px; line-height:28px; width:230px;  color:#999; background:#fff; border:none; background:transparent;}
+.idunion_trebuchet .user_login .loginForm .ulxForm li .s-index{ z-index:-9999;} 
+.idunion_trebuchet .user_login .loginForm .ulxForm li .lkpassword{ margin:0 10px; color:#5B5B5B;}
+.idunion_trebuchet .user_login .loginForm .ulxForm li .lkpassword:hover,.idunion_trebuchet .user_login .loginForm .artLog a:hover{ color:#333; text-decoration:underline;}
+.idunion_trebuchet .user_login .loginForm .artLog { height:25px; line-height:25px; display:block;overflow:hidden; padding-left:33px; position:absolute; bottom:10px; left:0; width:258px;}
+.idunion_trebuchet .user_login .loginForm .artLog a{ display:block; float:right; padding:0 10px 0 20px; margin-right:10px;}
+.idunion_trebuchet .user_login .loginForm .artLog a.tx{ background:url(../img/share_tx_wb.gif) 0 center no-repeat;}
+.idunion_trebuchet .user_login .loginForm .artLog a.xl{ background:url(../img/icoSina.gif) 0 center no-repeat;}
+.idunion_trebuchet .user_login .userReg{ margin-top:17px; text-align:center;}
+.idunion_trebuchet .user_login .userReg .userRegbut{ background:url(../img/idunion_52.png) -2px -273px no-repeat; height:33px; width:239px; cursor:pointer; display:block; margin:0 auto;line-height:30px;color:#fff;text-align:center;}
+.idunion_trebuchet .user_login .userReg .userRegbut:hover{ background:url(../img/idunion_52.png) -2px -310px no-repeat;}
+.idunion_trebuchet .user_login .userReg .userRegbut:active{ background:url(../img/idunion_52.png) -2px -349px no-repeat;}
+
+.idunion_trebuchet .Competition_content{ border-top:1px solid #c7c7c7;border-left:1px solid #c7c7c7; padding-top:1px; padding-left:1px; overflow:hidden; width:614px; background:#fff;}
+.idunion_trebuchet .Competition_content .elem_ul{ width:614px; display:block;color:#666; overflow:hidden; }
+.idunion_trebuchet .Competition_content .elem_ul li{ background:url(../img/idunion_07.png) 0 0 no-repeat; width:500px; height:128px; padding-left:114px; position:relative; z-index:1; overflow:hidden; float:left;}
+.idunion_trebuchet .Competition_content .elem_ul li:hover{ background:url(../img/idunion_07-hover.png) 0 0 no-repeat;text-shadow:0px 1px 0px #fff;font-size:14px;}
+.idunion_trebuchet .Competition_content .elem_ul li.last{ height:117px;}
+.idunion_trebuchet .Competition_content .elem_ul .hx{ font-size:22px; font-family:"微软雅黑"; margin-top:30px;font-weight:normal;}
+.idunion_trebuchet .Competition_content .elem_ul p{ font-size:14px; padding-top:5px; line-height:22px;}
+.idunion_trebuchet .Competition_content .elem_ul em{ display:block; position:absolute; top:20px; left:30px; height:68px; width:68px; text-indent:-999px; overflow:hidden; z-index:99;}
+.idunion_trebuchet .Competition_content .elem_ul em.el0{ background:url(../img/idunion_13.png)  center center no-repeat;}
+.idunion_trebuchet .Competition_content .elem_ul em.el1{ background:url(../img/idunion_10.png)  center center no-repeat;}
+.idunion_trebuchet .Competition_content .elem_ul em.el2{ background:url(../img/idunion_17.png)  center center no-repeat;}
+
+.userLister{ height:95px; width:948px; margin:0 auto; position:relative; padding-top:44px;}
+.userLister .sl,.userLister .s2,.userLister .s3{ display:block; position:absolute;}
+.userLister .sl,.userLister .s2{ width:10px; height:137px; top:0;}
+.userLister .sl{ background:url(../img/idunion_20.png) 0 0 no-repeat; left:-10px;}
+.userLister .s2{ background:url(../img/idunion_25.png) 0 0 no-repeat; right:-1px;}
+.userLister .s3{ background:url(../img/idunion_24.png) 0 0 no-repeat; width:325px; height:9px; line-height:9px; right:10px; top:-0px; z-index:10;}
+.userLister .dateListe{ width:880px; height:50px; overflow:hidden; margin:0px auto;}
+.userLister .dateListe .u{ width:100%;}
+.userLister .dateListe .u p img{vertical-align:middle;margin-right:10px;}
+.userLister .dateListe .u p{height:50px; line-height:50px;text-align:center;color:#fff;}
+.userLister .dateListe .u li{ float:left; margin-right:8px;}
+.userLister .dateListe .u li img{ width:50px; height:50px; overflow:hidden; }
+.userLister .dateListe .u li img:hover{opacity:0.5;}
+
+/*moster Reg*/
+body.idunionReg{background:url(../img/reg_02.png) 0 -74px repeat-x;}
+.regSection a{color:#0692df;}
+.mosterRegHeader .idunion_logo{left:0;height:58px;}
+.regSection{width:960px;margin:0 auto; position:relative;z-index:1;}
+.regSection .regtitle{height:36px;width:360px;margin:15px auto 0;color:#333;}
+.regSection .regtitle .b{font-size:14px;font-weight:bold;height:36px;width:150px;line-height:36px;display:block;padding-left:20px;text-align:left;background:url(img/default.png) -475px -433px no-repeat;}
+.regSection .regtitle .fb{background:url(../img/reg_07.png) 0 0px no-repeat;}
+.regSection .regtitle .fb img{vertical-align:middle;}
+.regSection .regtitle .reg{float:right;margin-right:20px;line-height:36px;font-weight:normal;color:#666;}
+.regSection .regtitle .reg a:hover,body.idunionReg a:hover{text-decoration:underline;}
+.regSection .regmoster{margin-left:300px;padding-top:10px;width:640px;}
+.regSection .regmoster img,.regSection .regmoster input{vertical-align:middle;}
+.regSection .regmoster li{padding-bottom:18px;width:640px;}
+.regSection .regmoster li.pos{position:relative;}
+.regSection .regmoster li.pos .tps{position:absolute;top:0;left:340px;}
+.regSection .regmoster .err,.regSection .regmoster .explain,.regSection .regmoster .right{margin-left:10px;display:inline-block;}
+.regSection .regmoster .explain{background:#eef7fd;border:1px solid #cfdde6;border-radius:5px;padding:2px 10px;width:133px;vertical-align:middle;line-height:16px; color:#999;height:34px;}
+.regSection .regmoster .err{background:url(../img/a_l_25.png) -58px -80px no-repeat;color:#cb0000;text-indent:20px;height:20px;line-height:20px;font-style:normal;}
+.regSection .regmoster li.default_cl{color:#666;padding-top:20px;}
+.regSection .regmoster .right{background:url(../img/a_l_25.png) -58px -112px no-repeat;height:22px;width:50px;text-indent:-99em;}
+.regSection .regmoster .userTxt{width:320px;padding:10px;border:1px solid #cecece;box-shadow:0 0 1px #fff;border-radius:5px;font-size:16px;font-family:"微软雅黑";color:#666;height:20px;}
+.regSection .regmoster .txtare{height:120px;overflow:hidden;}
+.regSection .regmoster .cur{color:#ccc;border:1px solid #bfd6de;height:20px;}
+.regSection .regmoster .on{color:#000;}
+.regSection .regmoster .userTxt:focus{box-shadow:0 0 5px #bed5e4;border:1px solid #bed5e4;}
+.regSection .regmoster .yzm{width:150px;}
+.regSection .regmoster .elp{width:165px;display:inline-block;}
+.regSection .regmoster .elp .s{height:103px;height:44px;overflow:hidden;display:inline-block; vertical-align:middle;line-height:44px;}
+.regSection .regmoster .elp .s img{border-radius:5px;margin-right:8px;cursor:pointer;}
+
+#regLister{width:360px;height:74px;padding-top:0;z-index:10;padding-top:0px;text-align:left;margin-bottom:200px;}
+#regLister span.sl{background:url(../img/reg_03.png) 0 0 repeat-x;height:109px;width:13px;left:-13px;}
+#regLister span.s2{background:url(../img/reg_04.png) 0 0 repeat-x;right:-13px;height:109px;width:13px;}
+#regLister .regbut,#regLister .regbut:hover,#regLister .regbut:active{background:url(../img/reg_06.png) 0 0 no-repeat;}
+#regLister .regbut{width:345px; height:39px; display:block;font-size:14px;line-height:39px;text-align:center;color:#fff;text-shadow:0 1px 0 #008fc8;}
+#regLister .regbut:hover{background-position:0 -43px;text-decoration:none;}
+#regLister .regbut:active{background-position:0 -86px;}
+#userPassword,#re_userPassword{font-weight:bolder;font-size:22px;}
+.sc{height:300px;width:500px;margin:130px auto 0;text-align:center;font-weight:bold;font-size:14px;color:#333;line-height:25px;}
+.sc span{margin:0 3px;color:#0aae02;font-size:35px;font-family:"微软雅黑";padding-bottom:25px;display:block;}
+
+/**注册成功**/
+.success .regSection{background:#fff; position:static; height:auto; padding-bottom:30px;}
+#elhx{height:48px;background:url(../img/a_l_05.png) 0 center no-repeat;font-size:25px;color:#666;padding-left:50px;margin:51px 0 63px 305px;line-height:48px; font-family:"微软雅黑";}
+.success .regSection .regtitle .t{ background:url(../img/reg_05.png) -197px 0 no-repeat;}
+.success .regSection .bdx{width:855px;margin:0 auto;}
+.success .regSection .gzx{height:40px;text-indent:15px;line-height:40px;color:#666;background:#e6e6e6;font-weight:bold;font-size:14px;}
+.success .regSection .bdx .hn{font-size:14px;color:#333;border-bottom:1px dotted #ccc;height:30px;line-height:30px;margin-top:5px;padding-bottom:5px; margin-bottom:15px;}
+.success .regSection .bdx .hn em{font-style:normal;font-family:Verdana;font-weight:bold;font-size:22px;margin-right:5px;}
+.success .regSection .bdx .x{ border-bottom:1px dotted #ccc; padding-bottom:18px;}
+
+.dhz .contxt_List{ line-height:22px; width:280px; float:left; height:65px; margin-bottom:15px;}
+.dhz .contxt_List .u{width:65px; height:64px; overflow:hidden; background:url(../img/ask_q.png) -2px -334px no-repeat; padding-left:2px;  color:#fff;word-spacing:-2px;text-align:center; float:left; display:block;}
+.dhz .contxt_List .u p,.success .dhz .contxt_List .u p{font-weight:bold;}
+.dhz .contxt_List .u:hover{border-radius:5px;}
+.dhz .contxt_List .u p,.dhz .contxt_List .u p{ padding:5px 0; color:#333;}
+.dhz .contxt_List .txli{ margin-left:75px; height:64px;  width:170px;}
+.success .c_arigud{ height:23px; width:855px; clear:both; text-align:right;}
+.success .c_arigud a{ display:inline;}
+
+.success .c_arigud a.cix{ background:url(../img/idunion_52.png) -174px -212px no-repeat; width:76px; height:23px; display:inline-block; color:#fff; text-align:center; line-height:22px;}
+
+.success .dlt{ width:855px;}
+.success .dlt a{ display:inline-block; height:30px; line-height:30px;}
+.success .tak{ width:855px; height:145px;}
+.success .tak .utr{ float:left; width:210px; height:48px;}
+.success .tak .utr .pictrue{ float:left; width:45px;}
+.success .tak .utr .pictrue .Lmg{ height:32px; width:32px; border:1px solid #ccc; padding:1px;}
+.success .tak .utr .lsi{ color:#666; height:35px; margin-left:45px; width:165px;}
+.success .tak .utr .s{ display:block;}
+.success .tak .utr .lsi a{ display:inline-block; margin-bottom:4px;}
+.success .tEnd{ padding:40px 20px 20px; text-align:center;}
+.success .tEnd a{ background:url(../img/idunion_52.png) 0 0 no-repeat;}
+.success .tEnd a{ display:inline-block; width:157px; height:32px; margin-right:10px; text-align:center; line-height:31px; font-size:14px; font-weight:bold; background-position:0 -62px; color:#fff; text-shadow:0 1px 0 #0079bd;}
+.success .tEnd a:hover{ background-position:0 -95px; text-decoration:none;}
+.success .tEnd a:active{ background-position:0 -128px;}
+
+.success .tak .utr .lsi .addtips{ margin-bottom:0; margin-left:5px;}
+
+.wb_reg{background:#fff;}
+.wb_reg .regtitle{margin-bottom:30px;}
+.wb_reg .regmoster{margin-left:160px;border-right:1px solid #ccc;width:450px;padding-top:0;}
+.wb_reg .regmoster li{width:450px;}
+.wb_reg .regmoster .userTxt{width:250px;height:15px;font-size:13px;}
+.wb_reg .regmoster .userTxt[type='password']{font-weight:bold;font-size:18px;font-family:"微软雅黑";line-height:13px;}
+.wb_reg .regmoster .yzm{width:80px;}
+
+.idunionReg .regbutx{background:url(../img/idunion_52.png) 0 -95px no-repeat;width:157px;height:32px;color:#fff;text-align:center;margin-left:220px;display:block;line-height:30px;text-shadow:0 1px 0 #1bace2;}
+.idunionReg .regbutx:hover{text-decoration:none;background-position:0 -62px;}
+.idunionReg .regbutx:active{background-position:0 -128px;}
+
+.wb_reg .wb_login{float:right;width:250px;margin-top:50px;border-right:none;margin-left:0;margin-right:40px;}
+.wb_reg .wb_login li{width:250px;}
+.wb_reg .wb_login .regbutx{margin:0 auto;}
+.wb_reg .wb_login .userTxt{width:220px;}
+
+.ui-tooltip-content .p{padding-bottom:10px;}
+
+
+/*default_login*/
+.default_login{height:300px;background-color:#303030;position:relative;z-index:1;}
+.default_login .default_logo{position:absolute;z-index:2;bottom:50px;width:340px;left:50%;margin-left:-300px;padding:65px 0 0 260px;background:url(img/logo_big250x60.png) 0 5px no-repeat;font-size:13px;font-weight:bold;color:#ccc;}
+.default_login .arrow{position:absolute;z-index:3;bottom:0;display:block;background:url(img/default.png) 0 -63px no-repeat;height:13px;width:28px;left:50%;margin-left:-150px;}
+.default_login .default_logo span{position:absolute;bottom:0;right:0;width:339px;}
+.default_account{width:600px;margin:0 auto;}
+.default_account .defa_login{padding:20px 0;height:40px;}
+.default_account .defa_login li{float:left;width:280px;position:relative;}
+.default_account .de_subForm{text-align:right;width:542px;height:30px;line-height:30px;color:#666;text-shadow:0 1px 0 #fff;}
+.default_account .de_subForm input[type="checkbox"]{vertical-align:middle;}
+.default_account .de_subForm .default_user_login{float:right;margin-left:54px;text-shadow:0 1px 0 #0093d1;}
+.default_account .de_subForm .default_reg{float:left;width:150px;text-align:left;}
+.default_account .de_subForm .default_reg a{margin-right:10px;color:#0293cc;margin-left:2px;}
+.default_account .de_subForm .default_reg a:hover{text-decoration:underline;}
+.default_account input[type="text"],.default_account input[type="password"]{border:1px solid #b3b3b3;padding:5px;border-radius:4px;width:250px;height:30px;box-shadow:1px 1px 0 #fff;color:#666;line-height:30px;font-size:13px;font-family:Lucida Sans Unicode;}
+.default_account input[type="text"]:hover,.default_account input[type="password"]:hover,.default_account input[type="text"]:focus,.default_account input[type="password"]:focus{box-shadow:0 0 3px #ccc;}
+.default_account input[type="password"]{font-family:"微软雅黑";}
+body.login_default #clearFix{display:none;}
+
+.default_reg_success{border:1px solid #ccc;background:#fff;border-radius:10px;margin:65px auto 120px auto;width:650px;}
+
+.default_reg_success .r_reg {padding-bottom:50px;}
+.default_reg_success .r_reg h2{margin-top:40px;font-size:22px;color:#338820;text-align:center;margin-bottom:10px;}
+.default_reg_success .r_reg .bz_v2{padding-left:180px;font-size:14px;color:#666;margin:5px 0;}
+.default_reg_success .r_reg .bz_v2 span{color:#247578;font-size:12px;}
+.default_reg_success .r_reg .bz_v3{padding-top:20px;text-align:center;}
+.default_reg_success .reg_bz{background:#dedede;padding:30px;color:#666;font-size:12px;line-height:20px;font-family:icon;}
+.default_reg_success .reg_bz b{display:block;font-size:14px;}
+.default_reg_success .reg_bz a{color:#2d7fb1;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

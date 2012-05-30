@@ -1,0 +1,21 @@
+﻿<?php TPL::output('admin/admin_header.tpl.htm'); ?>
+
+<style type="text/css">
+	html,body {overflow:hidden;} 
+</style>
+
+<body>
+
+<div id="body-wrapper">
+     <div class="defalt_admin"><span class="logo">后台管理</span>&nbsp;&nbsp;&nbsp;&nbsp;你好，<?php echo $this->admin_info['user_name']; ?> &nbsp;&nbsp;• <a href="<?php echo get_setting('base_url'); ?>" target="_blank">访问网站首页</a> &nbsp;&nbsp;• <a href="<?php echo get_setting('base_url'); ?>/admin/?c=login&act=logout">退出</a></div>
+	<div id="sidebar" style="width:200px;border-right:1px solid #ccc;">
+		<iframe src="?act=left" id="leftIframe" frameborder="0" scrolling="no" style="width:100%"></iframe>
+	</div>
+
+	<div style="margin:0 0 0 200px;">
+		<iframe src="<?php echo $this->frame_url; ?>" id="rightIframe" style="width:100%;" frameborder="no" scrolling="auto"></iframe>
+	</div>
+
+</div>
+</body>
+</html>

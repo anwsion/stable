@@ -1,0 +1,5 @@
+.footer{background:#fff;background:url(img/default.png) 0 0 repeat-x;height:56px;text-align:right;line-height:56px;color:#fff;text-shadow:2px 1px 0 #333}
+.footer .fb{width:960px;margin:0 auto;}
+.footer p{float:left;text-align:left;padding-left:25px;}
+.footer a{margin-right:10px;color:#fff;}
+.footer a:hover{color:#999;}

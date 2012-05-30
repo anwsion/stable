@@ -1,0 +1,32 @@
+<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+<!--header_e-->
+<div class="bd pbd">
+ 
+  <!--left_nav_s-->
+
+  <div class="contant_left readns_discus ps-wd">
+  <?php TPL::output('account/setting_menu.tpl.htm'); ?>
+	<div id="td-0" style="display:block;">
+	
+
+    <form id="setting_form" method="post" action="<?php echo get_setting('base_url');?>/account/?c=setting&act=contact_process_ajax">
+	<ul class="ps-info" >
+		<li><label>QQ：</label><input type="text" name="qq" id="qq" class="rx-txt" value="<?php echo $this->user_info[qq]; ?>" ></li>
+		<li><label>MSN：</label><input type="text" name="msn" id="msn" class="rx-txt" value="<?php echo $this->user_info[msn]; ?>" ></li>
+		<li><label>手机：</label><input type="text" name="mobile" id="mobile" class="rx-txt" value="<?php echo $this->user_info[mobile]; ?>" ></li>
+		<li><label>常用E-mail：</label><input type="text" name="popular_email" id="popular_email" class="rx-txt" value="<?php echo $this->user_info[popular_email]; ?>" ></li>
+
+		<li><label>个人主页：</label><input type="text" name="homepage" id="homepage" value="<?php echo $this->user_info[homepage]; ?>"  class="rx-txt"></li>
+        <li><a href="javascript:void(0);" onclick="ajax_post($('#setting_form'),_tips_form_processer); return false;" class="seve_s">保存</a></li>
+	</ul>
+    </form>
+	</div>
+   
+	</div>
+
+	<!--微博绑定_e-->
+    </div>
+  <!--left_nav_e-->
+</div>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

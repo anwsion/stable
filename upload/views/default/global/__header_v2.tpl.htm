@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="<?php echo X_UA_COMPATIBLE; ?>" />
+<meta name="description" content="<?php echo get_setting('description'); ?>"  />
+<meta name="keywords" content="<?php echo get_setting('keywords'); ?>" />
+<title><?php echo $this->page_title; ?></title>
+
+<!-- Global require -->
+<?php foreach ($this->_global_css AS $global_css) { ?>
+<link href="<?php echo G_STATIC_URL; ?>/<?php echo str_replace('css/', 'css/' . $this->template_name . '/', $global_css); ?>" rel="stylesheet" type="text/css" />
+<?php } ?>
+<?php foreach ($this->_global_js AS $global_js) { ?>
+<script src="<?php echo G_STATIC_URL; ?>/<?php echo str_replace('css/', 'js/' . $this->template_name . '/', $global_js); ?>" type="text/javascript"></script>
+<?php } ?>
+<!-- / Global require -->
+
+<script type="text/javascript">
+	var G_SITE_NAME = '<?php echo get_setting('site_name'); ?>';
+	var G_BASE_URL = '<?php echo get_setting('base_url'); ?>';
+	var G_STATIC_URL = '<?php echo G_STATIC_URL; ?>';
+	var G_UPLOAD_URL = '<?php echo get_setting('upload_url'); ?>';
+	var USER_ID = <?php echo $this->user_id; ?>;
+	var USER_NAME = '<?php echo $this->user_info['user_name']; ?>';
+	
+	var elementClickEvent = new strClick_show();//for global declare fun	
+</script>
+<?php if (is_array($this->_import_css_files)) { ?>
+<?php foreach ($this->_import_css_files AS $import_css) { ?>
+<link href="<?php echo G_STATIC_URL; ?>/<?php echo $import_css; ?>" rel="stylesheet" type="text/css" />
+<?php } ?>
+<?php } ?>
+<?php if (is_array($this->_import_js_files)) { ?>
+<?php foreach ($this->_import_js_files AS $import_js) { ?>
+<script src="<?php echo G_STATIC_URL; ?>/<?php echo $import_js; ?>" type="text/javascript"></script>
+<?php } ?>
+<?php } ?>
+</head>
+<body>
+<div id="Wrapper">
+<!--header_s-->
+<div class="header">
+  <div class="default_width">
+  <?php if (!$this->user_id) { ?> 
+    <p class="default_login_v2"><a href="<?php echo get_setting('base_url'); ?>/account/?c=login">登录</a> | <a href="<?php echo get_setting('base_url'); ?>/account/?c=register">注册</a></p>
+  <?php } ?>
+    <h1 class="logo"><a href="<?php echo get_setting('base_url'); ?>/index/" hidefocus="true" title="<?php echo get_setting('site_name'); ?>">&nbsp;</a></h1>
+    <?php if ($this->user_id) { ?>
+    <div class="sreach">
+      <ul class="sreachLis">
+        <li class="i_li fl">
+          <input type="button" name=""  class="i_btn fr" value=""/>
+          <input name="q" id="global_search" event_type="header_all" placeholder="搜索话题、问题或人…" title="搜索话题、问题或人…" type="text" id="s_txt" class="i_txt" />
+        </li>
+        <li class="userName_li fr">
+          <div class="userElementInfo elementsChanges" >
+            <p class="userTop" onClick="window.location='<?php echo get_setting('base_url'); ?><?php if (!$this->user_info['user_name']) { ?>/account/?c=setting&act=user<?php } else { ?>/people/<?php } ?>'"><img src="<?php if ($this->user_info['uid']) { echo get_avatar_url($this->user_info['uid'],'mid',$this->user_info['avatar_file']); } else { echo G_STATIC_URL.'/common/avatar-min-img.jpg'; } ?>" class="ig"/>
+			<span class="default_s <?php if($this->user_info['notice_unread']<1){?>hide<?php }?> " id="header_inbox_unread"><a href="<?php echo get_setting('base_url');?>/inbox/"><?php echo $this->user_info['notice_unread'];?></a></span></p>
+            <p class="userLister">
+				<a href="<?php echo get_setting('base_url');?>/people/" class="r0" title="个人主页">个人主页</a>
+				<a href="<?php echo get_setting('base_url');?>/inbox/" class="r1" title="私信">私信<span style="display:none;" id="inbox_num" class="default_s"><?php echo $this->inbox_unread;?></span></a>
+				<a href="<?php echo get_setting('base_url');?>/account/?c=setting&act=user" class="r2" title="设置">设置</a>
+				<?php if($this->user_info['is_admin'] ){ ?><a href="<?php echo get_setting('base_url');?>/admin/" class="r2" title="管理中心" target=_blank>管理中心</a><?php } ?>
+				<a href="<?php echo get_setting('base_url');?>/account/?c=login&act=logout" class="r3" title="退出">退出</a>
+			</p>
+          </div>
+        </li>
+        <li class="default_seach"> <a href="javascript:;" class="flx" onClick="elementClickEvent.letter.moudleTips_start();">发起</a> <a href="<?php echo get_setting('base_url');?>/index/">首页</a><a href="<?php echo get_setting('base_url');?>/question/">发现</a><a href="<?php echo get_setting('base_url');?>/notifications/">通知<span class="<?php if($this->user_info['notification_unread'] == 0){ ?>hide <?php } ?>default_s" id="notifications_num"><?php echo $this->user_info['notification_unread']; ?></span></a> </li>
+      </ul>
+    </div>
+    <?php } ?>
+  </div>
+</div>
+<!--header_e-->

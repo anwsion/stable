@@ -1,0 +1,8 @@
+﻿//设定iframe自动高度
+<script type="text/javascript">
+var b_iframe = window.parent.parent.document.getElementById("rightIframe");
+var hash_url = window.location.hash;
+var hash_width = hash_url.split("#")[1].split("|")[0]+"px";
+var hash_height = hash_url.split("#")[1].split("|")[1]+"100px";
+b_iframe.style.cssText = 'width:'+hash_width+';height:'+hash_height+';';
+</script>

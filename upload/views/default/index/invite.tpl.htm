@@ -1,0 +1,5 @@
+<?php foreach($this->list as $key => $val){ ?>
+	<li><a href="javascript:;"> <span title="删除" onclick="question_invite_delete($(this), <?php echo $val['question_invite_id']; ?>)" class="del_Msg">x</span> </a><a class="default_title_txt" href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $val['question_id']; ?>"><?php echo $val['question_content']; ?></a>
+		<p class="default_edit"><a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['user']['url']; ?>" target="_blank"><?php echo $val['user']['user_name']; ?></a> 邀请你回答这个问题</p>
+	</li>
+<?php } ?>

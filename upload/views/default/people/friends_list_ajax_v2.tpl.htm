@@ -1,0 +1,23 @@
+<ul class="Lister_attentionPersonal">
+<?php 
+foreach($this->friends_list as $key => $val){ ?>
+			<li>
+				<a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['user_name']; ?>" class="a">
+<img src="<?php echo get_avatar_url($val['uid'],'mid',$val['avatar_file']); ?>" title="" alt="<?php echo $val['user_name']; ?>" onMouseOver="eventsMouseM(this);"  rel="<?php echo $val['uid'];?>"/></a>
+				<span class="span"  onclick="follow_people($(this), $(this), <?php echo $val['uid']; ?>); return false;">
+<?php if ($val['show_focus'])
+{echo "关注";
+}
+else
+{
+echo "取消关注";
+}
+?>
+				</span>
+
+				<big><a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['user_name']; ?>" onMouseOver="eventsMouseM(this);" rel="<?php echo $val['uid'];?>"><?php echo $val['user_name'];?></a></big>
+				<p><?php echo $val['area_name']; ?></p>
+				<p><?php echo $val['signature'];?></p>
+			</li>
+<?php } ?>
+</ul>

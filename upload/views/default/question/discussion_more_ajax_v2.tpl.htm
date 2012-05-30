@@ -1,0 +1,15 @@
+<?php foreach($this->hot_list as $key => $val) { ?>
+<div class="alqus">
+  <h4 class="titH4"><a href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $val['question_id']; ?>#reply<?php echo $val['answer_count']; ?>" title="<?php echo $val['title']; ?>"><?php echo $val['title']; ?></a>
+ <?php if ($this->user_id) { ?><a href="javascript:void(0);"  style="display:none;" class="addtips<?php if ($val['focus']) { ?> cur<?php } ?>" rel="添加关注" onclick="focus_question($(this), $(this).find('em'), <?php echo $val['question_id']; ?>);"><em><?php if ($val['focus']) { ?>取消<?php } ?>关注</em></a><?php } ?>
+  <span class="add"><?php foreach($val['topics'] AS $t_key => $t_val){ ?><a href="<?php echo get_setting('base_url');?>/topic/?topic_title=<?php echo $t_val['topic_title']; ?>" title="<?php echo $t_val['topic_title']; ?>" onmouseover="eventstalk(this);" rel="<?php echo $t_val['topic_id']; ?>"><?php echo $t_val['topic_title']; ?></a><?php } ?></span></h4>
+  
+  <?php if ($val['answer']['answer_content']) {  ?><p class="infotx fix"><a href="<?php echo $val['answer']['u_url']; ?>" onMouseOver="eventsMouseM(this);" rel="<?php echo $val['answer']['uid']; ?>"><?php echo $val['answer']['user_name']; ?></a><i>回复了该问题<?php if ($val['category']) { ?> • <a href="<?php echo get_setting('base_url'); ?>/question/?category=<?php echo $val['category']['id']; ?>" class="q_category"><?php echo $val['category']['title']; ?></a><?php } ?><?php if ($val['answer_count'] > 0) { ?> • <a  class="v3" href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $val['question_id']; ?>#reply<?php echo $val['answer_count']; ?>"><?php echo $val['answer_count']; ?> 个回复</a><?php } ?> • <?php echo $val['focus_count']; ?> 人关注 • <?php echo date_friendly($val['update_time']); ?></i>
+  <br/>
+  <a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['answer']['uid']; ?>" class="tface" onMouseOver="eventsMouseM(this);"  rel="<?php echo $val['answer']['uid']; ?>"><img src="<?php echo get_avatar_url($val['answer']['uid'],'mid',$val['answer']['avatar_file']); ?>" onMouseOver="eventsMouseM(this);"  rel="<?php echo $val['answer']['uid']; ?>"/></a>
+  </p>
+  <?php } else { ?>
+  <p class="infotx fix"><?php if ($_GET['category'] != $val['category_id']) { ?><a class="class_all" href="./?category=<?php echo $val['category_id']; ?>"><?php echo $val['category_info']['title']; ?></a><?php } ?><a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['user_info']['uid']; ?>" onMouseOver="eventsMouseM(this);"  rel="<?php echo $val['user_info']['uid']; ?>"><?php echo $val['user_info']['user_name']; ?></a> <i>发起了该问题 • <?php echo $val['focus_count']; ?> 人关注 • <?php echo date_friendly($val['add_time']); ?></i><a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['user_info']['uid']; ?>" class="tface"><img src="<?php echo get_avatar_url($val['user_info']['uid'],'mid',$val['user_info']['avatar_file']); ?>" onMouseOver="eventsMouseM(this);"  rel="<?php echo $val['user_info']['uid']; ?>"/></a></p>
+  <?php } ?>
+</div>
+<?php } ?>

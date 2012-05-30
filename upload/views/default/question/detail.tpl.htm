@@ -1,0 +1,258 @@
+<?php TPL::output('global/__header_v2.tpl.htm'); ?>
+
+<div class="bd">
+  <!--right_nav_s-->
+  <div class="tommy_rightDiv xBlog_tag">
+  	<?php if ($this->user_id) { ?>
+	 <div class="RightListDiv default_SZ">
+		<a href="javascript:;" class="default_blue_but" onclick="focus_question($(this), $(this), <?php echo $this->question_id; ?>); return false;" title="<?php if ($this->question_focus) { ?>取消<?php } ?>关注"><?php if ($this->question_focus) { ?>取消<?php } ?>关注</a>
+		<!--<a class="default_set" href="javascript:" title="设置" onclick="elementClickEvent.letter.default_anonymity(event);">设置</a>
+		<p class="default_setPosition hide">
+			<a href="javascript:;" title="使用匿名身份" >使用匿名身份</a>
+		</p>-->
+	 </div>
+	 <?php } ?>
+		<div class="publishers">
+			<h4 class="p_title">发布者</h4>
+			<div class="publishers_info">
+				<p class="faceHead"><a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $this->q_info['user_info']['user_name']; ?>"><img src="<?php echo get_avatar_url($this->q_info['published_uid'],'mid',$this->q_info['user_info']['avatar_file']); ?>" onMouseOver="eventsMouseM(this);"  rel="<?php echo $this->q_info['published_uid']; ?>"/></a></p>
+				<p><a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $this->q_info['user_info']['user_name']; ?>"><?php echo $this->q_info['user_info']['user_name']; ?></a> <?php if ($this->user_id != $this->q_info['published_uid'] AND $this->user_id) { ?><a href="#" onclick="follow_people($(this), $(this).find('em'), <?php echo $this->q_info['published_uid']; ?>); return false;" class="addtips<?php if ($this->user_follow_check) { ?> cur<?php } ?>"><em><?php if ($this->user_follow_check) { ?>取消<?php } ?>关注</em></a><?php } ?></p>
+				<b><?php echo $this->q_info['user_info']['signature']; ?></b>
+			</div>
+		</div>
+	<?php if ($this->user_id) { ?>
+	 <div class=" RightListDiv">
+	  <h3 class="h3">邀请别人回答问题</h3>
+	  <p><a href="javascript:;" onclick="elementClickEvent.letter.default_invite(this);">站内邀请<span class="defa_nums"><?php echo count($this->invite_users); ?></span></a> &nbsp;&nbsp;<!--a href="javascript:;">邮件邀请</a--></p>
+	  <div id="default_invite" class="hide">
+	  <div class="default_query"><input type="text" name="" class="default_seachTxt" title="搜索站内用户" value="搜索站内用户" onfocus="if(this.value=='搜索站内用户'){this.value='';}" onblur="if(this.value==''){this.value='搜索站内用户';};" id="default_seach_txt"/>
+		<div id="default_ajax_query" class="default_class_query hide">
+			<!--<p class="default_dateLister" onclick="elementClickEvent.letter.default_addUser();">
+				<a href="javascript:;" class="default_userhead"><img src="<?php echo get_setting('base_url');?>/uploads/avatar/000/00/00/01_avatar_mid.jpg" title="Sank"/></a>
+				Sank
+				<span class="default_span">这是他的一句话介绍...</span>
+			</p>-->
+		</div>
+	  </div>
+	  <p class="default_inbites" id="default_inbites">
+
+		
+	  </p>
+	  <ul class="default_lsit_ul">
+		<?php if($this->invite_users) { ?>
+			<?php foreach($this->invite_users as $key => $val){ ?>
+		<li><a href="javascript:;" onClick="cancel_question_invite($(this), question_id,<?php echo $val['uid']; ?>)" class="default_exit cur">取消邀请</a><a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['url']; ?>" class="i_imgs"><img src="<?php echo $val['avatar_file']; ?>"/></a><a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['url']; ?>" class="dis_v2"><?php echo $val['user_name']; ?></a><p><?php echo cutmbstr_zhcn($val['signature'], 12); ?></p></li>
+			<?php } ?>
+		<?php } ?>
+	  </ul>
+      </div>
+	</div>
+	<?php } ?>
+	<?php if ($this->q_link) { ?>
+    <div class=" RightListDiv">
+      <h3 class="h3">相关问题<em></em></h3>
+      <?php foreach($this->q_link AS $key => $val) { ?>
+      <p class="p2"><a href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $val['question_id']; ?>"><?php echo $val['question_content']; ?></a></p>
+      <?php } ?>
+    </div>
+    <?php } ?>
+    
+    <?php if ($this->user_id) { ?> 
+	  <div class=" RightListDiv">
+	  <h3 class="h3">分享问题</h3>
+	  
+	  <ul class="yquestionTag">
+		<li class="h"><?php if (get_setting('sina_weibo_enabled') == 'Y' OR get_setting('qq_t_enabled') == 'Y') { ?><a href="javascript:;" onclick="share_content('question', <?php echo $this->question_id; ?>, 'weibo', SYSTEM_WEIBO_ENABLED);" class="x1" title="分享到微博">微博分享</a> <?php } ?><a href="javascript:;" onclick="share_content('question', <?php echo $this->question_id; ?>, 'mail', SYSTEM_WEIBO_ENABLED); return false;" class="x0" title="电子邮件">邮件</a><a href="javascript:;" onclick="share_content('question', <?php echo $this->question_id; ?>, 'letter', SYSTEM_WEIBO_ENABLED);" class="x3" title="站内分享">站内私信</a></li>
+	  </ul>
+    </div>
+    <?php } ?>
+    
+	 <div class=" RightListDiv" style="border-bottom:none;">
+      <h3 class="h3">问题状态<em></em></h3>
+	  
+	  <p class="default_exe">最近活动：<span class="s"><?php echo date_friendly($this->q_info['update_time']); ?></span><br/>浏览：<span class="s"><?php echo $this->q_info['view_count']; ?></span> 次 <br/>关注者：<span class="s"><?php echo $this->q_info['focus_count']; ?></span> 人</p>
+	  <p class="default_GZ" id="focus_users"></p>
+    </div>
+  </div>
+  <!--right_nav_e-->
+  <!--left_nav_s-->
+  <div class="contant_left DIS_top discussion_element">
+  <div id="Manytopics" class="shd">
+	<div class="add_C" id="addtxt">
+    <?php foreach($this->q_topic as $key => $val){ ?>
+    <span val="<?php echo $val['topic_title']; ?>" id="<?php echo $val['topic_id']; ?>"><a href="<?php echo get_setting('base_url');?>/topic/?topic_title=<?php echo $val['topic_title']; ?>" rel="<?php echo $val['topic_id']; ?>" title="<?php echo $val['topic_title']; ?>" onmouseover="eventstalk(this);"><?php echo $val['topic_title']; ?></a><em onclick="removeChilds(this)" class="hide">x</em></span>
+    <?php } ?>
+	</div> 
+	<?php if ($this->user_id) { ?>
+	<a href="javascript:void(0);" class="editor" id="editor" onclick="hide('editorInput','editor','editorInput','editor hide',this)" title="话题编辑">话题编辑</a>
+	<?php } ?>
+	
+	<?php if ($this->user_id) { ?>
+	<div class="editorInput hide" id="editorInput">
+		<div id="ajaxDate" class="hide">
+			<div class="add" onclick="add('take');">添加
+			<span id="take" ></span>话题</div>
+			<div id="txt"></div>
+		</div>
+		<input type="text" class="i_add" name="addName">
+		<a href="javascript:void(0);" class="default_blue_but" onclick="hide('editor','editorInput','editor ','editorInput hide',this);addElementVALUE();">完成</a>
+		<p id="err" class="cr hide">请勿重复添加话题！</p>
+	</div>
+	<?php } ?>
+</div>
+
+    <h3 class="x_h3 ">
+    <div id="ed_title_s">
+		<span id="question_content"><?php echo $this->q_info['question_content']; ?></span>
+		<?php if ($this->q_info['question_modify']){ ?><a class="editorTxt" style="font-size:12px;font-weight:normal;color:#666;height:18px;line-height:18px;text-decoration:none;" href="<?php if($this->q_info['question_modify_avail']){ ?><?php echo get_setting('base_url');?>/publish/?question_id=<?php echo $this->question_id; ?>#question<?php } else { ?>javacript:;<?php } ?>"<?php if(!$this->q_info['question_modify_avail']){ ?> title="发布问题超过 30 分钟以后无法修改"<?php } ?>>修改</a><?php } ?>
+    </div>
+    </h3>
+    
+    <div class="congtxt">
+    	<div id="question_detail"><?php echo $this->q_info['question_detail']; ?></div>
+    </div>
+	<!--<p class="default_review"><a href="#"> • 增加评论</a><a href="#"> • 修改记录</a><a href="#"> • 举报问题</a></p>-->
+
+    <?php if ($this->q_info['attachs']) {  ?>
+	<h2 class="disH2"><em>●</em>附件</h2>
+	<div class="congtxt fb_pd">
+	<?php foreach ($this->q_info['attachs'] AS $key => $attach) { ?>
+      	<?php 
+		if ($attach['is_image']) { ?>
+      	<a href="<?php echo $attach['attachment']; ?>" target="_blank" rel="lightbox"><img src="<?php echo $attach['attachment']; ?>" alt="<?php echo $attach['attach_name']; ?>" /></a> 
+      	<?php } else { ?>
+      	<p><a class="file_ico" href="<?php echo down_url($attach['file_name'], $attach['attachment']); ?>"><?php echo $attach['file_name']; ?></a></p>
+      	<?php } ?>
+      	<?php } ?>
+	</div>
+	<?php } ?>
+
+  </div>
+  <div class="contant_left readns_discus index dis_ListEntry">
+  <a name="answers"></a>
+    <h2 class="c_title">
+      <?php if ($this->user_id) { ?><p class="sux"><a href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $this->question_id; ?>&sort_key=agree_count&sort=DESC"<?php if ((!$_GET['uid'] && !$_GET['sort_key']) || $_GET['sort_key'] == 'agree_count') { ?> style="font-weight:bold;"<?php } ?>>• 按票数排序</a><a href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $this->question_id; ?>&sort_key=add_time&sort=DESC"<?php if ($_GET['sort_key'] == 'add_time') { ?> style="font-weight:bold;"<?php } ?>>• 按时间排序</a><a href="<?php echo get_setting('base_url');?>/question/?act=detail&question_id=<?php echo $this->question_id; ?>&uid=focus" <?php if ($_GET['uid'] == 'focus') { ?> style="font-weight:bold;"<?php } ?>>• 只显示我关注的人</a>
+	  </p><?php } ?>
+	  
+	   <?php echo $this->q_answer_count; ?> 个回复
+    </h2>
+      
+    <div class="BeforClass">
+    <?php if ($this->q_answer) { foreach ($this->q_answer AS $key => $val) { ?>
+		<ul class="contxt_List" uninterested_count="<?php echo $val['uninterested_count']; ?>" id="answer_list_<?php echo $val['answer_id']; ?>">
+			<li>
+				<div class="default_txt">
+				<?php if ($this->user_id) { ?>
+				<a name="<?php echo $val['answer_id']; ?>" status="<?php echo $val['agree_status']; ?>"></a>
+				<a title="<?php if($val['agree_status'] == '1'){ ?>取消投票<?php }else{ ?>投一票<?php } ?>" class="default_num defa_agree<?php if($val['agree_status'] == '1'){ ?> up_cur<?php } ?>" onClick="change_agree($(this), '1')" href="javascript:;">赞同 </a>
+				<a title="<?php if ($val['agree_status'] == '-1') { ?>取消反对<?php } else { ?>反对，不会显示你的姓名<?php } ?>" class="default_num defa_oppose<?php if($val['agree_status'] == '-1'){ ?> down_cur<?php } ?>" onClick="change_agree($(this), '-1')" href="javascript:;">反对</a>
+				<?php } ?>
+				
+				<h3 class="default_uh"><a class="default_ubd" href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['uid']; ?>"><?php echo $val['uname']; ?></a><?php if ($val['signature']) { ?>，<?php echo $val['signature']; ?><?php } ?></h3>
+				
+				<p class="default_ticket" name="agree_user_list" style="display:<?php if($val['agree_count'] == 0){ ?>none;<?php } else { ?>block<?php } ?>">
+					<span name="agree_num"><?php echo $val['agree_count']; ?></span> 票，来自
+					<span class="agee_people">
+					<?php if($val['agree_users']) { ?>
+						<?php $count = 0; foreach($val['agree_users'] as $uid => $user){ ?>
+						<a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $uid;?>" rel="<?php echo $uid;?>" onmouseover="eventsMouseM(this);" name="agee_people" class="a"><?php echo $user;?></a><?php if(count($val['agree_users']) != ++$count) { ?>、<?php } ?>
+						<?php } ?>
+					<?php } ?>
+					</span>
+				</p>
+			
+				<p class="infotx">
+					<div id="answer_content_<?php echo $val['answer_id']; ?>"><?php echo $val['answer_content']; ?></div>
+					<?php if ($val['attachs']) { ?>
+			    	  <br />
+			     	 <p><b>附件:</b></p>
+
+			    	  <p class="imgScroll">
+			    	  <?php foreach ($val['attachs'] AS $attach) {  ?>
+			    	  	<?php  if ($attach['is_image']) { ?>
+			    	  	<a href="<?php echo $attach['attachment']; ?>" target="_blank" rel="lightbox"/><img src="<?php echo $attach['attachment'] ?>" alt="<?php echo $attach['attach_name']; ?>"></a>
+			    	  	<?php } ?>
+			    	  <?php } ?>
+			    	  </p>
+
+			      <?php foreach ($val['attachs'] AS $attach) { ?>
+			      	<?php  if(!$attach['is_image']) { ?>
+			      	<p><a class="file_ico" href="<?php echo down_url($attach['file_name'], $attach['attachment']); ?>"><?php echo $attach['file_name']; ?></a></p>
+			      	<?php } ?>
+			      <?php } ?>
+
+			      <?php } ?>
+				</p>
+			
+				<p class="default_ticket"><?php echo date('Y-m-d H:i', $val['add_time']); ?> &nbsp;&nbsp;<a href="javascript:;" class="layer_imgs layer_pl" onclick="toggle_answer_comments(<?php echo $val['answer_id']; ?>); return false;"><?php echo $val['comment_count']; ?> 条评论</a><?php if ($this->user_id) { ?> &nbsp;&nbsp; <a href="javascript:;" onClick="share_content('answer', <?php echo $val['answer_id'];?>, 'mail', SYSTEM_WEIBO_ENABLED);" title="分享" class="layer_imgs layer_s">分享</a> &nbsp;&nbsp; <a href="javascript:;" onclick="answer_user_rate(<?php echo $val['answer_id'];?>, 'thanks', this);" class="layer_imgs layer_t"><?php if ($val['user_rated_thanks']) { ?>撤消<?php } ?>感谢</a> &nbsp;&nbsp; <a href="javascript:;" onclick="answer_user_rate(<?php echo $val['answer_id'];?>, 'uninterested', this);" class="layer_imgs layer_n"><?php if ($val['user_rated_uninterested']) { ?>撤消<?php } ?>没有帮助</a><!--  &nbsp;&nbsp; <a href="javascript:;" title="收藏" class="layer_imgs layer_c">收藏</a> --><?php } ?><?php if ($val['uid'] == $this->user_id) {?> &nbsp;&nbsp;<a title="编辑" href="javascript:void(0);" id="edit_answer_<?php echo $val['answer_id']; ?>" onclick="ajax_edit($('#answer_content_<?php echo $val['answer_id']; ?>'), $('#answer_content_<?php echo $val['answer_id']; ?>'),  '<?php echo get_setting('base_url'); ?>/question/?c=ajax&act=edit_question_answer&question_id=<?php echo $this->question_id; ?>&answer_id=<?php echo $val['answer_id']; ?>&target_id=answer_content_<?php echo $val['answer_id']; ?>&display_id=edit_answer_<?php echo $val['answer_id']; ?>', false, true, $(this)); return false;" class="layer_imgs layer_ed">快速编辑</a>  &nbsp;&nbsp; <a href="#" onclick="edit_answer(<?php echo $val['answer_id']; ?>); return false;" class="layer_imgs layer_ed">高级编辑</a><?php } ?></p>
+				
+			      <!--评论_s-->
+			      <div class="default_comment" id="answer_comments_<?php echo $val['answer_id']; ?>" style="display:none">
+			      	<!--用户评论展示_s-->
+			      	<div id="answer_comments_list_<?php echo $val['answer_id']; ?>"></div>
+			      	<!--用户评论展示_e-->
+			      	<form action="<?php echo get_setting('base_url');?>/question/?c=ajax&act=save_answer_comment&answer_id=<?php echo $val['answer_id']; ?>" method="post" id="answer_comments_form_<?php echo $val['answer_id']; ?>">
+			      	<?php if ($this->user_id) { ?>
+			      	<input class="default_textArea" type="text" name="message" class="answer_content" onkeydown="if (event.keyCode == 13) { ajax_post($('#answer_comments_form_<?php echo $val['answer_id']; ?>'), _answer_comments_form_processer); this.value=''; return false; }" />
+			      	<p class="default_save">
+			      		<a href="#" onclick="toggle_answer_comments(<?php echo $val['answer_id']; ?>); return false;">取消</a>
+			      		<a class="save_txt default_blue_but" onclick="ajax_post($('#answer_comments_form_<?php echo $val['answer_id']; ?>'), _answer_comments_form_processer); try{ this.parentNode.parentNode.getElementsByTagName('input')[0].value=''; }catch(e){} return false;" href="#">保存</a>
+			      	</p>
+			      	<?php } else { ?>
+			      	要参与问题问题请先<a href="<?php echo get_setting('base_url'); ?>/account/?c=login&url=%2Fquestion%2F%3Fact%3Ddetail%26question_id%3D<?php echo $this->question_id; ?>">登录</a>或<a href="<?php echo get_setting('base_url'); ?>/account/?c=register">注册</a>
+			      	<?php } ?>
+			      	</form>
+			      </div>
+			      <!--评论_e-->
+			</div>
+		</li>
+		
+		<li class="userFace"><a href="<?php echo get_setting('base_url');?>/people/?u=<?php echo $val['uid']; ?>" class="posiMgs_face"><img src="<?php echo get_avatar_url($val['uid'],'mid',$val['avatar_file']); ?>" onMouseOver="eventsMouseM(this);"  rel="<?php echo $val['uid']; ?>"/></a></li>
+	</ul>
+	<?php } ?>
+	<?php } ?>
+	<p id="load_uninterested_answers" style="display: none;" class="more default_more"><a href="javascript:;" class="a" onclick="qAlert('被折叠的回复是被大多数用户认为没有帮助的回答.');">为什么被折叠？</a><a href="javascript:;" class="b" onclick="elementClickEvent.letter.default_more(event); $('#uninterested_answers_list').toggle();"><span class="hide_answers_count">0</span> 个回复被折叠 </a></p>
+	
+	<div class="BeforClass" style="display: none;" id="uninterested_answers_list"></div>
+    <a name="answer_form"></a>
+    <div class="say_u" id="say_u">
+    <?php if (!$this->user_id) { ?>
+    <p align="center">要查看所有问题和参与问题请先<a href="<?php echo get_setting('base_url'); ?>/account/?c=login&url=%2Fquestion%2F%3Fact%3Ddetail%26question_id%3D<?php echo $this->question_id; ?>">登录</a>或<a href="<?php echo get_setting('base_url'); ?>/account/?c=register">注册</a></p>
+    <?php } else if ($this->user_answered) { ?>
+    <p align="center">一个问题只能回答一次，你可以编辑回答过的回复</p>
+    <?php } else { ?>
+      <div class="txtarea">
+      <form action="<?php echo get_setting('base_url');?>/question/?act=save_answer" method="post" id="answer_form">
+      	<input type="hidden" name="question_id" value="<?php echo $this->question_id; ?>" />
+      	<input type="hidden" name="attach_access_key" value="<?php echo $this->attach_access_key; ?>" />
+      	
+        <div style="margin-bottom: 15px"><textarea name="answer_content" id="answer_content" class="answer_content" rows="6"></textarea></div>
+			
+		<div id="file_uploader_answer"></div>
+		<div style="clear:left"></div>
+		
+		<p class="subMitSure submitsrue"><span onClick="try{document.getElementById('answer_content').value='';}catch(e){}" style="cursor:pointer; color:#999;color:#105cb6;">清空内容</span> &nbsp; <a href="#" onclick="ajax_post($('#answer_form')); return false;" class="default_blue_but" style="color:#fff;">提交</a><span id="answer_content_message" style="float: left;"></span></p>
+      </form>
+      </div>
+    <?php } ?>
+    </div>
+  </div>
+  <!--left_nav_e-->
+</div>
+
+<script type="text/javascript">
+<?php if (get_setting('sina_weibo_enabled') == 'Y' OR get_setting('qq_t_enabled') == 'Y') { ?>
+var SYSTEM_WEIBO_ENABLED = 'Y';
+<?php } else { ?>
+var SYSTEM_WEIBO_ENABLED;
+<?php } ?>
+
+var ATTACH_ACCESS_KEY = '<?php echo $this->attach_access_key; ?>';
+var hightlight_ids = '<?php echo $_GET['item_id']; ?>';
+var question_id = <?php echo $this->question_id;?>;
+var uninterested_limit = <?php echo get_setting('uninterested_fold'); ?>;
+</script>
+
+<script type="text/javascript" src="<?php echo G_STATIC_URL; ?>/js/question_detail.js"></script>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

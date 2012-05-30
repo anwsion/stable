@@ -1,0 +1,28 @@
+<?php TPL::output('global/__public_header_v2.tpl.htm'); ?>
+
+<section class="regSection">
+<h3 class="regtitle"><b class="b">帐户激活</b></h3>
+  <form action="<?php echo get_setting('base_url');?>/account/?c=active&act=valid_email_active_process" method="post" id="active_form">
+  <input type="hidden" name="active_code" value="<?php echo $this->active_code; ?>"/>
+  <ul class="regmoster" id="reg_moster">
+	<li style="display:none;"><input type="text" name="user_name" value="" id="userName" class="userTxt" disabled="true"/><span id="tip_userName"></span></li>
+	<li>
+	<?php if ($this->email != ""){ ?><input type="hidden" name="email_ref" id="userEmail_ref" value="<?php echo $this->email;?>" /><?php } ?>
+	<input type="text" name="email" id="userEmail" value="<?php echo $this->email;?>" class="userTxt" title="电子邮箱"<?php if($this->email != ""){ ?> disabled<?php } ?>/><span id="tip_userEamil"></span></li>
+	<li><input type="password" name="password" id="userPassword" class="userTxt hide" title="密码"/>
+	<input type="text" id="userPasswordx" class="userTxt" title="密码"/><span id="tip_userPassword"></span></li>
+	
+	<li><input type="text" name="seccode_verify" id="userCode" class="userTxt yzm" title="验证码"/>
+	<span class="elp"><em class="s"><img src="" onclick="this.src='<?php echo get_setting('base_url');?>/account/?c=captcha&' + Math.random();" id="seccode" /></em><a href="javascript:void(0);" onclick="$('#seccode').click();">换一张</a></span>
+	<span id="tip_userCode" style="display:none;"></span>
+	</li>
+  </ul>
+  </form>
+</section>
+<section class="userLister" id="regLister">
+	<a href="#" onclick="ajax_post($('#active_form'), _ajax_post_tip_processer); return false;" class="regbut">激活</a>
+</section>
+
+<script src="<?php echo G_STATIC_URL; ?>/js/reg.js" type="text/javascript"></script>
+
+<?php TPL::output('global/__footer_v2.tpl.htm'); ?>

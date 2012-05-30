@@ -1,0 +1,130 @@
+<?php TPL::output('admin/admin_header.tpl.htm'); ?>
+
+<body >
+
+<div id="body-wrapper">
+	<div id="main-content">
+		<div class="clear"></div>
+		<div class="content-box">
+			<div class="content-box-header">
+				<h3>用户充值</h3>
+				<ul class="content-box-tabs">
+				</ul>
+				<div class="clear"></div>
+			</div>
+			<div class="content-box-content">
+				<div class="tab-content default-tab" id="tab1">
+					<!--div id="notf_tip" class="notification attention png_bg" style="display:none"> <a href="javascript:;" class="close"><img src="resources/images/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
+						<div></div>
+					</div-->
+					<form id="_save_form" action="?c=credit&act=credit_user_process_ajax" method="post">
+					<fieldset>
+					<p>
+						<label>用户名或邮箱：
+						<?php if($this->set_user){ ?>
+							<?php echo $this->set_user['user_name']; ?>(<?php echo $this->set_user['email']; ?>)
+						<?php }else{ ?>
+							<input id="user_email" name="user_email" class="text-input small-input" type="text" value="" style="color:#459300"/>
+						<?php } ?>
+							<input type="hidden" id="uid" name="uid" value="<?php echo $this->set_user['uid']; ?>" />
+							<span class="input-notification" id="user_tip" style="display:none;"></span>
+						<span id="balance" style="display:none;font-weight:normal;margin-left:5px; font-size:12px; cursor:pointer;"><a id="balance_cli" href="javascript:;">查询余额</a></span></label>
+						<label>输入充值金额：
+							<input name="credit_increase" class="text-input small-int" type="text" value=""/>&nbsp;元
+						</label>
+					</p>
+					
+						<p>
+							<input class="button" type="button" onClick="ajax_post($('#_save_form'), _credit_form_process)" value="  提  交  " />
+						</p>
+						</fieldset>
+						<div class="clear"></div>
+						
+					</form>
+				</div>
+		</div>
+		
+		<div class="clear"></div>
+		<div id="notf_tip" style="display:none;" class="notification png_bg"> <a href="javascript:;" class="close"><img src="resources/images/icons/cross_grey_small.png" alt="关闭" /></a>
+			<div id="notf_cont"></div>
+		</div>
+		
+	</div>
+</div>
+<script>
+
+function _credit_form_process(result)
+{
+	if(result.errno == "-1")
+	{
+		$("#notf_cont").html(result.err);
+		$("#notf_tip").css("opacity", "").addClass("error").show();
+	}
+	else if(result.errno == "1")
+	{
+		alert(result.err);
+		window.location.reload();
+	}
+}
+
+$(document).ready(function (){
+
+	$("#user_email").change(function (){
+
+		$("#uid").val("");
+		$("#balance").html('<a id="balance_cli" href="javascript:;">查询余额</a>').hide();
+	
+		if($(this).val() == "")
+		{
+			return false;
+		}
+		
+		$.getJSON('?c=credit&act=get_user_ajax&email=' + $(this).val(), function (result){
+			if(result.errno == 1)
+			{
+				$("#user_tip").removeClass("error").addClass("success").html(result.rsm.uinfo.user_name + "(" + result.rsm.uinfo.email + ")").show();
+				$("#uid").val(result.rsm.uinfo.uid);
+				$("#balance").html("余额：" + result.rsm.uinfo.credit + "元");
+				$("#balance").show();
+			}
+			else if(result.errno == -1)
+			{
+				$("#user_tip").removeClass("success").addClass("error").html("帐户不存在。").show();
+			}
+			else
+			{
+				$("#user_tip").removeClass("success").addClass("error").html("系统错误！").show();
+			}
+		});
+	});
+
+
+	$("#balance_cli").live("click", function (){
+		
+		if($("#uid").val() <= 0)
+		{
+			return false;
+		}
+		
+		$(this).html("Loading...");
+		
+		$.getJSON('?c=credit&act=get_user_balance_ajax&uid=' + $("#uid").val(), function (result){
+			if(result.errno == 1)
+			{
+				$("#balance").html("余额：" + result.rsm.uinfo.credit + "元");
+			}
+		});
+	});
+
+<?php if($this->set_user){ ?>
+	$("#balance").show();
+	$("#balance_cli").click();
+<?php } ?>
+
+});
+
+</script>
+
+<script type="text/javascript" src="resources/js/right_iframe.js"></script>
+</body>
+</html>

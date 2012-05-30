@@ -1,0 +1,60 @@
+<?php TPL::output('install/header.tpl.htm'); ?>
+
+<p class="default_head"><span class="default_logo"></span> </p>
+<div class="default_contents">
+  <h2 class="dedault_hx"> • 配置系统</h2>
+  <p class="default_txt">需要您提供必要的系统配置信息。</p>
+  
+  <?php if ($this->error_messages) { ?>
+  <div class="default_error">
+  	<h3>发生错误</h3>
+  	<p>
+  		<?php foreach ($this->error_messages AS $error_message) { ?>
+  			<?php echo $error_message; ?><br />
+  		<?php } ?>
+  		</p>
+  </div>
+  <?php } ?>
+  
+  <form action="" method="post" id="installer">
+  <input type="hidden" name="step" value="3" />
+  <ul class="default_ul">
+  <?php if ($this->pdo_support) { ?>
+  	<li>
+  	  <label class="label">数据库驱动</label>
+  	  <select name="db_driver">
+  	  	<option value="PDO_MYSQL">PDO (推荐, 性能更强)</option>
+  	  	<option value="MySQLi">MySQLi (内存占用较低)</option>
+  	  </select>
+  	  <span class="txt_color">请根据服务器状态选择数据库驱动</span>
+  	</li>
+  <?php } ?>
+    <li>
+      <label class="label">数据库主机</label>
+      <input type="text" name="db_host" value="localhost" class="default_text"/>
+      <span class="txt_color">通常为 localhost</span>
+    </li>
+    <li>
+      <label class="label">数据库用户名</label>
+      <input type="text" name="db_username" value="" class="default_text"/>
+    </li>
+    <li>
+      <label class="label">数据库密码</label>
+      <input type="text" name="db_password" class="default_text"/>
+    </li>
+    <li>
+      <label class="label">数据库名称</label>
+      <input type="text" name="db_dbname" class="default_text"/>
+    </li>
+    <li>
+      <label class="label">数据表前缀</label>
+      <input type="text" name="db_prefix" value="aws_" class="default_text"/>
+      <span class="txt_color">同数据库安装多个本程序时需要更改</span>
+    </li>
+    
+    <li class="default_setup_n" id="setup_control"><a href="#" class="default_install" onclick="document.getElementById('installer').submit(); document.getElementById('setup_control').style.display = 'none'; return false;">开始安装</a></li>
+  </ul>
+  </form>
+</div>
+
+<?php TPL::output('install/footer.tpl.htm'); ?>

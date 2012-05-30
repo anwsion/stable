@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="<?php echo X_UA_COMPATIBLE; ?>" />
+<meta name="description" content="<?php echo get_setting('description'); ?>"  />
+<meta name="keywords" content="<?php echo get_setting('keywords'); ?>" />
+
+<title><?php echo $this->page_title; ?></title>
+
+<script type="text/javascript">
+	var G_SITE_NAME = '<?php echo get_setting('site_name'); ?>';
+	var G_BASE_URL = '<?php echo get_setting('base_url'); ?>';
+	var G_STATIC_URL = '<?php echo G_STATIC_URL; ?>';
+</script>
+
+<link href="<?php echo G_STATIC_URL; ?>/css/<?php echo $this->template_name; ?>/login.css" rel="stylesheet" type="text/css" />
+<script src="<?php echo G_STATIC_URL; ?>/js/jquery.js" type="text/javascript"></script>
+<script src="<?php echo G_STATIC_URL; ?>/js/jquery.form.js" type="text/javascript"></script>
+<script src="<?php echo G_STATIC_URL; ?>/js/functions.js" type="text/javascript"></script>
+
+<!--[if IE]>
+<script src="<?php echo G_STATIC_URL; ?>/js/createfor_ie.js" type="text/javascript"></script>
+<![endif]-->
+
+<?php if (is_array($this->_import_css_files)) { ?>
+<?php foreach ($this->_import_css_files AS $import_css) { ?>
+<link href="<?php echo G_STATIC_URL; ?>/<?php echo $import_css; ?>" rel="stylesheet" type="text/css" />
+<?php } ?>
+<?php } ?>
+
+<script src="<?php echo G_STATIC_URL; ?>/js/login.js" type="text/javascript"></script>
+</head>
+
+<body class="login_default" lang="zh-cn">
+<!--[if IE 6]>
+<style type="text/css">.isIE6{ background:#feb300; border-bottom:1px solid #dfdfdf; height:40px; line-height:40px; font-size:18px; font-weight:bold; color:#000; font-family:"微软雅黑"; padding:0 20px; text-align:center;width:100%;white-space:nowrap;}.isIE6 a{ color:blue;}.isIE6 a:hover{color:blue; text-decoration:underline;}</style>
+<div class="isIE6">你目前使用的浏览器版本过低，将不能使用本站部分功能。请升级你的 <a href="<?php echo get_setting('base_url');?>/ie/ie7xp.exe">Internet Explorer 浏览器</a>获取最佳的浏览效果。</div>
+<![endif]-->
+
+<div class="default_login">
+	<p class="default_logo"><span><?php echo get_setting('description'); ?></span></p>
+	<span class="arrow"></span>
+</div>

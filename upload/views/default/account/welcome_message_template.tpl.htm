@@ -1,0 +1,103 @@
+	<div id="welcome_step1">
+		<form id="welcome_step_1_form" action="<?php echo get_setting('base_url');?>/account/?c=ajax&act=update_signature" method="post">
+		<!--完善资料_s-->
+		<div class="invite_reg">
+			<h2 class="reg_suc"><img src="<?php echo G_STATIC_URL; ?>/css/img/a_l_05.png"/><?php echo $this->user_info['user_name']?>，恭喜你注册成功！</h2>
+			<h3 class="material_perfect">完善你的资料
+				<p class="tips">以便朋友们能轻易地找到您，我们也能准确的为您推送有效的信息。</p>
+			</h3>
+			<ul class="upload_for_form">
+				<li class="th"><div class="user_face"><img src="<?php echo get_avatar_url($this->user_id,'150',$this->user_info['avatar_file']); ?>" id="welcome_avatar_src" /></div><p><em>·</em> 支持 jpg/gif/png</p><p><em>·</em> 建议图片尺寸大于 100 × 100 像素</p><a href="javascript:;" class="upload_userface" id="welcome_avatar_uploader" title="上传头像">上传头像</a> <span id="welcome_avatar_uploading_status" style="display:none"><img src="<?php echo G_STATIC_URL; ?>/css/img/load.gif" align="absmiddle"> 文件上传中...</span></li>
+				<li><input type="text" name="signature" id="welcome_signature" value="<?php if ($this->user_info['signature']) { echo $this->user_info['signature']; } else { ?>例如：某公司高管，结构工程师，电路设计师等<?php } ?>" class="short_refer" title="一句话介绍" onFocus="if(this.value=='例如：某公司高管，结构工程师，电路设计师等'){this.value=''};" onBlur="if(this.value==''){this.value='例如：某公司高管，结构工程师，电路设计师等'};"/></li>
+			</ul>
+			<div class="perfect_rest"><a href="#" onclick="$('#welcome_step1_addon').removeClass('hide'); $(this).parent().hide(); $('#welcome_step_1_form').attr('action', G_BASE_URL+'/account/?c=setting&act=user_process_ajax'); return false;">完善其他&nbsp;&nbsp;<img src="<?php echo G_STATIC_URL; ?>/css/img/dc_vr0c4.png"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" id="welcome_step_1_next_link" onclick="welcome_step_2_load();">跳过</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="sure_but" id="welcome_step_1_save_link" href="#" onclick="$('#welcome_signature').focus(); ajax_post($('#welcome_step_1_form'), _welcome_step_1_form_processer); return false;">保存</a></div>
+
+			<ul class="ps_info hide" id="welcome_step1_addon">
+				<li><label>帐号：</label><span class="sFONT"><?php echo $this->user_info['email']; ?> <?php if ($this->user_info['valid_email'] == 0) { ?>(已验证)<?php } ?></span> <?php if ($this->user_info['valid_email'] != 0) { ?>(<a href="#" class="a" onclick="ajax_request(G_BASE_URL+'/account/?c=valid&act=valid_email_step1_process_ajax'); return false;">您的邮件地址还未验证，请点击进行验证</a>)<?php } ?></li>
+				<li><label>真实姓名：</label><input type="text" name="user_name" value="<?php echo $this->user_info['user_name']; ?>"> 请输入2-7个汉字，或者4-14个英文</li>
+				<li><label>性别：</label><input type="radio" name="sex" id="sex" value="1" <?php if ($this->user_info['sex'] == 1 || empty($this->user_info['sex'])){ echo "checked";} ?>/>男
+				<input type="radio" name="sex" id="sex" value="2" <?php if ($this->user_info['sex'] == 2){ echo "checked";} ?>/>女
+				<input type="radio" name="sex" id="sex" value="3" <?php if ($this->user_info['sex'] == 3){ echo "checked";} ?>/>保密</li>
+				<li><label>生日：</label>
+					<select name="birthday_y">
+					<?php echo H::display_options($this->birthday_y, $this->birthday_y_s); ?>
+					</select>  年
+					<select name="birthday_m">
+					<?php echo H::display_options($this->birthday_m, $this->birthday_m_s); ?>
+					</select> 月
+					<select name="birthday_d">
+					<?php echo H::display_options($this->birthday_d, $this->birthday_d_s); ?>
+					</select> 日
+				</li>
+				<li><label>现居：</label>
+					<select name="province" id="level0" class="select_area"></select>
+					<select name="city" id="level1"  class="select_area"></select>
+					<select name="district" id="level2"  class="select_area"></select>
+				</li>
+				<li><label>个性网址：</label><?php echo get_setting('base_url'); ?>/people/?u=<input name="domain_url" type="text"class="add-t2" id="domain_url"  style="width:70px;"  value="<?php echo $this->user_info['url']; ?>"  size="20"/> (可输入4~20位的英文或数字)</li>
+
+				<li style="text-align:right;padding-right:100px;"><a href="#" onclick="$('#welcome_step_1_next_link').click();">跳过</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="sure_but" href="#" onclick="$('#welcome_step_1_save_link').click(); return false;">保存</a></li>
+			</ul>
+
+		</div>
+		</form>
+		<!--完善资料_e-->
+	</div>
+	
+	<div id="welcome_step_2">
+	<!--近期热门话题_s-->
+		<div class="invite_reg">
+			<h3 class="material_perfect">近期热门话题
+				<p class="tips">关注您感兴趣的话题，以便我们为您推送有效的信息。</p>
+			</h3>
+			<div id="welcome_topics_list"></div>
+			<div class="sub_div"><a href="javascript:;" class="color" id="welcome_reload_topics_list">换一批</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="javascript:;" onclick="$.each($('#welcome_topics_list a.addtips:not(.cur)'), function (i, e) { e.click(); }); return false;">关注以上全部</a><a rel="添加关注" class="addtips" href="javascript:void(0);" onclick="$.each($('#welcome_topics_list a.addtips:not(.cur)'), function (i, e) { e.click(); }); return false;"><em>添加关注</em></a>&nbsp;&nbsp;<a href="javascript:;" onclick="welcome_step_3_load(); return false;" class="sure_but vertical" >下一步</a></div>
+		</div>
+	<!--近期热门话题_e-->
+	</div>
+	
+	<div id="welcome_step_3">
+	<!--近期热门竞赛_s-->
+		<div class="invite_reg">
+			<div class="point_show">
+				<img src="<?php echo G_STATIC_URL; ?>/css/img/c_1.png"/>
+				<span class="c_1"></span>
+				<span class="c_2"></span>
+			</div>
+			<h3 class="material_perfect">近期热门竞赛
+				<p class="tips">关注您感兴趣的竞赛，以便我们为您推送有效的信息。</p>
+			</h3>
+			<div id="welcome_competitions_list"></div>
+			<div class="sub_div"><a href="javascript:;" class="color" id="welcome_reload_competitions_list">换一批</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="javascript:;" onclick="$.each($('#welcome_competitions_list a.addtips:not(.cur)'), function (i, e) { e.click(); }); return false;">关注以上全部</a><a rel="添加关注" class="addtips" href="javascript:void(0);" onclick="$.each($('#welcome_competitions_list a.addtips:not(.cur)'), function (i, e) { e.click(); }); return false;"><em>添加关注</em></a>&nbsp;&nbsp;<a href="javascript:;" class="sure_but vertical" onclick="welcome_step_4_load(); return false;">下一步</a></div>
+		</div>
+	<!--近期热门竞赛_e-->
+	</div>
+		
+	<div id="welcome_step_4">
+	<!--近期热门问题_s-->
+		<div class="invite_reg">
+			<div class="point_show perfect">
+				<img src="<?php echo G_STATIC_URL; ?>/css/img/c_2.png"/>
+				<span class="c_1"></span>
+				<span class="c_2"></span>
+			</div>
+			<h3 class="material_perfect">近期热门问题
+				<p class="tips">关注您感兴趣的问题，以便我们为您推送有效的信息。</p>
+			</h3>
+			<div id="welcome_questions_list"></div>
+			<div class="sub_div"><a href="javascript:;" class="color" id="welcome_reload_questions_list">换一批</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="javascript:;" onclick="$.each($('#welcome_questions_list a.addtips:not(.cur)'), function (i, e) { e.click(); }); return false;">关注以上全部</a><a rel="添加关注" class="addtips" href="javascript:void(0);" onclick="$.each($('#welcome_questions_list a.addtips:not(.cur)'), function (i, e) { e.click(); }); return false;"><em>添加关注</em></a>&nbsp;&nbsp;<a href="javascript:;" class="sure_but vertical" onclick="welcome_step_5_load();">下一步</a></div>
+		</div>
+	<!--近期热门问题_e-->
+	</div>
+	
+	<div id="welcome_step_5">
+	<!--近期活跃用户_s-->
+		<div class="invite_reg">
+			<h3 class="material_perfect">近期活跃用户
+				<p class="tips">关注您感兴趣的人，以便我们为您推送有效的信息。</p>
+			</h3>
+			<div id="welcome_users_list"></div>
+			<div class="sub_div"><a href="javascript:;" class="color" id="welcome_reload_users_list">换一批</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="javascript:;" onclick="$.each($('#welcome_users_list a.addtips:not(.cur)'), function (i, e) { e.click(); }); return false;">关注以上全部</a><a rel="添加关注" class="addtips" href="javascript:void(0);" onclick="$.each($('#welcome_users_list a.addtips:not(.cur)'), function (i, e) { e.click(); }); return false;"><em>添加关注</em></a>&nbsp;&nbsp;<a href="javascript:;" class="sure_but vertical" onclick="welcome_step_finish();">完成</a></div>
+		</div>
+	<!--近期活跃用户_e-->
+	</div>
